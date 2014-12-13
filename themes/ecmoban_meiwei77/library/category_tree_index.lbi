@@ -1,0 +1,54 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+          //初始化主菜单
+            function sw_nav2(obj,tag)
+            {
+            var DisSub2 = document.getElementById("DisSub2_"+obj);
+            var HandleLI2= document.getElementById("HandleLI2_"+obj);
+                if(tag==1)
+                {
+                    DisSub2.style.display = "block";
+					HandleLI2.className="current";
+                }
+                else
+                {
+                    DisSub2.style.display = "none";
+					HandleLI2.className="";
+                }
+            }
+</script>
+ 
+<div class="menu_box_navbg"> 
+	<div id="category_tree">
+  		<ul>
+     		<!--{foreach from=$categories item=cat name=no}-->
+        	<li>
+            	<div  class="dt" onMouseOver="sw_nav2({$smarty.foreach.no.iteration},1);" onMouseOut="sw_nav2({$smarty.foreach.no.iteration},0);" >
+        			<div id="HandleLI2_{$smarty.foreach.no.iteration}">
+        				<a href="{$cat.url}">{$cat.name|escape:html} </a>
+					</div>
+					<div  id=DisSub2_{$smarty.foreach.no.iteration} style="display:none" class="wr_menu_box"> 
+						<div class="menu_box_g">
+                        	<div class="menu_width">
+								<div class="menu_box_info">
+                                	<!--{foreach from=$cat.cat_id item=child name=no}-->
+                                    <!-- {if $smarty.foreach.no.iteration<5}-->
+                                    <dl>
+ 										<dt><a href="{$child.url}">{$child.name|escape:html}</a></dt>
+										<!--{foreach from=$child.cat_id item=childer}-->
+										<dd><a href="{$childer.url}">·{$childer.name|escape:html}</a></dd>
+										<!--{/foreach}-->
+                                    </dl>
+                                    <!-- {/if} -->   
+									<!--{/foreach}-->
+                        		</div>
+                        	</div>
+                        </div>
+					</div> 
+				</div>
+			</li>
+			<!--{/foreach}--> 
+		</ul>
+	</div>
+</div>
+<div class="blank"></div>

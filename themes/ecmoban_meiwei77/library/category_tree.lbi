@@ -1,0 +1,42 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+	.left_nav {background:#F2F2F2;clear: both;overflow: hidden;padding: 0 23px 30px;text-align: left;width: 175px; color:#464646}
+	.left_nav li {border:none;clear: both;line-height: 25px;padding: 14px 0;position: relative;text-align: left;}
+	.man_nav{ background:#d41c4f; color:#ffffff; cursor:pointer; float:left; font-size:16px; height:40px; line-height:40px; margin-right:1px; text-align:center; width:221px}
+	#menu_div{ background:#f2f2f2; clear:both; float:left; overflow:hidden; position:relative; width:220px}
+	._tabs{ display:inline-table; position:relative; width:220px}
+	#menu_div .nav_mian {padding-left: 0; clear:both; font-size:12px; height:22px; line-height:22px; margin-top:2px; overflow:hidden}
+	#menu_div .nav_sub {padding-left: 0;}
+</style>
+<div class="web_title" style="height:30px; clear:both">
+	<p class="man_nav">所有分类</p>
+</div>
+
+<div id="menu_div">
+	<div class="_tabs">
+    	<div class="bg_drawing left_nav gray">
+        	<ul>
+            	<!--{foreach from=$categories item=cat name=no}-->
+                <li class="over_out out_bg" onMouseOver="this.className='over_out_on over_out'" onMouseOut="this.className='over_out'">
+                	<h2 class="nav_mian"><a href="javascript:;" >{$cat.name|escape:html}<font class="letter"></font></a></h2>
+                    <div class="nav_sub">
+                    	<!--{foreach from=$cat.cat_id item=child}-->
+          				<!--{foreach from=$child.cat_id item=childer}-->
+						<a href="{$childer.url}" class="start">{$childer.name|escape:html}</a> | 
+         				<!--{/foreach}-->
+						<!--{/foreach}-->
+                    </div>
+                    
+                </li>
+                <!--{/foreach}-->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<p class="clear"></p>
+
+
+
+
+<div class="blank"></div>

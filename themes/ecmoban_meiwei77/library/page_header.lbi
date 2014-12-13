@@ -1,0 +1,145 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="themes/ecmoban_meiwei77/qq/images/qq.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+<SCRIPT src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/public.js"></script>
+
+
+<div class="top_nav"> 
+  <script type="text/javascript">
+          //初始化主菜单
+            function sw_nav(obj,tag)
+            {
+     
+            var DisSub = document.getElementById("DisSub_"+obj);
+            var HandleLI= document.getElementById("HandleLI_"+obj);
+                if(tag==1)
+                {
+                    DisSub.style.display = "block";
+             
+                    
+                }
+                else
+                {
+                    DisSub.style.display = "none";
+                
+                }
+     
+            }
+     
+    </script>
+  <div class="block"> 
+    <!--顶部微博微信弹出区域-->
+    <ul class="top_bav_l">
+      <li class="top_sc"> <a href="javascript:void(0);" onclick="AddFavorite('我的网站',location.href)">收藏我们</a> </li>
+      <li>关注我们：</li>
+      <li style="border:none" class="menuPopup"  onMouseOver="sw_nav(1,1);" onMouseOut="sw_nav(1,0);"> <a id="HandleLI_1" href="javascript:;" title="微博" class="attention"></a>
+        <div id=DisSub_1 class="top_nav_box  top_weibo"> <a href="#" target="_blank" title="新浪微博" class="top_weibo"></a> <a href="#" target="_blank" title="QQ微博" class="top_qq"></a> </div>
+      </li>
+      <li class="menuPopup" onMouseOver="sw_nav(2,1);" onMouseOut="sw_nav(2,0);"> <a id="HandleLI_2" href="javascript:;" title="微信" class="top_weixin"></a>
+        <div id=DisSub_2 class="  weixinBox" style="display: none;"> <img src="themes/ecmoban_meiwei77/images/weixin.png"> </div>
+      </li>
+    </ul>
+    <!--顶部微博微信弹出区域end-->
+    <div class="header_r"> 
+      <!--{if $navigator_list.top}--> 
+      <!-- {/if} --> 
+      {insert_scripts files='transport.js,utils.js'} <font id="ECS_MEMBERZONE" >{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font> 
+      
+      <!--{if $navigator_list.top}--> 
+      <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} --> 
+      <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a> 
+      <!-- {if !$smarty.foreach.nav_top_list.last} --> 
+      | 
+      <!-- {/if} --> 
+      <!-- {/foreach} --> 
+      <!-- {/if} --> 
+	 </div>
+  </div>
+</div>
+<div style=" clear:both"></div>
+<div style="height:83px;width:100%;" class="clearfix">
+  <div class="block header">
+    <div class="logo"> <a href="../index.php"><img src="../images/logo.gif" width="180" height="70"></a> <a class="amazonline" href="javascript:void(0)"></a> <a href="#"> <img class="amazonimg" width="90px" height="70px" src="images/amazonlog.gif"> </a> </div>
+    <div class="header-search"> 
+      <script type="text/javascript">
+                {literal}
+                <!--
+                function checkSearchForm()
+                {
+                    if(document.getElementById('keyword').value)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        alert("{$lang.no_keywords}");
+                        return false;
+                    }
+                }
+                -->
+                {/literal}
+                </script>
+      <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()">
+        <div class="searchleft"> </div>
+        <div class="key">
+          <input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}" class="search-input" />
+        </div>
+        <div class="btn_search">
+          <input value="" id="seachbtn" type="submit">
+        </div>
+        <div class="hot-keys"> {if $searchkeywords}<span>热门关键字 ：</span> <span class="s-item">{foreach from=$searchkeywords item=val} <a href="search.php?keywords={$val|escape:url}">{$val}</a>{/foreach}</span>{/if} </div>
+      </form>
+    </div>
+    <div class="header-serve"> {insert name='ads' id=161 num=1} </div>
+  </div>
+</div>
+<div style="clear:both"></div>
+<div class="menu_nav">
+  <div id="topchannel" class="nav">
+  <ul>
+    <li class="lichannel firstli" onMouseOver="this.className='firstli firstli-hover'" onMouseOut="this.className='firstli'">
+    <a href="javascript:void(0);">商品分类</a>
+    <div class="i_category hide">
+    	<ul id="main_cat">
+      <!--{foreach from=$categories item=cat name=no1}-->
+      <li class="cur" onMouseOver="this.className='cur current'" onMouseOut="this.className='cur'"> 
+      <div id="catlistul" class="cat_tit" <!--{if $smarty.foreach.no1.last}--> style="border:none"<!--{/if}-->> <a target="_blank" href="{$cat.url}">{$cat.name|escape:html}</a></div>
+      <div class="cat_menu">
+        <div class="cat_m"> 
+          <!--{foreach from=$cat.cat_id item=child}-->
+          <dl class="cat_dl">
+            <dt><a href="{$child.url}" target="_blank" >{$child.name|escape:html}</a></dt>
+            <dd> 
+              <!--{foreach from=$child.cat_id item=childer}--> 
+              <a href="{$childer.url}" target="_blank">{$childer.name|escape:html}</a> 
+              <!-- {/foreach} --> 
+            </dd>
+          </dl>
+          <!-- {/foreach} --> 
+        </div>
+      </div>
+      </li>
+      
+      <!-- {/foreach} -->
+    </ul>
+    </div>
+    </li>
+    <li class="lichannel"><a href="../index.php">{$lang.home}</a></li>
+    <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+    <li class="lichannel"><a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}>{$nav.name}</a></li>
+    <!-- {/foreach} -->
+  </ul>
+  <div id="menuCart" class="shooping_car">
+      {insert name='cart_info'}
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
