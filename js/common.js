@@ -62,6 +62,33 @@ function addToCart(goodsId, parentId)
 }
 
 /**
+ * 直接购买
+ * @param goodsId
+ * @param parentId
+ */
+function quickBuy(goodsId, parentId)
+{ var goods = new Object();
+    var spec_arr = new Array();
+    var fittings_arr = new Array();
+    var number = 1;
+    var formBuy = document.forms['ECS_FORMBUY'];
+// 检查是否有商品规格
+    if (formBuy)
+    {
+        spec_arr = getSelectedAttributes(formBuy);
+        if (formBuy.elements['number'])
+        {
+            number = formBuy.elements['number'].value;
+        }
+    }
+    goods.spec = spec_arr;
+    goods.goods_id = goodsId;
+    goods.number = number;
+    goods.parent = (typeof(parentId) == "undefined") ? 0 : parseInt(parentId);
+    Ajax.call('flow.php?step=quick_buy', 'goods=' + goods.toJSONString(), quickBuyResponse, 'POST', 'JSON');
+}
+
+/**
  * 获得选定的商品属性
  */
 function getSelectedAttributes(formBuy)
@@ -141,6 +168,45 @@ function addToCartResponse(result)
       }
     }
   }
+}
+
+/* *
+ * 直接购买处理添加商品到购物车的反馈信息
+ */
+function quickBuyResponse(result)
+
+{
+    if (result.error > 0)
+    {
+// 如果需要缺货登记，跳转
+        if (result.error == 2)
+        {
+            if (confirm(result.message))
+            {
+                location.href = 'user.php?act=add_booking&id=' + result.goods_id;
+            }
+        }
+// 没选规格，跳到商品详情页
+        else if (result.error == 9)
+        {
+            location.href = 'goods.php?id=' + result.goods_id;
+        }
+        else
+        {
+            alert(result.message);
+        }
+    }
+    else
+    {
+        var cartInfo = document.getElementById('ECS_CARTINFO');
+        if (cartInfo)
+        {
+            cartInfo.innerHTML = result.content;
+        }
+        location.href = 'flow.php?step=checkout';
+
+    }
+
 }
 
 /* *

@@ -300,7 +300,7 @@ function reg(str){
       
       <li class="padd">
       <a href="javascript:addToCart({$goods.goods_id})"><img src="images/goumai2.gif" /></a>
-     
+        <a href="javascript:quickBuy({$goods.goods_id})"><img src="images/goumai.png" alt="直接购买" /></a>
       </li>
      
       </ul>

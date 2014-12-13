@@ -166,6 +166,75 @@ if ($_REQUEST['step'] == 'add_to_cart')
 
     $result['confirm_type'] = !empty($_CFG['cart_confirm']) ? $_CFG['cart_confirm'] : 2;
     die($json->encode($result));
+}elseif ($_REQUEST['step'] == 'quick_buy'){
+    include_once('includes/cls_json.php');
+    if (!empty($_REQUEST['goods_id']) && empty($_POST['goods']))
+    {
+        if (!is_numeric($_REQUEST['goods_id']) || intval($_REQUEST['goods_id']) <= 0)
+        {
+            header("location:./\n");
+        }
+        $goods_id = intval($_REQUEST['goods_id']);
+        exit;
+    }
+    $result = array('error' => 0, 'message' => '', 'content' => '', 'goods_id' => '');
+    $json = new JSON;
+    if (empty($_POST['goods']))
+    {
+        $result['error'] = 1;
+        die($json->encode($result));
+    }
+    $goods = $json->decode($_POST['goods']);
+    /* 如果商品有规格，而post的数据没有规格，跳到商品详情页 */
+    if (empty($goods->spec))
+    {
+        $sql = "SELECT COUNT(*) " .
+            "FROM " . $ecs->table('goods_attr') . " AS ga, " .
+            $ecs->table('attribute') . " AS a " .
+            "WHERE ga.attr_id = a.attr_id " .
+            "AND ga.goods_id = '" . $goods->goods_id . "' " .
+            "AND a.attr_type = 1";
+        if ($db->getOne($sql) > 0)
+        {
+            $result['error'] = 9;
+            $result['goods_id'] = $goods->goods_id;
+            die($json->encode($result));
+        }
+    }
+    /* 先清空购物车 */
+    clear_cart();
+    /* 商品数量是否合法 */
+    if (!is_numeric($goods->number) || intval($goods->number) <= 0)
+    {
+        $result['error'] = 1;
+        $result['message'] = $_LANG['invalid_number'];
+    }
+    else
+    {
+        /* 添加到购物车 */
+        if (addto_cart($goods->goods_id, $goods->number, $goods->spec, $goods->parent))
+        {
+            if ($_CFG['cart_confirm'] > 2)
+            {
+                $result['message'] = '';
+            }
+            else
+            {
+                $result['message'] = $_CFG['cart_confirm'] == 1 ? $_LANG['addto_cart_success_1'] : $_LANG['addto_cart_success_2'];
+            }
+            $result['content'] = insert_cart_info();
+            $result['one_step_buy'] = $_CFG['one_step_buy'];
+        }
+        else
+        {
+            $result['message'] = $err->last_message();
+            $result['error'] = $err->error_no;
+            $result['goods_id'] = stripslashes($goods->goods_id);
+        }
+    }
+    $result['confirm_type'] = 4;
+    die($json->encode($result));
+
 }
 elseif ($_REQUEST['step'] == 'link_buy')
 {
