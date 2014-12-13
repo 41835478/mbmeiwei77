@@ -82,6 +82,14 @@ function update_user_info()
         }
     }
 
+    /*每天第一次登录送100分*/
+    $sql = 'SELECT last_login FROM ' . $GLOBALS['ecs']->table('users') . " WHERE user_id = '" . $_SESSION['user_id'] . "'";
+    $last_login = $GLOBALS['db']->getOne($sql);
+    if($last_login < (strtotime(date("y-m-d"))-8*3600))
+    {
+        log_account_change($_SESSION['user_id'], 0, 0, $GLOBALS['_CFG']['login_points'], $GLOBALS['_CFG']['login_points'],"会员每天第一次登录赠送".$GLOBALS['_CFG']['login_points']."积分");
+    }
+
     /* 更新登录时间，登录次数及登录ip */
     $sql = "UPDATE " .$GLOBALS['ecs']->table('users'). " SET".
            " visit_count = visit_count + 1, ".

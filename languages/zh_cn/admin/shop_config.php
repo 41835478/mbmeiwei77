@@ -30,6 +30,7 @@ $_LANG['cfg_name']['rewrite'] = 'URL重写';
 $_LANG['cfg_name']['integral_name'] = '消费积分名称';
 $_LANG['cfg_name']['integral_scale'] = '积分换算比例';
 $_LANG['cfg_name']['integral_percent'] = '积分支付比例';
+$_LANG['cfg_name']['login_points'] = '会员每天第一次登录赠送积分';
 $_LANG['cfg_name']['enable_order_check'] = '是否开启新订单提醒';
 $_LANG['cfg_name']['default_storage'] = '默认库存';
 $_LANG['cfg_name']['date_format'] = '日期格式';
