@@ -60,6 +60,20 @@ h1 .action-span a {
   background:#DDEEF2 url(../images/icon_add.gif) no-repeat 3px center;
   *background:#DDEEF2 url(../images/icon_add.gif) no-repeat 3px 3px;
 }
+.export a {
+    color: #666;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+    width: 35px;
+    padding:2px 5px 2px 23px;
+    *padding:4px 5px 2px 23px;
+    border:1px solid #278296;
+    border-right:2px solid #278296;
+    border-bottom:2px solid #278296;
+    background:#DDEEF2 url(../images/icon_output.gif) no-repeat 3px center;
+    *background:#DDEEF2 url(../images/icon_output.gif) no-repeat 3px 3px;
+}
 
 h1 .action-span a:hover {
   border:1px solid #5FA6B6;

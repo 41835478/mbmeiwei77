@@ -57,6 +57,7 @@ if ($_REQUEST['act'] == 'order_query')
 
 elseif ($_REQUEST['act'] == 'list')
 {
+    $query_string = $comm='';
     /* 检查权限 */
     admin_priv('order_view');
 
@@ -77,10 +78,106 @@ elseif ($_REQUEST['act'] == 'list')
     $smarty->assign('record_count', $order_list['record_count']);
     $smarty->assign('page_count',   $order_list['page_count']);
     $smarty->assign('sort_order_time', '<img src="images/sort_desc.gif">');
-
+    foreach($order_list['filter'] as $k=>$v){
+        $query_string .=$comm.$k.'='.$v;
+        $comm= '&';
+    }
+    $smarty->assign('query_string',$query_string);
     /* 显示模板 */
     assign_query_info();
     $smarty->display('order_list.htm');
+}elseif($_REQUEST['act'] == 'export'){
+    $_REQUEST['page_size'] = $_REQUEST['record_count'];
+    $_REQUEST['page'] = 1;
+    $rowix = 1;
+    require_once ROOT_PATH . 'includes/PHPExcel.php';
+    require_once ROOT_PATH.'includes/PHPExcel/IOFactory.php';
+    $objPHPExcel = new PHPExcel();
+    $objPHPExcel->setActiveSheetIndex(0)
+        ->setCellValue('A'.$rowix ,  '订单号')
+        ->setCellValue('B'.$rowix ,  '收货人')
+        ->setCellValue('C'.$rowix ,  '地址')
+        ->setCellValue('D'.$rowix ,  '电话')
+        ->setCellValue('E'.$rowix ,  '商品名称')
+        ->setCellValue('F'.$rowix ,  '规格')
+        ->setCellValue('G'.$rowix ,  '单价')
+        ->setCellValue('H'.$rowix ,  '时间')
+        ->setCellValue('I'.$rowix ,  '备注')
+        ->setCellValue('J'.$rowix ,  '总金额');
+    $rowix++;
+    $order_list = order_list();
+    foreach($order_list['orders'] as $orderInfo){
+        $order_id = $orderInfo['order_id'];
+        $sql = "SELECT o.*, g.goods_thumb, g.goods_number AS storage, o.goods_attr, IFNULL(b.brand_name, '') AS brand_name " .
+            "FROM " . $ecs->table('order_goods') . " AS o ".
+            "LEFT JOIN " . $ecs->table('goods') . " AS g ON o.goods_id = g.goods_id " .
+            "LEFT JOIN " . $ecs->table('brand') . " AS b ON g.brand_id = b.brand_id " .
+            "WHERE o.order_id = '{$order_id}' ";
+        $res = $db->query($sql);
+        while ($row = $db->fetchRow($res))
+        {
+            /* 虚拟商品支持 */
+            if ($row['is_real'] == 0)
+            {
+                /* 取得语言项 */
+                $filename = ROOT_PATH . 'plugins/' . $row['extension_code'] . '/languages/common_' . $_CFG['lang'] . '.php';
+                if (file_exists($filename))
+                {
+                    include_once($filename);
+                    if (!empty($_LANG[$row['extension_code'].'_link']))
+                    {
+                        $row['goods_name'] = $row['goods_name'] . sprintf($_LANG[$row['extension_code'].'_link'], $row['goods_id'], $order['order_sn']);
+                    }
+                }
+            }
+
+            $row['formated_subtotal']       = price_format($row['goods_price'] * $row['goods_number']);
+            $row['formated_goods_price']    = price_format($row['goods_price']);
+            $_goods_thumb = get_image_path($row['goods_id'], $row['goods_thumb'], true);
+            $_goods_thumb = (strpos($_goods_thumb, 'http://') === 0) ? $_goods_thumb : $ecs->url() . $_goods_thumb;
+            $row['goods_thumb'] = $_goods_thumb;
+            $goods_attr[] = explode(' ', trim($row['goods_attr'])); //将商品属性拆分为一个数组
+            $goods_list[] = $row;
+        }
+
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A'.$rowix ,  $orderInfo['order_sn'])
+            ->setCellValue('B'.$rowix ,  $orderInfo['consignee'])
+            ->setCellValue('C'.$rowix ,  $orderInfo['address'])
+            ->setCellValue('D'.$rowix ,  $orderInfo['tel'])
+            ->setCellValue('H'.$rowix ,  date('Y-m-d H:i:s',$orderInfo['add_time']))
+            ->setCellValue('I'.$rowix ,  $orderInfo['postscript'])
+            ->setCellValue('J'.$rowix ,  $orderInfo['total_fee']);
+        $starti = $rowix;
+        foreach($goods_list as $goods){
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('E' . $rowix,$goods['goods_name'])
+                ->setCellValue('F' . $rowix, '规格')
+                ->setCellValue('G' . $rowix, $goods['goods_price']);
+            $rowix++;
+        }
+        if(($rowix-$starti)>1){
+            //合并单元格
+            $endi = $rowix-1;
+            $objPHPExcel->getActiveSheet(0)->mergeCells('A'.$starti.':A'.$endi);
+            $objPHPExcel->getActiveSheet(0)->mergeCells('B'.$starti.':B'.$endi);
+            $objPHPExcel->getActiveSheet(0)->mergeCells('C'.$starti.':C'.$endi);
+            $objPHPExcel->getActiveSheet(0)->mergeCells('D'.$starti.':D'.$endi);
+            $objPHPExcel->getActiveSheet(0)->mergeCells('H'.$starti.':H'.$endi);
+            $objPHPExcel->getActiveSheet(0)->mergeCells('I'.$starti.':I'.$endi);
+            $objPHPExcel->getActiveSheet(0)->mergeCells('J'.$starti.':J'.$endi);
+        }
+        unset($goods_list);
+    }
+    $filepaths= ROOT_PATH."temp/xls/".$_SERVER['SERVER_NAME'].'_Orders_'.date("Y-m-d_H_i").'.xls';
+    $filename = $_SERVER['SERVER_NAME'].'_Orders_'.date("Y-m-d_H_i").'.xls';
+
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+    $objWriter->setTempDir(ROOT_PATH."temp");
+
+    $objWriter->save($filepaths);
+
+    header("Location:../temp/xls/".$filename);
 }
 
 /*------------------------------------------------------ */
@@ -88,6 +185,7 @@ elseif ($_REQUEST['act'] == 'list')
 /*------------------------------------------------------ */
 elseif ($_REQUEST['act'] == 'query')
 {
+    $query_string = $comm='';
     /* 检查权限 */
     admin_priv('order_view');
 
@@ -99,7 +197,11 @@ elseif ($_REQUEST['act'] == 'query')
     $smarty->assign('page_count',   $order_list['page_count']);
     $sort_flag  = sort_flag($order_list['filter']);
     $smarty->assign($sort_flag['tag'], $sort_flag['img']);
-    make_json_result($smarty->fetch('order_list.htm'), '', array('filter' => $order_list['filter'], 'page_count' => $order_list['page_count']));
+    foreach($order_list['filter'] as $k=>$v){
+        $query_string .=$comm.$k.'='.$v;
+        $comm= '&';
+    }
+    make_json_result($smarty->fetch('order_list.htm'), '', array('filter' => $order_list['filter'], 'page_count' => $order_list['page_count'],'query_string'=>$query_string));
 }
 
 /*------------------------------------------------------ */
@@ -5040,7 +5142,7 @@ function order_list()
 
         /* 查询 */
         $sql = "SELECT o.order_id, o.order_sn, o.add_time, o.order_status, o.shipping_status, o.order_amount, o.money_paid," .
-                    "o.pay_status, o.consignee, o.address, o.email, o.tel, o.extension_code, o.extension_id, " .
+                    "o.pay_status, o.consignee, o.address, o.email, o.tel, o.extension_code, o.extension_id,o.postscript, " .
                     "(" . order_amount_field('o.') . ") AS total_fee, " .
                     "IFNULL(u.user_name, '" .$GLOBALS['_LANG']['anonymous']. "') AS buyer ".
                 " FROM " . $GLOBALS['ecs']->table('order_info') . " AS o " .

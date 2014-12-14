@@ -16,6 +16,7 @@
     <a href="order.php?act=list&composite_status={$os_unconfirmed}">{$lang.cs.$os_unconfirmed}</a>
     <a href="order.php?act=list&composite_status={$cs_await_pay}">{$lang.cs.$cs_await_pay}</a>
     <a href="order.php?act=list&composite_status={$cs_await_ship}">{$lang.cs.$cs_await_ship}</a>
+      <span class="action-span export"><a href="order.php?act=export&{$query_string}" id="export">导出</a></span>
   </form>
 </div>
 
@@ -78,6 +79,7 @@
 <script language="JavaScript">
 listTable.recordCount = {$record_count};
 listTable.pageCount = {$page_count};
+//document.getElementById("export")
 
 {foreach from=$filter item=item key=key}
 listTable.filter.{$key} = '{$item}';
@@ -95,6 +97,7 @@ listTable.filter.{$key} = '{$item}';
      */
     function searchOrder()
     {
+
         listTable.filter['order_sn'] = Utils.trim(document.forms['searchForm'].elements['order_sn'].value);
         listTable.filter['consignee'] = Utils.trim(document.forms['searchForm'].elements['consignee'].value);
         listTable.filter['composite_status'] = document.forms['searchForm'].elements['status'].value;
@@ -184,6 +187,8 @@ listTable.filter.{$key} = '{$item}';
                     listTable.filter = result.filter;
                 }
                 listTable.pageCount = result.page_count;
+                var query_string = result.query_string;
+                document.getElementById('export').setAttribute('href','order.php?act=export&'+query_string);
             }
             catch(e)
             {
