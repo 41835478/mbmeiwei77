@@ -1577,6 +1577,7 @@ elseif ($_REQUEST['step'] == 'done')
     $order['discount']     = $total['discount'];
     $order['surplus']      = $total['surplus'];
     $order['tax']          = $total['tax'];
+    $order['save_money'] = $total['saving'];
 
     // 购物车中的商品能享受红包支付的总额
     $discount_amout = compute_discount_amount();

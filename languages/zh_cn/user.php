@@ -259,6 +259,7 @@ $_LANG['order_list_lnk'] = '我的订单列表';
 $_LANG['order_number'] = '订单编号';
 $_LANG['order_addtime'] = '下单时间';
 $_LANG['order_money'] = '订单总金额';
+$_LANG['save_money'] = '省钱金额';
 $_LANG['order_status'] = '订单状态';
 $_LANG['first_order'] = '主订单';
 $_LANG['second_order'] = '从订单';
