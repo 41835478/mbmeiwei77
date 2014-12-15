@@ -575,7 +575,7 @@ class integrate
         elseif ($remember)
         {
             /* 设置cookie */
-            $time = time() + 3600 * 24 * 15;
+            $time = time() + 3600 * 24 * 7;
 
             setcookie("ECS[username]", $username, $time, $this->cookie_path, $this->cookie_domain);
             $sql = "SELECT user_id, password FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_name='$username' LIMIT 1";
