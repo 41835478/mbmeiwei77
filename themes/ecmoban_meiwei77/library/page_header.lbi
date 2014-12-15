@@ -96,7 +96,7 @@ var process_request = "{$lang.process_request}";
   </div>
 </div>
 <div style="clear:both"></div>
-<div class="menu_nav">
+<div class="menu_nav" id="menu_nav">
   <div id="topchannel" class="nav">
   <ul>
     <li class="lichannel firstli" onMouseOver="this.className='firstli firstli-hover'" onMouseOut="this.className='firstli'">
@@ -139,7 +139,21 @@ var process_request = "{$lang.process_request}";
 
 
 
+<script type="text/javascript">
+window.onscroll = function(){
+    var t = document.documentElement.scrollTop || document.body.scrollTop;
+    var top_div = document.getElementById( "menu_nav" );
+    if( t >= 120 ) {
+        top_div.style.top = 0;
+        top_div.style.position = 'fixed';
+        top_div.style.zIndex = 300;
+    } else {
+        top_div.style.top = "";
+        top_div.style.position = '';
+    }
+}
 
+</script>
 
 
 
