@@ -140,6 +140,8 @@ var process_request = "{$lang.process_request}";
 
 
 <script type="text/javascript">
+var isCheck =false;
+var isIndex = false;
 window.onscroll = function(){
     var t = document.documentElement.scrollTop || document.body.scrollTop;
     var top_div = document.getElementById( "menu_nav" );
@@ -147,9 +149,15 @@ window.onscroll = function(){
         top_div.style.top = 0;
         top_div.style.position = 'fixed';
         top_div.style.zIndex = 300;
+        if(!isCheck){
+            isIndex = document.body.className=='index_page'?true:false;
+            isCheck = true;
+        }
+        document.body.className='';
     } else {
         top_div.style.top = "";
         top_div.style.position = '';
+        if(isIndex){document.body.className='index_page';}
     }
 }
 
