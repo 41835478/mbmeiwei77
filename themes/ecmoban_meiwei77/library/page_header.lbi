@@ -99,12 +99,12 @@ var process_request = "{$lang.process_request}";
 <div class="menu_nav" id="menu_nav">
   <div id="topchannel" class="nav">
   <ul>
-    <li class="lichannel firstli" onMouseOver="this.className='firstli firstli-hover'" onMouseOut="this.className='firstli'">
+    <li class="lichannel firstli" id="firstli" onMouseOver="this." onMouseOut="this.className='firstli'">
     <a href="javascript:void(0);">商品分类</a>
-    <div class="i_category hide">
+    <div class="i_category hide" id="i_category">
     	<ul id="main_cat">
       <!--{foreach from=$categories item=cat name=no1}-->
-      <li class="cur" onMouseOver="this.className='cur current'" onMouseOut="this.className='cur'"> 
+      <li class="cur" onMouseOver="liOver(this)" onMouseOut="liOut(this)">
       <div id="catlistul" class="cat_tit" <!--{if $smarty.foreach.no1.last}--> style="border:none"<!--{/if}-->> <a target="_blank" href="{$cat.url}">{$cat.name|escape:html}</a></div>
       <div class="cat_menu">
         <div class="cat_m"> 
@@ -142,22 +142,62 @@ var process_request = "{$lang.process_request}";
 <script type="text/javascript">
 var isCheck =false;
 var isIndex = false;
+var top_div = document.getElementById( "menu_nav" );
+var i_category = document.getElementById("i_category");
+var firstli = document.getElementById("firstli");
+var height;
+var t=0;
+function liOver(thisObj){
+thisObj.className='cur current';
+i_category.style.overflow = 'visible';
+}
+function liOut(thisObj){
+thisObj.className='cur';
+i_category.style.overflow = 'hidden';
+}
+firstli.onmouseover  = function(){
+i_category.style.height='';
+this.className='firstli firstli-hover';
+};
+firstli.onmouseout  = function(){
+if(t<105){
+    i_category.style.height='';
+}else{
+i_category.style.height=height+'px';
+}
+this.className='firstli cur';
+};
 window.onscroll = function(){
-    var t = document.documentElement.scrollTop || document.body.scrollTop;
-    var top_div = document.getElementById( "menu_nav" );
+    t = document.documentElement.scrollTop || document.body.scrollTop;
     if( t >= 120 ) {
         top_div.style.top = 0;
         top_div.style.position = 'fixed';
+        top_div.style.left=0
         top_div.style.zIndex = 300;
         if(!isCheck){
             isIndex = document.body.className=='index_page'?true:false;
             isCheck = true;
         }
-        document.body.className='';
+        if(isIndex){
+         height = 480-t;
+         if(height>0){
+            document.body.className='index_page';
+            i_category.style.height=height+'px';
+         }else{
+            document.body.className='';
+         }
+        }
+
     } else {
         top_div.style.top = "";
         top_div.style.position = '';
-        if(isIndex){document.body.className='index_page';}
+        if(isIndex){
+            i_category.style.height='';
+            document.body.className='index_page';
+        }
+    }
+    if(isIndex){
+    i_category.style.overflow = 'hidden';
     }
 }
 
