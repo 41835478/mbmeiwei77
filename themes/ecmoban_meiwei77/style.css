@@ -147,7 +147,7 @@ h6 span{float:left; padding-left:15px; font-size:14px;}
 .nav .firstli {width:175px;padding:0px;display:block;position:relative;z-index:1000;}
 .firstli-hover .i_category{ display:block}
 #topchannel .lichannel {position: relative;}
-.i_category {position: absolute;top:37px;left:0px;width:171px;float:left;padding-top:3px;border-left: 2px solid #be000e;border-right: 2px solid #be000e;border-bottom: 2px solid #be000e;background-color:#f8f8f8;z-index:1000}
+.i_category {position: absolute;top:37px;left:0px;width:171px;float:left;padding-top:3px;border-left: 2px solid #be000e;border-right: 2px solid #be000e;border-bottom: 2px solid #be000e;background-color:#f8f8f8;z-index:1000;}
 .i_category ul {float:left;}
 .i_category ul li {width:171px;height:39px;float:left;padding:0px;display:block;}
 .i_category ul li a {color:#525252;}

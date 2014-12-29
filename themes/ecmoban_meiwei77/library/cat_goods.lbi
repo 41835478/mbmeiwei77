@@ -1,33 +1,98 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-
-<div class="xm-box">
-<h4 class="title"><span>{$goods_cat.name|escape:html}</span> <a class="more" href="{$goods_cat.url}">更多</a></h4>
-<div class="blank"></div>
-<div id="show_hot_area" class="clearfix">
-
- 
-      <!--{foreach from=$cat_goods item=goods}-->
-      <div class="goodsItem">
-       
-           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
-           <p class="f1"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
-           
-           
- 市场价：<font class="market">{$goods.market_price}</font> <br/>
-      
-           本店价：<font class="f1">
-           <!-- {if $goods.promote_price neq ""} -->
-          {$goods.promote_price}
-          <!-- {else}-->
-          {$goods.shop_price}
-          <!--{/if}-->
-           </font>      
-		    
+<div id="electronics" data-fid="0" class="w w1">
+    <div class="m m1 catalogue">
+        <div class="mt ld">
+            <div class="floor">
+            <b class="fixpng b b1"></b>
+            <b class="fixpng b b2" style="height: 34px; display: block;"></b>
+                  <?php    $flow = 1;
+                                             if($this->_var['flow']){
+                                                 $flow = $this->_var['flow']+1;
+                                             }
+                                              $GLOBALS['smarty']->assign('flow', $flow);
+                                             ?>
+            <b class="b b3">{$flow}F</b>
+            <b class="fixpng b4"></b>
+            </div>
+            <h2>{$goods_cat.name|escape:html}</h2>
         </div>
-      <!--{/foreach}-->
+        <div class="mc">
+         <?php  $ci = 1;$GLOBALS['smarty']->assign('ci', $ci);?>
+        <!--{foreach from=$goods_cat.cat_id item=rec_cat name=f}-->
+                <!--{foreach from=$rec_cat.cat_id item=s_cat name=f}-->
+                <?php
+                                $cid = $this->_var['s_cat']['id'];
+                                $this ->assign('goods_cat_'.$cid, assign_cat_goods($cid, 9));
+                                $this->assign('cat_goods_nf',$this->_var['cat_goods_'.$cid]);
+                         ?>
+                <!--{foreach from=$cat_goods_nf item=goods name=name}-->
+                                <!--{if $smarty.foreach.name.iteration eq 1}-->
+                                <div class="style1 <!--{if $ci neq 1}--> hide <!--{/if}-->" id="focus{$s_cat.id}{$ci}" >
+                                <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">
+                                    <img width="270px" height="361px" data-img="{$i}" alt="{$goods.name|escape:html}" src="{$goods.thumb}" class="err-product">
+                                 </a>
+                                </div>
+                                <!--{/if}-->
+                <!--{/foreach}-->
+                <?php $ci = $ci+1;$GLOBALS['smarty']->assign('ci', $ci);?>
+                <!--{/foreach}-->
+
+        <!--{/foreach}-->
+
+        </div>
     </div>
- 
- 
+    <div class="m plist">
+        <div class="tab-arrow" style="left: 0px;"><b></b></div>
+        <?php  $i = 1;$GLOBALS['smarty']->assign('i', $i);?>
+        <!--{foreach from=$goods_cat.cat_id item=rec_cat name=f}-->
+        <!--{foreach from=$rec_cat.cat_id item=s_cat name=f}-->
+<?php
+                                $cid = $this->_var['s_cat']['id'];
+                                $this ->assign('goods_cat_'.$cid, assign_cat_goods($cid, 9));
+                                $this->assign('cat_goods_nf',$this->_var['cat_goods_'.$cid]);
+                         ?>
+        <div data-widget="tab-item" class="sm sm2 fore{$i} <!--{if $i eq 1}-->curr <!--{/if}--> " id="{$s_cat.id}{$i}" data-count="{$i}">
+            <div clstag="homepage|keycount|home2013|18c1" class="smt">
+                <h3>{$s_cat.name|escape:html} </h3>
+            </div>
+            <div data-widget="tab-content" class="smc">
+                <ul class="lh style1" id="style{$i}">
+                <!--{foreach from=$cat_goods_nf item=goods name=name}-->
+                <!--{if $smarty.foreach.name.iteration neq 1}-->
+                 <li class="fore1">
+                   <div clstag="homepage|keycount|home2013|18c2" class="p-img" style="opacity: 1;">
+                         <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">
+                            <img width="100" height="100" data-img="{$i}" alt="{$goods.name|escape:html}" src="{$goods.thumb}" class="err-product">
+                            </a>
+                    </div>
+                        <div class="p-name">
+                                <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">{$goods.name|escape:html}</a>
+                                </div>
+                                        <div class="p-price">
+                                        <span style="display:block;height:1.5em;overflow:hidden;">{$goods.market_price}</span>
+                                        </div>
+                  </li>
+                  <!--{/if}-->
+                <!--{/foreach}-->
+                </ul>
+            </div>
+        </div>
+        <?php $i = $i+1;$GLOBALS['smarty']->assign('i', $i);?>
+        <!--{/foreach}-->
+        <!--{/foreach}-->
+    </div>
+    <span class="clr"></span>
 </div>
-<div class="blank"></div>
+{insert_scripts files='jquery.js'}
+<script>
+    $().ready(function(){
+        $(".sm2").hover(function(){
+            $(this).siblings().removeClass('curr');
+            $(this).addClass('curr');
+           var id = $(this).attr('id');
+           $("#focus"+id).removeClass('hide');
+           $("#focus"+id).siblings().addClass('hide');
+           var i =  $(this).attr('data-count');
+           $(this).parent().find('.tab-arrow').css('left',(i-1)*230+'px');
+        })
+    })
+</script>

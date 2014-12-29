@@ -160,6 +160,7 @@
 	  <lib>brands</lib>
 	  <lib>recommend_promotion</lib>
 	   <lib>new_articles</lib>
+      <lib>index_tab</lib>
     </region>
     <region name="站内快讯上广告位（宽：210px）"/>
     <region name="右边主区域">

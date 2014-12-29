@@ -1,0 +1,91 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="xm-box">
+
+    <div class="itemTit New" id="indexTab">
+        <h2><a href="javascript:void(0)" onclick="change_tab_style('indexTab', 'h2', this);addClass('new')">新品区</a></h2>
+        <h2 class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('indexTab', 'h2', this);addClass('sale')">促销区</a></h2>
+        <h2 class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('indexTab', 'h2', this);addClass('hots')">热卖区</a></h2>
+        <div class="more">
+        <a href="../search.php?intro=new" id='newMore'><img src="images/more.gif" /></a>
+        <a href="../search.php?intro=promotion" id='saleMore' class='hide'><img src="images/more.gif" /></a>
+        <a href="../search.php?intro=hot" id='hotsMore' class='hide'><img src="images/more.gif" /></a>
+        </div>
+    </div>
+    <div id="show_new_area" class="clearfix goodsBox">
+        <div id="new">
+            <!--{foreach from=$new_goods item=goods}-->
+            <div class="goodsItem">
+                <span class="news"></span>
+                <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+                <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+                市场价：<font class="market">{$goods.market_price}</font> <br/>
+                本店价：<font class="f1">
+                <!-- {if $goods.promote_price neq ""} -->
+                {$goods.promote_price}
+                <!-- {else}-->
+                {$goods.shop_price}
+                <!--{/if}-->
+            </font>
+            </div>
+            <!--{/foreach}-->
+        </div>
+        <div id="sale" class="hide" >
+            <!--{foreach from=$promotion_goods item=goods}-->
+            <div class="goodsItem">
+                <span class="best"></span>
+                <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+                <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+                市场价：<font class="market">{$goods.market_price}</font> <br/>
+
+                本店价：<font class="f1">
+                <!-- {if $goods.promote_price neq ""} -->
+                {$goods.promote_price}
+                <!-- {else}-->
+                {$goods.shop_price}
+                <!--{/if}-->
+            </font>
+            </div>
+            <!--{/foreach}-->
+
+        </div>
+
+        <div id="hots" class="hide" >
+            <!--{foreach from=$hot_goods item=goods}-->
+            <div class="goodsItem">
+                <span class="hot"></span>
+                <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+                <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+                市场价：<font class="market">{$goods.market_price}</font> <br/>
+
+                本店价：<font class="f1">
+                <!-- {if $goods.promote_price neq ""} -->
+                {$goods.promote_price}
+                <!-- {else}-->
+                {$goods.shop_price}
+                <!--{/if}-->
+            </font>
+            </div>
+            <!--{/foreach}-->
+
+        </div>
+    </div>
+</div>
+
+<div class="blank5"></div>
+
+<script>
+    function addClass(id){
+        var className=['new','sale','hots'];
+        for(i=0;i<className.length;i++){
+            var obj = document.getElementById(className[i]);
+            var objMore = document.getElementById(className[i]+'More');
+            if(className[i]==id){
+                obj.className = ''
+                objMore.className='';
+            }else{
+                obj.className = 'hide';
+                objMore.className='hide';
+            }
+        }
+    }
+</script>

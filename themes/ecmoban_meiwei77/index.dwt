@@ -12,6 +12,7 @@
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link href="themes/ecmoban_meiwei77/index.css" rel="stylesheet" type="text/css" />
 <link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
 {* 包含脚本文件 *}
 {insert_scripts files='common.js,index.js'}
@@ -21,201 +22,326 @@
 <div class="block">
 <!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
 </div>
-<div class="block clearfix">
-	<div>  
-<!-- TemplateBeginEditable name="促销商品区域" -->
-<!-- #BeginLibraryItem "/library/recommend_promotion.lbi" -->
 
-<!-- {if $promotion_goods} -->
-<div class="sale_box clearfix">
-<div class="tit"><span>特价商品</span></div>
-
- 
-      <div class="clearfix">
-         <!--{foreach from=$promotion_goods item=goods name="promotion_foreach"}-->
-        
-           <ul class="clearfix">
-           <li class="goodsimg"><a href="{$goods.url}"><img src="{$goods.thumb}" border="0" alt="{$goods.name|escape:html}" class="B_blue"/></a></li>
-			<li> <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a></p>
-           {$lang.promote_price}<font class="f1">{$goods.promote_price}</font></li>
-           </ul>
-
-         <!--{/foreach}-->
-       </div>
- </div>
- 
+<!--品牌-->
+          <div class="block clearfix">
+           <div class="box_1 clearfix brand" id="">
+            <!-- #BeginLibraryItem "/library/brands.lbi" --><!-- #EndLibraryItem -->
+           </div>
+          </div>
 <div class="blank"></div>
-<!-- {/if} -->
+
+<div class="block clearfix">
+	<div>
+<!-- TemplateBeginEditable name="促销热卖集合区域" -->
+<!-- #BeginLibraryItem "/library/index_tab.lbi" -->
+
+<div class="xm-box">
+
+    <div class="itemTit New" id="indexTab">
+        <h2><a href="javascript:void(0)" onclick="change_tab_style('indexTab', 'h2', this);addClass('new')">新品区</a></h2>
+        <h2 class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('indexTab', 'h2', this);addClass('sale')">促销区</a></h2>
+        <h2 class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('indexTab', 'h2', this);addClass('hots')">热卖区</a></h2>
+        <div class="more">
+        <a href="../search.php?intro=new" id='newMore'><img src="images/more.gif" /></a>
+        <a href="../search.php?intro=promotion" id='saleMore' class='hide'><img src="images/more.gif" /></a>
+        <a href="../search.php?intro=hot" id='hotsMore' class='hide'><img src="images/more.gif" /></a>
+        </div>
+    </div>
+    <div id="show_new_area" class="clearfix goodsBox">
+        <div id="new">
+            <!--{foreach from=$new_goods item=goods}-->
+            <div class="goodsItem">
+                <span class="news"></span>
+                <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+                <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+                市场价：<font class="market">{$goods.market_price}</font> <br/>
+                本店价：<font class="f1">
+                <!-- {if $goods.promote_price neq ""} -->
+                {$goods.promote_price}
+                <!-- {else}-->
+                {$goods.shop_price}
+                <!--{/if}-->
+            </font>
+            </div>
+            <!--{/foreach}-->
+        </div>
+        <div id="sale" class="hide" >
+            <!--{foreach from=$promotion_goods item=goods}-->
+            <div class="goodsItem">
+                <span class="best"></span>
+                <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+                <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+                市场价：<font class="market">{$goods.market_price}</font> <br/>
+
+                本店价：<font class="f1">
+                <!-- {if $goods.promote_price neq ""} -->
+                {$goods.promote_price}
+                <!-- {else}-->
+                {$goods.shop_price}
+                <!--{/if}-->
+            </font>
+            </div>
+            <!--{/foreach}-->
+
+        </div>
+
+        <div id="hots" class="hide" >
+            <!--{foreach from=$hot_goods item=goods}-->
+            <div class="goodsItem">
+                <span class="hot"></span>
+                <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+                <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+                市场价：<font class="market">{$goods.market_price}</font> <br/>
+
+                本店价：<font class="f1">
+                <!-- {if $goods.promote_price neq ""} -->
+                {$goods.promote_price}
+                <!-- {else}-->
+                {$goods.shop_price}
+                <!--{/if}-->
+            </font>
+            </div>
+            <!--{/foreach}-->
+
+        </div>
+    </div>
+</div>
+
+<div class="blank5"></div>
+
+<script>
+    function addClass(id){
+        var className=['new','sale','hots'];
+        for(i=0;i<className.length;i++){
+            var obj = document.getElementById(className[i]);
+            var objMore = document.getElementById(className[i]+'More');
+            if(className[i]==id){
+                obj.className = ''
+                objMore.className='';
+            }else{
+                obj.className = 'hide';
+                objMore.className='hide';
+            }
+        }
+    }
+</script>
  <!-- #EndLibraryItem -->
 <!-- TemplateEndEditable -->
- 
+
 </div>
- 
-  	<div class="blank"></div> 
- 
+
+  	<div class="blank"></div>
+
   	<div class="goodsBox_1">
   <!-- TemplateBeginEditable name="首页右侧区域" -->
 <!-- TemplateEndEditable -->
-  
+
   <!-- TemplateBeginEditable name="全宽行" -->
 <!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
-
-
-
-<div class="xm-box">
-<h4 class="title"><span>{$goods_cat.name|escape:html}</span> <a class="more" href="{$goods_cat.url}">更多</a></h4>
-<div class="blank"></div>
-<div id="show_hot_area" class="clearfix">
-
- 
-      <!--{foreach from=$cat_goods item=goods}-->
-      <div class="goodsItem">
-       
-           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
-           <p class="f1"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
-           
-           
- 市场价：<font class="market">{$goods.market_price}</font> <br/>
-      
-           本店价：<font class="f1">
-           <!-- {if $goods.promote_price neq ""} -->
-          {$goods.promote_price}
-          <!-- {else}-->
-          {$goods.shop_price}
-          <!--{/if}-->
-           </font>      
-		    
+<div id="electronics" data-fid="0" class="w w1">
+    <div class="m m1 catalogue">
+        <div class="mt ld">
+            <div class="floor">
+            <b class="fixpng b b1"></b>
+            <b class="fixpng b b2" style="height: 34px; display: block;"></b>
+                  <?php    $flow = 1;
+                                             if($this->_var['flow']){
+                                                 $flow = $this->_var['flow']+1;
+                                             }
+                                              $GLOBALS['smarty']->assign('flow', $flow);
+                                             ?>
+            <b class="b b3">{$flow}F</b>
+            <b class="fixpng b4"></b>
+            </div>
+            <h2>{$goods_cat.name|escape:html}</h2>
         </div>
-      <!--{/foreach}-->
+        <div class="mc">
+         <?php  $ci = 1;$GLOBALS['smarty']->assign('ci', $ci);?>
+        <!--{foreach from=$goods_cat.cat_id item=rec_cat name=f}-->
+                <!--{foreach from=$rec_cat.cat_id item=s_cat name=f}-->
+                <?php
+                                $cid = $this->_var['s_cat']['id'];
+                                $this ->assign('goods_cat_'.$cid, assign_cat_goods($cid, 9));
+                                $this->assign('cat_goods_nf',$this->_var['cat_goods_'.$cid]);
+                         ?>
+                <!--{foreach from=$cat_goods_nf item=goods name=name}-->
+                                <!--{if $smarty.foreach.name.iteration eq 1}-->
+                                <div class="style1 <!--{if $ci neq 1}--> hide <!--{/if}-->" id="focus{$ci}" >
+                                <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">
+                                    <img width="270px" height="361px" data-img="{$i}" alt="{$goods.name|escape:html}" src="{$goods.thumb}" class="err-product">
+                                 </a>
+                                </div>
+                                <!--{/if}-->
+                <!--{/foreach}-->
+                <?php $ci = $ci+1;$GLOBALS['smarty']->assign('ci', $ci);?>
+                <!--{/foreach}-->
+
+        <!--{/foreach}-->
+
+        </div>
     </div>
- 
- 
-</div>
-<div class="blank"></div>
-
- <!-- #EndLibraryItem -->
-<!-- #BeginLibraryItem "/library/recommend_new.lbi" -->
-
-<!-- {if $new_goods} -->
-<!-- {if $cat_rec_sign neq 1} -->
-<div class="xm-box">
-<h4 class="title"><span>新品上架</span> <a class="more" href="../search.php?intro=new">更多</a></h4>
-<div class="blank"></div>
-<div id="show_new_area" class="clearfix">
-  <!-- {/if} -->
-  <!--{foreach from=$new_goods item=goods}-->
-  <div class="goodsItem">
-       
-           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
-           <p class="f1"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
-           
-           
- 市场价：<font class="market">{$goods.market_price}</font> <br/>
-      
-           本店价：<font class="f1">
-           <!-- {if $goods.promote_price neq ""} -->
-          {$goods.promote_price}
-          <!-- {else}-->
-          {$goods.shop_price}
-          <!--{/if}-->
-           </font>      
-		    
+    <div class="m plist">
+        <div class="tab-arrow" style="left: 0px;"><b></b></div>
+        <?php  $i = 1;$GLOBALS['smarty']->assign('i', $i);?>
+        <!--{foreach from=$goods_cat.cat_id item=rec_cat name=f}-->
+        <!--{foreach from=$rec_cat.cat_id item=s_cat name=f}-->
+<?php
+                                $cid = $this->_var['s_cat']['id'];
+                                $this ->assign('goods_cat_'.$cid, assign_cat_goods($cid, 9));
+                                $this->assign('cat_goods_nf',$this->_var['cat_goods_'.$cid]);
+                         ?>
+        <div data-widget="tab-item" class="sm sm2 fore{$i} <!--{if $i eq 1}-->curr <!--{/if}--> " id="{$i}">
+            <div clstag="homepage|keycount|home2013|18c1" class="smt">
+                <h3>{$s_cat.name|escape:html} </h3>
+            </div>
+            <div data-widget="tab-content" class="smc">
+                <ul class="lh style1" id="style{$i}">
+                <!--{foreach from=$cat_goods_nf item=goods name=name}-->
+                <!--{if $smarty.foreach.name.iteration neq 1}-->
+                 <li class="fore1">
+                   <div clstag="homepage|keycount|home2013|18c2" class="p-img" style="opacity: 1;">
+                         <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">
+                            <img width="100" height="100" data-img="{$i}" alt="{$goods.name|escape:html}" src="{$goods.thumb}" class="err-product">
+                            </a>
+                    </div>
+                        <div class="p-name">
+                                <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">{$goods.name|escape:html}</a>
+                                </div>
+                                        <div class="p-price">
+                                        <span style="display:block;height:1.5em;overflow:hidden;">{$goods.market_price}</span>
+                                        </div>
+                  </li>
+                  <!--{/if}-->
+                <!--{/foreach}-->
+                </ul>
+            </div>
         </div>
-  <!--{/foreach}-->
- 
-  <!-- {if $cat_rec_sign neq 1} -->
-  </div>
-
+        <?php $i = $i+1;$GLOBALS['smarty']->assign('i', $i);?>
+        <!--{/foreach}-->
+        <!--{/foreach}-->
+    </div>
+    <span class="clr"></span>
 </div>
-<div class="blank"></div>
-  <!-- {/if} -->
-<!-- {/if} -->
-
+{insert_scripts files='jquery.js'}
+<script>
+    $().ready(function(){
+        $(".sm2").hover(function(){
+            $(".sm2").removeClass('curr');
+            $(this).addClass('curr');
+           var id = $(this).attr('id');
+           $("#focus"+id).removeClass('hide');
+           $("#focus"+id).siblings().addClass('hide');
+        })
+    })
+</script>
  <!-- #EndLibraryItem -->
-<!-- #BeginLibraryItem "/library/recommend_hot.lbi" -->
-
-<!-- {if $hot_goods} -->
-<!-- {if $cat_rec_sign neq 1} -->
-<div class="xm-box">
-<h4 class="title"><span>热卖商品</span> <a class="more" href="../search.php?intro=hot">更多</a></h4>
-<div class="blank"></div>
-<div id="show_hot_area" class="clearfix">
-  <!-- {/if} -->
-  <!--{foreach from=$hot_goods item=goods}-->
-  <div class="goodsItem">
-       
-           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
-           <p class="f1"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
-           
-           
- 市场价：<font class="market">{$goods.market_price}</font> <br/>
-      
-           本店价：<font class="f1">
-           <!-- {if $goods.promote_price neq ""} -->
-          {$goods.promote_price}
-          <!-- {else}-->
-          {$goods.shop_price}
-          <!--{/if}-->
-           </font>      
-		    
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+<div id="electronics" data-fid="0" class="w w1">
+    <div class="m m1 catalogue">
+        <div class="mt ld">
+            <div class="floor">
+            <b class="fixpng b b1"></b>
+            <b class="fixpng b b2" style="height: 34px; display: block;"></b>
+                  <?php    $flow = 1;
+                                             if($this->_var['flow']){
+                                                 $flow = $this->_var['flow']+1;
+                                             }
+                                              $GLOBALS['smarty']->assign('flow', $flow);
+                                             ?>
+            <b class="b b3">{$flow}F</b>
+            <b class="fixpng b4"></b>
+            </div>
+            <h2>{$goods_cat.name|escape:html}</h2>
         </div>
-  <!--{/foreach}-->
- 
-  <!-- {if $cat_rec_sign neq 1} -->
-  </div>
+        <div class="mc">
+         <?php  $ci = 1;$GLOBALS['smarty']->assign('ci', $ci);?>
+        <!--{foreach from=$goods_cat.cat_id item=rec_cat name=f}-->
+                <!--{foreach from=$rec_cat.cat_id item=s_cat name=f}-->
+                <?php
+                                $cid = $this->_var['s_cat']['id'];
+                                $this ->assign('goods_cat_'.$cid, assign_cat_goods($cid, 9));
+                                $this->assign('cat_goods_nf',$this->_var['cat_goods_'.$cid]);
+                         ?>
+                <!--{foreach from=$cat_goods_nf item=goods name=name}-->
+                                <!--{if $smarty.foreach.name.iteration eq 1}-->
+                                <div class="style1 <!--{if $ci neq 1}--> hide <!--{/if}-->" id="focus{$ci}" >
+                                <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">
+                                    <img width="270px" height="361px" data-img="{$i}" alt="{$goods.name|escape:html}" src="{$goods.thumb}" class="err-product">
+                                 </a>
+                                </div>
+                                <!--{/if}-->
+                <!--{/foreach}-->
+                <?php $ci = $ci+1;$GLOBALS['smarty']->assign('ci', $ci);?>
+                <!--{/foreach}-->
 
-</div>
-<div class="blank"></div>
-  <!-- {/if} -->
-<!-- {/if} -->
+        <!--{/foreach}-->
 
- <!-- #EndLibraryItem -->
-<!-- #BeginLibraryItem "/library/recommend_best.lbi" -->
-
-<!-- {if $best_goods} -->
-<!-- {if $cat_rec_sign neq 1} -->
-<div class="xm-box">
-<h4 class="title"><span>精品推荐</span> <a class="more" href="../search.php?intro=best">更多</a></h4>
-<div class="blank"></div>
-<div id="show_best_area" class="clearfix">
-  <!-- {/if} -->
-  <!--{foreach from=$best_goods item=goods}-->
-  <div class="goodsItem">
-       
-           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
-           <p class="f1"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
-           
-           
- 市场价：<font class="market">{$goods.market_price}</font> <br/>
-      
-           本店价：<font class="f1">
-           <!-- {if $goods.promote_price neq ""} -->
-          {$goods.promote_price}
-          <!-- {else}-->
-          {$goods.shop_price}
-          <!--{/if}-->
-           </font>      
-		    
         </div>
-  <!--{/foreach}-->
- 
-  <!-- {if $cat_rec_sign neq 1} -->
-  </div>
-
+    </div>
+    <div class="m plist">
+        <div class="tab-arrow" style="left: 0px;"><b></b></div>
+        <?php  $i = 1;$GLOBALS['smarty']->assign('i', $i);?>
+        <!--{foreach from=$goods_cat.cat_id item=rec_cat name=f}-->
+        <!--{foreach from=$rec_cat.cat_id item=s_cat name=f}-->
+<?php
+                                $cid = $this->_var['s_cat']['id'];
+                                $this ->assign('goods_cat_'.$cid, assign_cat_goods($cid, 9));
+                                $this->assign('cat_goods_nf',$this->_var['cat_goods_'.$cid]);
+                         ?>
+        <div data-widget="tab-item" class="sm sm2 fore{$i} <!--{if $i eq 1}-->curr <!--{/if}--> " id="{$i}">
+            <div clstag="homepage|keycount|home2013|18c1" class="smt">
+                <h3>{$s_cat.name|escape:html} </h3>
+            </div>
+            <div data-widget="tab-content" class="smc">
+                <ul class="lh style1" id="style{$i}">
+                <!--{foreach from=$cat_goods_nf item=goods name=name}-->
+                <!--{if $smarty.foreach.name.iteration neq 1}-->
+                 <li class="fore1">
+                   <div clstag="homepage|keycount|home2013|18c2" class="p-img" style="opacity: 1;">
+                         <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">
+                            <img width="100" height="100" data-img="{$i}" alt="{$goods.name|escape:html}" src="{$goods.thumb}" class="err-product">
+                            </a>
+                    </div>
+                        <div class="p-name">
+                                <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">{$goods.name|escape:html}</a>
+                                </div>
+                                        <div class="p-price">
+                                        <span style="display:block;height:1.5em;overflow:hidden;">{$goods.market_price}</span>
+                                        </div>
+                  </li>
+                  <!--{/if}-->
+                <!--{/foreach}-->
+                </ul>
+            </div>
+        </div>
+        <?php $i = $i+1;$GLOBALS['smarty']->assign('i', $i);?>
+        <!--{/foreach}-->
+        <!--{/foreach}-->
+    </div>
+    <span class="clr"></span>
 </div>
-<div class="blank"></div>
-  <!-- {/if} -->
-<!-- {/if} -->
-
+{insert_scripts files='jquery.js'}
+<script>
+    $().ready(function(){
+        $(".sm2").hover(function(){
+            $(".sm2").removeClass('curr');
+            $(this).addClass('curr');
+           var id = $(this).attr('id');
+           $("#focus"+id).removeClass('hide');
+           $("#focus"+id).siblings().addClass('hide');
+        })
+    })
+</script>
  <!-- #EndLibraryItem -->
 <!-- TemplateEndEditable -->
   </div>
-  
+
   	<div class="foot_add">
         	<!-- TemplateBeginEditable name="首页底部大广告" -->
 <!-- TemplateEndEditable -->
-    </div> 
-  
+    </div>
+
 </div>
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
 </body>

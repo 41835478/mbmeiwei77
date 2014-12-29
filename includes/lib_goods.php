@@ -808,7 +808,7 @@ function assign_cat_goods($cat_id, $num = 0, $from = 'web', $order_rule = '')
     $cat['name'] = $GLOBALS['db']->getOne($sql);
     $cat['url']  = build_uri('category', array('cid' => $cat_id), $cat['name']);
     $cat['id']   = $cat_id;
-
+    $cat['cat_id'] = get_child_tree($cat_id);
     return $cat;
 }
 

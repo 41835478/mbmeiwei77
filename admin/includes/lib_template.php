@@ -124,7 +124,8 @@ $page_libs = array(
         '/library/cart.lbi' => 0,
         '/library/order_query.lbi' => 0,
         '/library/email_list.lbi' => 0,
-        '/library/vote_list.lbi' => 0
+        '/library/vote_list.lbi' => 0,
+        '/library/index_tab.lbi' => 0,
     ),
     'goods' => array(
         '/library/ur_here.lbi' => 0,
