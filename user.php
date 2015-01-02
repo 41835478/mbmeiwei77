@@ -2064,7 +2064,7 @@ elseif ($action == 'bonus')
             $district = $db->getRow($sql);
             $address= $country['region_name'].$province['region_name'].$city['region_name'].$district['region_name']."-".$addressArray['address']."-".$addressArray['consignee']."-".$addressArray['tel']."-".$addressArray['mobile'];
 
-            $sql = "UPDATE ".$ecs->table('user_bonus')." set info='".$address."',emailed=1,used_time=".$time." where bonus_type_id=".$type_id;
+            $sql = "UPDATE ".$ecs->table('user_bonus')." set info='".$address."',emailed=1,used_time=".$time." where bonus_type_id=".$type_id.' and user_id='.$user_id;
             $db->query($sql);
             ecs_header('Location: user.php?act=bonus');
             exit;
