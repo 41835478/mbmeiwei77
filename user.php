@@ -2044,17 +2044,59 @@ elseif ($action == 'save_order_address')
 /* 我的红包列表 */
 elseif ($action == 'bonus')
 {
-    include_once(ROOT_PATH .'includes/lib_transaction.php');
+    $type_id = isset($_REQUEST['bonus_id'])?$_REQUEST['bonus_id']:0;
+    $time = time();
+    if(isset($_REQUEST['bonus_id']) && $_REQUEST['do']=='get'){
+        if($_POST){
+            $address_id = isset($_REQUEST['address'])?$_REQUEST['address']:'';
+            $addressArray = $db->getRow("select * from ".$ecs->table('user_address')." where user_id=".$user_id." and address_id=".$address_id);
+            $sql = 'SELECT region_id, region_name FROM ' . $GLOBALS['ecs']->table('region') .
+                " WHERE  region_id = ".$addressArray['country'];
+            $country = $db->getRow($sql);
+            $sql = 'SELECT region_id, region_name FROM ' . $GLOBALS['ecs']->table('region') .
+                " WHERE  region_id = ".$addressArray['province'];
+            $province = $db->getRow($sql);
+            $sql = 'SELECT region_id, region_name FROM ' . $GLOBALS['ecs']->table('region') .
+                " WHERE  region_id = ".$addressArray['city'];
+            $city = $db->getRow($sql);
+            $sql = 'SELECT region_id, region_name FROM ' . $GLOBALS['ecs']->table('region') .
+                " WHERE  region_id = ".$addressArray['district'];
+            $district = $db->getRow($sql);
+            $address= $country['region_name'].$province['region_name'].$city['region_name'].$district['region_name']."-".$addressArray['address']."-".$addressArray['consignee']."-".$addressArray['tel']."-".$addressArray['mobile'];
 
-    $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
-    $record_count = $db->getOne("SELECT COUNT(*) FROM " .$ecs->table('user_bonus'). " WHERE user_id = '$user_id'");
+            $sql = "UPDATE ".$ecs->table('user_bonus')." set info='".$address."',emailed=1,used_time=".$time." where bonus_type_id=".$type_id;
+            $db->query($sql);
+            ecs_header('Location: user.php?act=bonus');
+            exit;
+        }
+        $address = '';
 
-    $pager = get_pager('user.php', array('act' => $action), $record_count, $page);
-    $bonus = get_user_bouns_list($user_id, $pager['size'], $pager['start']);
+        /*  索取商品红包   */
+        $bonus = $db->getRow("SELECT * FROM ".$ecs->table('bonus_type')." where type_id=".$type_id);
+        $sql = "SELECT * FROM ".$ecs->table('user_address')." where user_id=".$user_id;
+        $query = $GLOBALS['db']->query($sql);
+        while ($row = $GLOBALS['db']->fetchRow($query))
+        {
+            $address .="<option value='".$row['address_id']."'>".$row['address']."-".$row['consignee']."</option>";
+        }
+        $address = $address?$address:'<option>无配送地址，请在收货地址栏设置</option>';
+        $smarty->assign('bonus', $bonus);
+        $smarty->assign('address', $address);
+        $smarty->display('user_bonus_get.dwt');
+    }else{
+        include_once(ROOT_PATH .'includes/lib_transaction.php');
 
-    $smarty->assign('pager', $pager);
-    $smarty->assign('bonus', $bonus);
-    $smarty->display('user_transaction.dwt');
+        $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
+        $record_count = $db->getOne("SELECT COUNT(*) FROM " .$ecs->table('user_bonus'). " WHERE user_id = '$user_id'");
+
+        $pager = get_pager('user.php', array('act' => $action), $record_count, $page);
+        $bonus = get_user_bouns_list($user_id, $pager['size'], $pager['start']);
+
+        $smarty->assign('pager', $pager);
+        $smarty->assign('bonus', $bonus);
+        $smarty->display('user_transaction.dwt');
+    }
+
 }
 
 /* 我的团购列表 */

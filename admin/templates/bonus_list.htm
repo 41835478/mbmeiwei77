@@ -17,9 +17,9 @@
       <th><a href="javascript:listTable.sort('bonus_sn'); ">{$lang.bonus_sn}</a>{$sort_bonus_sn}</th>
       {/if}
       <th><a href="javascript:listTable.sort('type_name'); ">{$lang.bonus_type}</a>{$sort_type_name}</th>
-      <th><a href="javascript:listTable.sort('order_id'); ">{$lang.order_id}</a>{$sort_order_id}</th>
+      <th><a href="javascript:listTable.sort('order_id'); ">{if $send_type==SEND_BY_SEARCH}配送地址{else}{$lang.order_id}{/if}</a>{$sort_order_id}</th>
       <th><a href="javascript:listTable.sort('user_id'); ">{$lang.user_id}</a>{$sort_user_id}</th>
-      <th><a href="javascript:listTable.sort('used_time'); ">{$lang.used_time}</a>{$sort_use_time}{$sort_used_time}</th>
+      <th><a href="javascript:listTable.sort('used_time'); ">{if $send_type==SEND_BY_SEARCH}申请时间{else}{$lang.used_time}{/if}</a>{$sort_use_time}{$sort_used_time}</th>
       {if $show_mail}
       <th><a href="javascript:listTable.sort('emailed'); ">{$lang.emailed}</a>{$sort_emailed}{$sort_emailed}</th>
       {/if}
@@ -32,13 +32,16 @@
       <td>{$bonus.bonus_sn}</td>
       {/if}
       <td>{$bonus.type_name}</td>
-      <td>{$bonus.order_sn}</td>
+      <td>{if $send_type==SEND_BY_SEARCH}{$bonus.info}{else}{$bonus.order_sn}{/if}</td>
       <td>{if $bonus.email}<a href="mailto:{$bonus.email}">{$bonus.user_name}</a>{else}{$bonus.user_name}{/if}</td>
       <td align="right">{$bonus.used_time}</td>
       {if $show_mail}
       <td align="center">{$bonus.emailed}</td>
       {/if}
       <td align="center">
+        {if $send_type==SEND_BY_SEARCH && $bonus.email==1}
+              <a href="javascript:;" onclick="bonus_sure({$bonus.bonus_id})">确认</a>
+        {/if}
         <a href="javascript:;" onclick="listTable.remove({$bonus.bonus_id}, '{$lang.drop_confirm}', 'remove_bonus')">{$lang.remove}</a>
         {if $show_mail and $bonus.order_id eq 0 and $bonus.email}<a href="bonus.php?act=send_mail&bonus_id={$bonus.bonus_id}">{$lang.send_mail}</a>{/if}</td>
     </tr>
@@ -77,6 +80,19 @@
     document.forms['listForm'].reset();
   }
   {/literal}
+  function  bonus_sure(id){
+    Ajax.call('bonus.php', 'act=bonus_sure&id=' + id, onBonusSureResponse, 'GET', 'JSON');
+  }
+  function onBonusSureResponse(res){
+    if (res.err_msg.length > 0)
+    {
+      alert(res.err_msg);
+    }
+    else
+    {
+      window.location.href='';
+    }
+  }
 </script>
 {include file="pagefooter.htm"}
 {/if}

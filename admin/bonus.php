@@ -187,7 +187,7 @@ if ($_REQUEST['act'] == 'add')
     $bonus_arr['use_start_date']    = local_date('Y-m-d');
     $bonus_arr['send_end_date']     = local_date('Y-m-d', $next_month);
     $bonus_arr['use_end_date']      = local_date('Y-m-d', $next_month);
-
+    $bonus_arr['option'] = '<option value="0">请先搜索商品生成选项列表</option>';
     $smarty->assign('bonus_arr',    $bonus_arr);
 
     assign_query_info();
@@ -213,15 +213,15 @@ if ($_REQUEST['act'] == 'insert')
         $link[] = array('text' => $_LANG['go_back'], 'href' => 'javascript:history.back(-1)');
         sys_msg($_LANG['type_name_exist'], 0, $link);
     }
-
     /* 获得日期信息 */
     $send_startdate = local_strtotime($_POST['send_start_date']);
     $send_enddate   = local_strtotime($_POST['send_end_date']);
     $use_startdate  = local_strtotime($_POST['use_start_date']);
     $use_enddate    = local_strtotime($_POST['use_end_date']);
-
+    $count = !empty($_POST['count']) ? $_POST['count'] : 0;
+    $desc = !empty($_POST['desc']) ? $_POST['desc'] : '';
     /* 插入数据库。 */
-    $sql = "INSERT INTO ".$ecs->table('bonus_type')." (type_name, type_money,send_start_date,send_end_date,use_start_date,use_end_date,send_type,min_amount,min_goods_amount)
+    $sql = "INSERT INTO ".$ecs->table('bonus_type')." (type_name, type_money,send_start_date,send_end_date,use_start_date,use_end_date,send_type,min_amount,min_goods_amount,`count`,description)
     VALUES ('$type_name',
             '$_POST[type_money]',
             '$send_startdate',
@@ -229,9 +229,26 @@ if ($_REQUEST['act'] == 'insert')
             '$use_startdate',
             '$use_enddate',
             '$_POST[send_type]',
-            '$min_amount','" . floatval($_POST['min_goods_amount']) . "')";
+            '$min_amount',
+            '" . floatval($_POST['min_goods_amount']) . "',".
+            "'$count',".
+            "'$desc'".
+            ")";
 
     $db->query($sql);
+    if($_POST[send_type]==SEND_BY_SEARCH){
+        $bonus_id = $db->insert_id();
+        //红包商品
+        $goods_id = !empty($_POST['goods_id']) ? $_POST['goods_id'] : 0;
+        $sql = "select * from ".$ecs->table('goods')." where goods_id=".$goods_id;
+        if($db->getOne($sql)>0){
+            $sql = "update ".$ecs->table('goods')." set bonus_type_id=".$bonus_id." where goods_id=".$goods_id;
+            $db->query($sql);
+        }else{
+            $link[] = array('text' => $_LANG['go_back'], 'href' => 'javascript:history.back(-1)');
+            sys_msg($_LANG['goods_none'], 0, $link);
+        }
+    }
     /* 记录管理员操作 */
     admin_log($_POST['type_name'], 'add', 'bonustype');
 
@@ -259,12 +276,13 @@ if ($_REQUEST['act'] == 'edit')
     /* 获取红包类型数据 */
     $type_id = !empty($_GET['type_id']) ? intval($_GET['type_id']) : 0;
     $bonus_arr = $db->getRow("SELECT * FROM " .$ecs->table('bonus_type'). " WHERE type_id = '$type_id'");
-
+    $goodsInfo = $db->getRow("SELECT * FROM ".$ecs->table('goods')." WHERE bonus_type_id='$type_id'");
+    $bonus_arr['goods_id'] = $goodsInfo['goods_id'];
     $bonus_arr['send_start_date']   = local_date('Y-m-d', $bonus_arr['send_start_date']);
     $bonus_arr['send_end_date']     = local_date('Y-m-d', $bonus_arr['send_end_date']);
     $bonus_arr['use_start_date']    = local_date('Y-m-d', $bonus_arr['use_start_date']);
     $bonus_arr['use_end_date']      = local_date('Y-m-d', $bonus_arr['use_end_date']);
-
+    $bonus_arr['option'] = $goodsInfo ? '<option value="' . $goodsInfo['goods_id'] . '">' . $goodsInfo['goods_name'] . '</option>' : '<option value="0">请先搜索商品生成选项列表</option>';
     $smarty->assign('lang',        $_LANG);
     $smarty->assign('ur_here',     $_LANG['bonustype_edit']);
     $smarty->assign('action_link', array('href' => 'bonus.php?act=list&' . list_link_postfix(), 'text' => $_LANG['04_bonustype_list']));
@@ -290,7 +308,9 @@ if ($_REQUEST['act'] == 'update')
     $type_name   = !empty($_POST['type_name'])  ? trim($_POST['type_name'])    : '';
     $type_id     = !empty($_POST['type_id'])    ? intval($_POST['type_id'])    : 0;
     $min_amount  = !empty($_POST['min_amount']) ? intval($_POST['min_amount']) : 0;
-
+    $goods_id = !empty($_POST['goods_id']) ? $_POST['goods_id'] : 0;
+    $count = !empty($_POST['count']) ? $_POST['count'] : 0;
+    $desc = !empty($_POST['desc']) ? $_POST['desc'] : '';
     $sql = "UPDATE " .$ecs->table('bonus_type'). " SET ".
            "type_name       = '$type_name', ".
            "type_money      = '$_POST[type_money]', ".
@@ -300,10 +320,27 @@ if ($_REQUEST['act'] == 'update')
            "use_end_date    = '$use_enddate', ".
            "send_type       = '$_POST[send_type]', ".
            "min_amount      = '$min_amount', " .
+            "count      = '$count', " .
+            "description      = '$desc', " .
            "min_goods_amount = '" . floatval($_POST['min_goods_amount']) . "' ".
            "WHERE type_id   = '$type_id'";
 
    $db->query($sql);
+    if($_POST[send_type]==SEND_BY_SEARCH && $_POST['goods_id']!=$_POST['old_goods_id']){
+        //红包商品
+        $goods_id = !empty($_POST['goods_id']) ? $_POST['goods_id'] : 0;
+        $old_goods_id = !empty($_POST['old_goods_id']) ? $_POST['old_goods_id'] : 0;
+        $sql = "select * from ".$ecs->table('goods')." where goods_id=".$goods_id;
+        if($db->getOne($sql)>0){
+            $sql = "update ".$ecs->table('goods')." set bonus_type_id=0 where goods_id=".$old_goods_id;
+            $db->query($sql);
+            $sql = "update ".$ecs->table('goods')." set bonus_type_id=".$type_id." where goods_id=".$goods_id;
+            $db->query($sql);
+        }else{
+            $link[] = array('text' => $_LANG['go_back'], 'href' => 'javascript:history.back(-1)');
+            sys_msg($_LANG['goods_none'], 0, $link);
+        }
+    }
    /* 记录管理员操作 */
    admin_log($_POST['type_name'], 'edit', 'bonustype');
 
@@ -367,6 +404,29 @@ if ($_REQUEST['act'] == 'send')
         $smarty->assign('type_list',    get_bonus_type());
 
         $smarty->display('bonus_by_print.htm');
+    }
+    elseif($_REQUEST['send_by'] == SEND_BY_SEARCH){
+        /* 查询此红包类型信息 */
+        $bonus_type = $db->GetRow("SELECT type_id, type_name FROM ".$ecs->table('bonus_type').
+            " WHERE type_id='$_REQUEST[id]'");
+
+        /* 查询红包类型的商品列表 */
+        $goods_list = get_bonus_goods($_REQUEST['id']);
+
+        /* 查询其他红包类型的商品 */
+        $sql = "SELECT goods_id FROM " .$ecs->table('goods').
+            " WHERE bonus_type_id > 0 AND bonus_type_id <> '$_REQUEST[id]'";
+        $other_goods_list = $db->getCol($sql);
+        $smarty->assign('other_goods', join(',', $other_goods_list));
+
+        /* 模板赋值 */
+        $smarty->assign('cat_list',    cat_list());
+        $smarty->assign('brand_list',  get_brand_list());
+
+        $smarty->assign('bonus_type',  $bonus_type);
+        $smarty->assign('goods_list',  $goods_list);
+
+        $smarty->display('bonus_by_search.htm');
     }
 }
 
@@ -792,6 +852,7 @@ if ($_REQUEST['act'] == 'bonus_list')
     $smarty->assign('filter',       $list['filter']);
     $smarty->assign('record_count', $list['record_count']);
     $smarty->assign('page_count',   $list['page_count']);
+    $smarty->assign('send_type',   $bonus_type['send_type']);
 
     $sort_flag  = sort_flag($list['filter']);
     $smarty->assign($sort_flag['tag'], $sort_flag['img']);
@@ -800,6 +861,15 @@ if ($_REQUEST['act'] == 'bonus_list')
     $smarty->display('bonus_list.htm');
 }
 
+if($_REQUEST['act']=='bonus_sure'){
+    include_once(ROOT_PATH . 'includes/cls_json.php');
+    $json = new JSON;
+    $id = (isset($_REQUEST['id'])) ? intval($_REQUEST['id']) : 0;
+    $res = array('err_msg' => '', 'result' => '', 'qty' => 1);
+    $sql = "update ".$ecs->table('user_bonus')." set emailed=2 where bonus_id=".$id;
+    $db->query($sql);
+    die($json->encode($res));
+}
 /*------------------------------------------------------ */
 //-- 红包列表翻页、排序
 /*------------------------------------------------------ */
@@ -1017,6 +1087,7 @@ function get_bonus_list()
     {
         $row[$key]['used_time'] = $val['used_time'] == 0 ?
             $GLOBALS['_LANG']['no_use'] : local_date($GLOBALS['_CFG']['date_format'], $val['used_time']);
+        $row[$key]['email'] = $row[$key]['emailed'];
         $row[$key]['emailed'] = $GLOBALS['_LANG']['mail_status'][$row[$key]['emailed']];
     }
 

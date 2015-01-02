@@ -584,7 +584,102 @@ h6 span{float:left; padding-left:15px; font-size:14px;}
 .art_cat_box th{ height:26px;line-height:26px; }
 .art_cat_box td{ border-bottom:1px solid #dbdbdb; font-weight:normal}
 .art_cat_box td a{ font-weight:bold; color:#3f3f3f; padding-left:20px; }
-
+/************************红包******************/
+.coupons-list .coupon {
+    background-color: white;
+    border: 3px solid #b7e1ef;
+    cursor: pointer;
+    display: block;
+    height: 124px;
+    margin: 15px auto;
+    text-decoration: none;
+}
+#indexshop ul li.selected .store-item, #more-stores .left, #more-stores .right, #filter-selected-list li, .coupons-list .coupon .left, .coupons-list .coupon .right span b, .coupons-list li .scissors, #filter-tabs .score span, #filter-tabs .score .desc span, #filter-tabs .score .asc span {
+    background: url("http://www.quanlaoda.com/static/theme/ev56_xiutuan/css/i/coupon_bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.coupons-list .coupon .left {
+    background-position: 116% -75px;
+    float: left;
+    height: 124px;
+    width: 80%;
+}
+.coupons-list .coupon .right {
+    background-color: #eaf9ff;
+    float: left;
+    height: 124px;
+    width: 20%;
+}
+.coupons-list .coupon .description {
+    color: #666;
+    display: block;
+    font-size: 14px;
+    margin: 26px 5px 0 0;
+    text-align: center;
+}
+.coupons-list .coupon .store-logo {
+    display: block;
+    height: 45px;
+    margin: 6px auto 0;
+    overflow: hidden;
+    width: 90px;
+}
+.coupons-list .coupon .description em {
+    color: #f44;
+    font-family: Arial;
+    font-size: 26px;
+    font-weight: bold;
+    margin: 0 5px;
+    position: relative;
+    top: 2px;
+}
+.coupons-list .coupon .right .free {
+    color: #f00;
+    font-family: "Microsoft Yahei";
+    font-size: 18px;
+}
+.coupons-list .coupon .right em {
+    display: block;
+    font-style: normal;
+    margin-top: 24px;
+    text-align: center;
+}
+.coupons-list .coupon .right span {
+    color: white;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+}
+.coupons-list .coupon .right span {
+    background-color: #39abd5;
+    color: white;
+    display: block;
+    font-size: 18px;
+    height: 30px;
+    line-height: 30px;
+    margin: 12px auto;
+    position: relative;
+    text-align: center;
+    width: 90px;
+}
+.coupons-list .coupon .right span b {
+    height: 30px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 90px;
+}
+.coupons-list .coupon:hover {
+    border-color: #f8ded5;
+}
+.coupons-list .coupon .right .get b {
+    background-position: -5px -75px;
+}
+.coupons-list .coupon .right .get b:hover {
+    background-position: -5px -105px;
+}
+.coupons-list .coupon:hover .right {
+    background: none repeat scroll 0 0 #fbf2ef;
+}
 
 
 

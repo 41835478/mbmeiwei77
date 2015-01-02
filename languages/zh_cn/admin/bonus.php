@@ -44,6 +44,7 @@ $_LANG['send_by'][SEND_BY_USER] = '按用户发放';
 $_LANG['send_by'][SEND_BY_GOODS] = '按商品发放';
 $_LANG['send_by'][SEND_BY_ORDER] = '按订单金额发放';
 $_LANG['send_by'][SEND_BY_PRINT] = '线下发放的红包';
+$_LANG['send_by'][SEND_BY_SEARCH] = '商品红包';
 $_LANG['report_form'] = '报表';
 $_LANG['send'] = '发放';
 $_LANG['bonus_excel_file'] = '线下红包信息列表';
@@ -70,6 +71,10 @@ $_LANG['back_list'] = '返回红包类型列表';
 $_LANG['continue_add'] = '继续添加红包';
 $_LANG['back_bonus_list'] = '返回红包列表';
 $_LANG['validated_email'] = '只给通过邮件验证的用户发放红包';
+$_LANG['goodsid'] = '显示商品位置';
+$_LANG['notice_goodsid'] ='设置红包要显示的位置';
+$_LANG['desc'] = '红包描述';
+$_LANG['count'] = '个数';
 
 /* 提示信息 */
 $_LANG['attradd_succed'] = '操作成功!';
@@ -89,6 +94,7 @@ $_LANG['js_languages']['user_name_empty'] = '您至少需要选择一个会员!'
 $_LANG['js_languages']['invalid_min_amount'] = '请输入订单下限（大于0的数字）';
 $_LANG['js_languages']['send_start_lt_end'] = '红包发放开始日期不能大于结束日期';
 $_LANG['js_languages']['use_start_lt_end'] = '红包使用开始日期不能大于结束日期';
+$_LANG['js_languages']['no_goods_id'] = '商品不能为空';
 
 $_LANG['order_money_notic'] = '只要订单金额达到该数值，就会发放红包给用户';
 $_LANG['type_money_notic'] = '此类型的红包可以抵销的金额';
@@ -101,6 +107,7 @@ $_LANG['creat_bonus'] = '生成了 ';
 $_LANG['creat_bonus_num'] = ' 个红包序列号';
 $_LANG['bonus_sn_error'] = '红包序列号必须是数字!';
 $_LANG['send_user_notice'] = '给指定的用户发放红包时,请在此输入用户名, 多个用户之间请用逗号(,)分隔开<br />如:liry, wjz, zwj';
+$_LANG['goods_none']='商品不存在,请重新编辑此红包';
 
 /* 红包信息字段 */
 $_LANG['bonus_id'] = '编号';

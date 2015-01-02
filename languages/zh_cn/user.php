@@ -38,6 +38,16 @@ $_LANG['label_track_packages'] = '跟踪包裹';
 $_LANG['label_transform_points'] = '积分兑换';
 $_LANG['label_logout'] = '退出';
 
+
+/*索取红包商品*/
+$_LANG['label_bonus_get'] = '索取商品';
+$_LANG['label_bonus_name'] = '红包名称';
+$_LANG['label_bonus_desc'] = '红包详情';
+$_LANG['label_bonus_address'] = "选择邮寄地址";
+$_LANG['label_bonus_order_ok'] = "申请已提交";
+$_LANG['bonus_waite'] = '等待确认';
+$_LANG['bonus_waited'] = '已寄出';
+
 /* 会员余额(预付款) */
 $_LANG['add_surplus_log'] = '查看帐户明细';
 $_LANG['view_application'] = '查看申请记录';
@@ -540,6 +550,7 @@ $_LANG['not_start'] = '未开始';
 $_LANG['overdue'] = '已过期';
 $_LANG['not_use'] = '未使用';
 $_LANG['had_use'] = '已使用';
+$_LANG['for_get'] = '索取';
 
 /* 用户推荐 */
 $_LANG['affiliate_mode'] = '分成模式';

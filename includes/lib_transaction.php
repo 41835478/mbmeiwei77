@@ -1078,7 +1078,7 @@ function save_order_address($address, $user_id)
  */
 function get_user_bouns_list($user_id, $num = 10, $start = 0)
 {
-    $sql = "SELECT u.bonus_sn, u.order_id, b.type_name, b.type_money, b.min_goods_amount, b.use_start_date, b.use_end_date ".
+    $sql = "SELECT u.bonus_sn, u.order_id,u.emailed, b.type_name, b.type_money, b.min_goods_amount, b.use_start_date, b.use_end_date,b.send_type,b.type_id ".
            " FROM " .$GLOBALS['ecs']->table('user_bonus'). " AS u ,".
            $GLOBALS['ecs']->table('bonus_type'). " AS b".
            " WHERE u.bonus_type_id = b.type_id AND u.user_id = '" .$user_id. "'";
@@ -1104,7 +1104,18 @@ function get_user_bouns_list($user_id, $num = 10, $start = 0)
             }
             else
             {
-                $row['status'] = $GLOBALS['_LANG']['not_use'];
+                if($row['send_type']==SEND_BY_SEARCH){
+                    if($row['emailed']==0){
+                        $row['status'] = '<a href="user.php?act=bonus&do=get&bonus_id=' .$row['type_id']. '" >' .$GLOBALS['_LANG']['for_get']. '</a>';
+                    }elseif($row['emailed']==1){
+                        $row['status'] = $GLOBALS['_LANG']['bonus_waite'];
+                    }else{
+                        $row['status'] = $GLOBALS['_LANG']['bonus_waited'];
+                    }
+
+                }else {
+                    $row['status'] = $GLOBALS['_LANG']['not_use'];
+                }
             }
         }
         else

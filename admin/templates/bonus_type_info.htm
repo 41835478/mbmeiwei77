@@ -12,7 +12,7 @@
     <td>
       <input type='text' name='type_name' maxlength="30" value="{$bonus_arr.type_name}" size='20' />    </td>
   </tr>
-  <tr>
+  <tr id="4">
     <td class="label">
       <a href="javascript:showNotice('Type_money_a');" title="{$lang.form_notice}">
       <img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.type_money}</td>
@@ -20,7 +20,7 @@
     <input type="text" name="type_money" value="{$bonus_arr.type_money}" size="20" />
     <br /><span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="Type_money_a">{$lang.type_money_notic}</span>    </td>
   </tr>
-  <tr>
+  <tr id="5">
     <td class="label"><a href="javascript:showNotice('NoticeMinGoodsAmount');" title="{$lang.form_notice}"> <img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}" /></a>{$lang.min_goods_amount}</td>
     <td><input name="min_goods_amount" type="text" id="min_goods_amount" value="{$bonus_arr.min_goods_amount}" size="20" />
     <br /><span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="NoticeMinGoodsAmount">{$lang.notice_min_goods_amount}</span> </td>
@@ -31,7 +31,9 @@
       <input type="radio" name="send_type" value="0" {if $bonus_arr.send_type eq 0} checked="true" {/if} onClick="showunit(0)"  />{$lang.send_by[0]}
       <input type="radio" name="send_type" value="1" {if $bonus_arr.send_type eq 1} checked="true" {/if} onClick="showunit(1)"  />{$lang.send_by[1]}
       <input type="radio" name="send_type" value="2" {if $bonus_arr.send_type eq 2} checked="true" {/if} onClick="showunit(2)"  />{$lang.send_by[2]}
-      <input type="radio" name="send_type" value="3" {if $bonus_arr.send_type eq 3} checked="true" {/if} onClick="showunit(3)"  />{$lang.send_by[3]}    </td>
+      <input type="radio" name="send_type" value="3" {if $bonus_arr.send_type eq 3} checked="true" {/if} onClick="showunit(3)"  />{$lang.send_by[3]}
+      <input type="radio" name="send_type" value="4" {if $bonus_arr.send_type eq 4} checked="true" {/if} onClick="showunit(4)"  />{$lang.send_by[4]}
+    </td>
   </tr>
   <tr id="1" style="display:none">
     <td class="label">
@@ -40,6 +42,27 @@
     <td>
       <input name="min_amount" type="text" id="min_amount" value="{$bonus_arr.min_amount}" size="20" />
       <br /><span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="Order_money_a">{$lang.order_money_notic}</span>    </td>
+  </tr>
+  <tr id="2">
+    <td align="right">{$lang.keywords}</td>
+    <td><input type="text" name="keywords" size="30" />
+      <input type="button" value="{$lang.button_search}" class="button" onclick="searchGoods()"></td>
+  </tr>
+  <tr id="3">
+    <td class="label"><a href="javascript:showNotice('noticegoodsid');" title="{$lang.form_notice}"><img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.goodsid}</td>
+    <td>
+      <select name="goods_id" onchange="javascript:change_good_products();" id="goods_id">
+        {$bonus_arr.option}
+      </select>
+      <select name="product_id" {if $snatch.product_id <= 0}style="display:none"{/if}>
+      {html_options options=$good_products_select selected=$snatch.product_id}
+      </select>
+      {$lang.require_field}
+      <br /><span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="noticegoodsid">{$lang.notice_goodsid}</span></td>
+  </tr>
+  <tr id="7">
+    <td class="label">{$lang.count}</td>
+    <td> <input name="count" type="text" id="count" value="{$bonus_arr.count}" size="20" /></td>
   </tr>
   <tr>
     <td class="label">
@@ -68,12 +91,17 @@
     <td>
       <input name="use_end_date" type="text" id="use_end_date" size="22" value='{$bonus_arr.use_end_date}' readonly="readonly" /><input name="selbtn4" type="button" id="selbtn4" onclick="return showCalendar('use_end_date', '%Y-%m-%d', false, false, 'selbtn4');" value="{$lang.btn_select}" class="button"/>    </td>
   </tr>
+  <tr id="6">
+    <td class="label">{$lang.desc}</td>
+    <td><textarea  name="desc" cols="60" rows="4"  >{$bonus_arr.description}</textarea></td>
+  </tr>
   <tr>
     <td class="label">&nbsp;</td>
     <td>
       <input type="submit" value="{$lang.button_submit}" class="button" />
       <input type="reset" value="{$lang.button_reset}" class="button" />
       <input type="hidden" name="act" value="{$form_act}" />
+      <input type="hidden" name="old_goods_id" value="{$bonus_arr.goods_id}" />
       <input type="hidden" name="type_id" value="{$bonus_arr.type_id}" />    </td>
   </tr>
 </table>
@@ -88,11 +116,9 @@ document.forms['theForm'].elements['type_name'].focus();
  * 检查表单输入的数据
  */
 function validate()
-{
+{console.log(document.getElementById(3).style.display);
   validator = new Validator("theForm");
   validator.required("type_name",      type_name_empty);
-  validator.required("type_money",     type_money_empty);
-  validator.isNumber("type_money",     type_money_isnumber, true);
   validator.islt('send_start_date', 'send_end_date', send_start_lt_end);
   validator.islt('use_start_date', 'use_end_date', use_start_lt_end);
   if (document.getElementById(1).style.display == "")
@@ -102,6 +128,12 @@ function validate()
     {
 	  validator.addErrorMsg(invalid_min_amount);
     }	
+  }
+  if(document.getElementById(3).style.display == ""){
+    validator.isNullOption("goods_id", no_goods_id);
+  }else{
+    validator.required("type_money",     type_money_empty);
+    validator.isNumber("type_money",     type_money_isnumber, true);
   }
   return validator.passed();
 }
@@ -133,10 +165,133 @@ function gObj(obj)
 function showunit(get_value)
 {
   gObj("1").style.display =  (get_value == 2) ? "" : "none";
-  document.forms['theForm'].elements['selbtn1'].disabled  = (get_value != 1 && get_value != 2);
-  document.forms['theForm'].elements['selbtn2'].disabled  = (get_value != 1 && get_value != 2);
+  gObj("2").style.display = (get_value==4)?"":"none";
+  gObj("3").style.display = (get_value==4)?"":"none";
+  gObj("4").style.display = (get_value==4)?"none":"";
+  gObj("5").style.display = (get_value==4)?"none":"";
+  gObj("6").style.display = (get_value==4)?"":"none";
+  gObj("7").style.display = (get_value==4)?"":"none";
+  document.forms['theForm'].elements['selbtn1'].disabled  = (get_value != 1 && get_value != 2 && get_value != 4);
+  document.forms['theForm'].elements['selbtn2'].disabled  = (get_value != 1 && get_value != 2 && get_value != 4);
 
   return;
+}
+function searchGoods()
+{
+  var filter = new Object;
+  filter.keyword = document.forms['theForm'].elements['keywords'].value;
+
+  Ajax.call('snatch.php?is_ajax=1&act=search_goods', filter, searchGoodsResponse, 'GET', 'JSON');
+}
+
+function searchGoodsResponse(result)
+{
+  var frm = document.forms['theForm'];
+  var sel = frm.elements['goods_id'];
+  var sp = frm.elements['product_id'];
+
+  if (result.error == 0)
+  {
+    /* 清除 options */
+    sel.length = 0;
+    sp.length = 0;
+
+    /* 创建 options */
+    var goods = result.content.goods;
+    if (goods)
+    {
+      for (i = 0; i < goods.length; i++)
+      {
+        var opt = document.createElement("OPTION");
+        opt.value = goods[i].goods_id;
+        opt.text  = goods[i].goods_name;
+        sel.options.add(opt);
+      }
+    }
+    else
+    {
+      var opt = document.createElement("OPTION");
+      opt.value = 0;
+      opt.text  = search_is_null;
+      sel.options.add(opt);
+    }
+
+    /* 创建 product options */
+    var products = result.content.products;
+    if (products)
+    {
+
+      for (i = 0; i < products.length; i++)
+      {
+        var p_opt = document.createElement("OPTION");
+        p_opt.value = products[i].product_id;
+        p_opt.text  = products[i].goods_attr_str;
+        sp.options.add(p_opt);
+      }
+    }
+    else
+    {
+      sp.style.display = 'none';
+
+      var p_opt = document.createElement("OPTION");
+      p_opt.value = 0;
+      p_opt.text  = search_is_null;
+      sp.options.add(p_opt);
+    }
+  }
+
+  if (result.message.length > 0)
+  {
+    alert(result.message);
+  }
+}
+
+function change_good_products()
+{
+  var filter = new Object;
+  filter.goods_id = document.forms['theForm'].elements['goods_id'].value;
+
+  Ajax.call('snatch.php?is_ajax=1&act=search_products', filter, searchProductsResponse, 'GET', 'JSON');
+}
+
+function searchProductsResponse(result)
+{
+  var frm = document.forms['theForm'];
+  var sp = frm.elements['product_id'];
+
+  if (result.error == 0)
+  {
+    /* 清除 options */
+    sp.length = 0;
+
+    /* 创建 product options */
+    var products = result.content.products;
+    if (products.length)
+    {
+      sp.style.display = display_yes;
+
+      for (i = 0; i < products.length; i++)
+      {
+        var p_opt = document.createElement("OPTION");
+        p_opt.value = products[i].product_id;
+        p_opt.text  = products[i].goods_attr_str;
+        sp.options.add(p_opt);
+      }
+    }
+    else
+    {
+      sp.style.display = 'none';
+
+      var p_opt = document.createElement("OPTION");
+      p_opt.value = 0;
+      sp.options.add(p_opt);
+    }
+  }
+
+  if (result.message.length > 0)
+  {
+    alert(result.message);
+  }
 }
 //-->
 </script>

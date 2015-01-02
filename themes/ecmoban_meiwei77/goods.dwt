@@ -322,9 +322,17 @@ function reg(str){
         <h2 class="h2bg" style="color:red;">{$lang.remark_package}</h2>
         <!-- {/if} -->
         </div>
-      </div>    <div class="box_1" style=" margin-top:15px">
-      <div id="com_v" class="  " style="padding:6px;"></div>
+      </div>
+      <div id="coupons-list">
+
+      </div>
+      <div class="box_1" style=" margin-top:15px">
+
+      <div id="com_v" class="  " style="padding:6px;">
+
+      </div>
       <div id="com_h">
+
        <blockquote>
         {$goods.goods_desc}
        </blockquote> 
@@ -591,6 +599,7 @@ var now_time = {$now_time};
 <!-- {literal} -->
 onload = function(){
   changePrice();
+  onCoupon();
   fixpng();
   try { onload_leftTime(); }
   catch (e) {}
@@ -625,5 +634,50 @@ function changePriceResponse(res)
   }
 }
 <!-- {/literal} -->
+function onCoupon(id){
+    var bonus_type_id = '{$goods.bonus_type_id}';
+     Ajax.call('bonus.php', 'act=bonus&id=' + bonus_type_id, onCouponResponse, 'GET', 'JSON');
+}
+function onCouponResponse(res){
+if (res.err_msg.length > 0)
+  {
+    alert(res.err_msg);
+  }
+  else
+  {
+    if(res.result){
+    var html='<div class="coupons-list">'+
+              '<a href="javascript:void(0)" class="coupon" onclick="getCoupon('+res.result.type_id+')">'+
+              '<span class="left">'+
+              '<span class="description">'+
+              res.result.description+
+              '</span>'+
+              '<span class="store-logo"></span>'+
+              '</span>'+
+              '<span class="right">'+
+              '<em class="free">免费</em>'+
+              '<span class=" get  "><b></b>已经领完</span>'+
+              '</span>'+
+              '</a>'+
+              '</div>';
+    document.getElementById('coupons-list').innerHTML=html;
+    }
+  }
+}
+function getCoupon(){
+     var bonus_type_id = '{$goods.bonus_type_id}';
+     Ajax.call('bonus.php', 'act=get_bonus&id=' + bonus_type_id, getCouponResponse, 'GET', 'JSON');
+}
+function getCouponResponse(res){
+    if (res.err_msg.length > 0)
+      {
+        alert(res.err_msg);
+      }
+      else
+      {
+        alert('领取成功');
+        document.getElementById('coupons-list').innerHTML='';
+      }
+}
 </script>
 </html>
