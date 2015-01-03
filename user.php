@@ -342,10 +342,7 @@ elseif ($action == 'act_login')
     if (($captcha & CAPTCHA_LOGIN) && (!($captcha & CAPTCHA_LOGIN_FAIL) || (($captcha & CAPTCHA_LOGIN_FAIL) && $_SESSION['login_fail'] > 2)) && gd_version() > 0)
     {
         $isCheck = true;
-        if (empty($_POST['captcha']))
-        {
-            show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
-        }
+
         //检查是否不需要短信验证
         $userInfo = $db->getRow("select * from ".$ecs->table('users')." where user_name='".$username."'");
         if($userInfo){
@@ -357,6 +354,10 @@ elseif ($action == 'act_login')
             }
         }
         if($isCheck){
+            if (empty($_POST['captcha']))
+            {
+                show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
+            }
             if($_SESSION['smsWord']!=$_POST['captcha']){
                 show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
             }
