@@ -33,7 +33,7 @@
         <table width="100%" border="0" align="left" cellpadding="3" cellspacing="5">
           <tr>
             <td width="25%" align="right">{$lang.label_username}</td>
-            <td width="65%"><input name="username" type="text" size="25" class="inputBg" /></td>
+            <td width="65%"><input name="username" type="text" size="25" class="inputBg" id="username" onBlur="checkType()"/></td>
           </tr>
           <tr>
             <td align="right">{$lang.label_password}</td>
@@ -41,11 +41,17 @@
             <input name="password" type="password" size="15"  class="inputBg"/>            </td>
           </tr>
           <!-- 判断是否启用验证码{if $enabled_captcha} -->
-          <tr>
+          <!--<tr>
             <td align="right">{$lang.comment_captcha}</td>
             <td><input type="text" size="8" name="captcha" class="inputBg" />
             <img src="captcha.php?is_login=1&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </td>
-          </tr>
+          </tr>-->
+          <tr id="captcha">
+                      <td align="right">{$lang.comment_captcha}</td>
+                      <td><input type="text" size="8" name="captcha" class="inputBg" />
+                       <input type="button" class="inp_2" value="发送验证码" id="sendPhoneCode" onClick="sendCode()">
+                      </td>
+                    </tr>
           <!--{/if}-->
           <tr>
             <td> </td>
@@ -347,6 +353,55 @@ var process_request = "{$lang.process_request}";
 {foreach from=$lang.passport_js item=item key=key}
 var {$key} = "{$item}";
 {/foreach}
+var token = '{$token}';
 var username_exist = "{$lang.username_exist}";
+function checkType(){
+var username = document.getElementById("username").value;
+     Ajax.call('user.php', 'act=get_check_type&username=' + username, getCheckTypeResponse, 'GET', 'JSON');
+}
+function getCheckTypeResponse(res){
+    if (res.err_msg.length > 0)
+      {
+        alert(res.err_msg);
+      }
+      else
+      {
+       var captchaObj = document.getElementById('captcha');
+        if(res.content && res.content.special==1){
+            captchaObj.style.display = 'none';
+        }else{
+            captchaObj.style.display = '';
+        }
+      }
+}
+function sendCode(){
+    var username = document.getElementById("username").value;
+    Ajax.call('sendSms.php', 'username=' + username+'&token='+token, getSendCodeResponse, 'GET', 'JSON');
+}
+function getSendCodeResponse(res){
+    if (res.err_msg.length > 0)
+          {
+            alert(res.err_msg);
+          }
+          else
+          {
+            document.getElementById("sendPhoneCode").disabled = true;
+            runTime = 120;
+            timeRunning();
+          }
+}
+function timeRunning(){
+var objSendCode = document.getElementById("sendPhoneCode");
+			runTime = parseInt(runTime) - 1;
+			setTimeout(function(){
+				if(runTime >= 1){
+					objSendCode.value = '短信已发送，' +runTime + '秒后可重发';
+					timeRunning();
+				}else{
+					objSendCode.value = '发送验证码';
+					objSendCode.disabled = false;
+				}
+			},1000);
+		}
 </script>
 </html>

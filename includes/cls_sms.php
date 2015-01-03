@@ -17,8 +17,8 @@ if (!defined('IN_ECS'))
 {
     die('Hacking attempt');
 }
-define('SOURCE_TOKEN', '814d4852d74f5914b41695ee7fa8508c');
-define('SOURCE_ID', '863180');
+define('ACCOUNT', 'zyzjgww');
+define('PASSWORD', 'zyzjgww123');
 require_once(ROOT_PATH . 'includes/cls_transport.php');
 require_once(ROOT_PATH . 'includes/shopex_json.php');
 
@@ -32,10 +32,9 @@ class sms
      * @var     array       $api_urls
      */
     var $api_urls   = array(
-                            'info'              =>      'http://api.sms.shopex.cn',
-                            'send'              =>      'http://api.sms.shopex.cn',
-                            'servertime'        =>      'http://webapi.sms.shopex.cn'
-    
+                            'info'              =>      'http://122.0.84.30:8380/SMSTransmit/sms/transmitsms!sendSMS.action',
+                            'send'              =>      'http://122.0.84.30:8380/SMSTransmit/sms/transmitsms!sendSMS.action',
+
     );
     /**
      * 存放MYSQL对象
@@ -124,15 +123,6 @@ class sms
 
             return false;
         }
-        else
-        {
-            if($login_info['info']['account_info']['active']!='1')
-            {
-                $this->errors['server_errors']['error_no'] = 11;//短信功能没有激活
-                return false;
-            }
-            
-        }
          /* 获取API URL */
         $sms_url = $this->get_url('send');
 
@@ -143,28 +133,19 @@ class sms
             return false;
         }
         
-        $send_str['contents']= $this->json->encode($contents);
-        $send_str['certi_app']='sms.send';
-        $send_str['entId']=$GLOBALS['_CFG']['ent_id'];
-        $send_str['entPwd']=$GLOBALS['_CFG']['ent_ac'];
-        $send_str['license']=$GLOBALS['_CFG']['certificate_id'];
-        $send_str['source']=SOURCE_ID;   
-        $send_str['sendType'] = 'notice';
-        $send_str['use_backlist'] = '1';
-        $send_str['version'] = $version;
-        $send_str['format']='json'; 
-        $send_str['timestamp'] = $this->getTime(); 
-        $send_str['certi_ac']=$this->make_shopex_ac($send_str,SOURCE_TOKEN);
-        $sms_url= $this->get_url('send');
+        $send_str['contents']= $contents;
+        $send_str['account']=ACCOUNT;
+        $send_str['password']=md5(PASSWORD);
+        $send_str['mobile'] = $phones;
         /* 发送HTTP请求 */
         $response = $this->t->request($sms_url, $send_str,'POST');
         $result = $this->json->decode($response['body'], true);
         
-        if($result['res'] == 'succ')
+        if($result['SubmitResult'])
         {
             return true;
         }
-        elseif($result['res'] == 'fail')
+        else
         {
             return false;
         }
@@ -247,24 +228,16 @@ class sms
          return $email;
     }
     //用户短信账户信息获取
-    function getSmsInfo($certi_app='sms.info',$version='1.0', $format='json'){
-        $send_str['certi_app'] = $certi_app;
-        $send_str['entId'] = $GLOBALS['_CFG']['ent_id'];
-        $send_str['entPwd'] = $GLOBALS['_CFG']['ent_ac'];
-        $send_str['source'] = SOURCE_ID;
-        $send_str['version'] = $version;
-        $send_str['format'] = $format;
-        $send_str['timestamp'] = $this->getTime();
-        $send_str['certi_ac'] = $this->make_shopex_ac($send_str,SOURCE_TOKEN);
+    function getSmsInfo(){
+        $send_str['account'] = ACCOUNT;
+        $send_str['password'] = md5(PASSWORD);
         $sms_url = $this->get_url('info');
         $response = $this->t->request($sms_url, $send_str,'POST');
         $result = $this->json->decode($response['body'],true);
-        if($result['res'] == 'succ')
+        if($result)
         {
             return $result;
-        }
-        elseif($result['res'] == 'fail')
-        {
+        }else{
             return false;
         }
     }

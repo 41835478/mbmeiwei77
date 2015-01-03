@@ -30,7 +30,7 @@ $back_act='';
 
 // 不需要登录的操作或自己验证是否登录（如ajax处理）的act
 $not_login_arr =
-array('login','act_login','register','act_register','act_edit_password','get_password','send_pwd_email','password', 'signin', 'add_tag', 'collect', 'return_to_cart', 'logout', 'email_list', 'validate_email', 'send_hash_mail', 'order_query', 'is_registered', 'check_email','clear_history','qpassword_name', 'get_passwd_question', 'check_answer');
+array('login','act_login','register','act_register','act_edit_password','get_password','send_pwd_email','password', 'signin', 'add_tag', 'collect', 'return_to_cart', 'logout', 'email_list', 'validate_email', 'send_hash_mail', 'order_query', 'is_registered', 'check_email','clear_history','qpassword_name', 'get_passwd_question', 'check_answer','get_check_type');
 
 /* 显示页面的action列表 */
 $ui_arr = array('register', 'login', 'profile', 'order_list', 'order_detail', 'address_list', 'collection_list',
@@ -322,7 +322,9 @@ elseif ($action == 'login')
         $GLOBALS['smarty']->assign('enabled_captcha', 1);
         $GLOBALS['smarty']->assign('rand', mt_rand());
     }
-
+    $token = md5(time());
+    $_SESSION['token']=$token;
+    $smarty->assign('token', $token);
     $smarty->assign('back_act', $back_act);
     $smarty->display('user_passport.dwt');
 }
@@ -335,15 +337,33 @@ elseif ($action == 'act_login')
     $back_act = isset($_POST['back_act']) ? trim($_POST['back_act']) : '';
 
 
+
     $captcha = intval($_CFG['captcha']);
     if (($captcha & CAPTCHA_LOGIN) && (!($captcha & CAPTCHA_LOGIN_FAIL) || (($captcha & CAPTCHA_LOGIN_FAIL) && $_SESSION['login_fail'] > 2)) && gd_version() > 0)
     {
+        $isCheck = true;
         if (empty($_POST['captcha']))
         {
             show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
         }
+        //检查是否不需要短信验证
+        $userInfo = $db->getRow("select * from ".$ecs->table('users')." where user_name='".$username."'");
+        if($userInfo){
+            if($userInfo['user_rank']){
+                $userRank = $db->getRow("select * from ".$ecs->table('user_rank')." where rank_id=".$userInfo['user_rank']);
+                if($userRank &&$userRank['special_rank']){
+                    $isCheck = false;
+                }
+            }
+        }
+        if($isCheck){
+            if($_SESSION['smsWord']!=$_POST['captcha']){
+                show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
+            }
 
+        }
         /* 检查验证码 */
+        /*
         include_once('includes/cls_captcha.php');
 
         $validator = new captcha();
@@ -352,6 +372,7 @@ elseif ($action == 'act_login')
         {
             show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
         }
+        */
     }
 
     if ($user->login($username, $password,isset($_POST['remember'])))
@@ -693,7 +714,23 @@ elseif ($action == 'check_answer')
         $smarty->display('user_passport.dwt');
     }
 }
-
+/*  检查是否需要短信验证 */
+elseif($action=='get_check_type'){
+    include_once('includes/cls_json.php');
+    $json= new json();
+    $result['error']   = 1;
+    $result['err_msg'] = '';
+    $username = !empty($_GET['username']) ? trim($_GET['username']) : '';
+    $userInfo =$user->get_user_info($username);
+    if($userInfo['user_rank']){
+        $userRank = $db->getRow("select * from ".$ecs->table('user_rank')." where rank_id=".$userInfo['user_rank']);
+        if($userRank && $userRank['special_rank']){
+            $result['error']=0;
+            $result['content'] = array('special'=>1);
+        }
+    }
+    die($json->encode($result));
+}
 /* 发送密码修改确认邮件 */
 elseif ($action == 'send_pwd_email')
 {

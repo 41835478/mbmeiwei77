@@ -427,7 +427,7 @@ class integrate
         $sql = "SELECT " . $this->field_id . " AS user_id," . $this->field_name . " AS user_name," .
                     $this->field_email . " AS email," . $this->field_gender ." AS sex,".
                     $this->field_bday . " AS birthday," . $this->field_reg_date . " AS reg_time, ".
-                    $this->field_pass . " AS password ".
+                    $this->field_pass . " AS password ,user_rank".
                " FROM " . $this->table($this->user_table) .
                " WHERE " .$this->field_name . "='$post_username'";
         $row = $this->db->getRow($sql);
