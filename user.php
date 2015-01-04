@@ -358,7 +358,7 @@ elseif ($action == 'act_login')
             {
                 show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
             }
-            if($_SESSION['smsWord']!=$_POST['captcha']){
+            if(strtolower($_SESSION['smsWord'])!=strtolower($_POST['captcha'])){
                 show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
             }
 

@@ -32,7 +32,7 @@ class sms
      * @var     array       $api_urls
      */
     var $api_urls   = array(
-                            'info'              =>      'http://122.0.84.30:8380/SMSTransmit/sms/transmitsms!sendSMS.action',
+                            'info'              =>      'http://122.0.84.30:8380/SMSTransmit/sms/transmitsms!checkBalance.action',
                             'send'              =>      'http://122.0.84.30:8380/SMSTransmit/sms/transmitsms!sendSMS.action',
 
     );
@@ -109,20 +109,14 @@ class sms
     {
        
         /* 检查发送信息的合法性 */
-        $contents=$this->get_contents($phones, $msg);  
+        $contents=$this->get_contents($phones, $msg);
         if(!$contents)
         {
             $this->errors['server_errors']['error_no'] = 3;//发送的信息有误
             return false;
         }
         
-        $login_info = $this->getSmsInfo();
-        if (!$login_info)
-        {
-            $this->errors['server_errors']['error_no'] = 5;//无效的身份信息
-
-            return false;
-        }
+       
          /* 获取API URL */
         $sms_url = $this->get_url('send');
 
@@ -133,15 +127,15 @@ class sms
             return false;
         }
         
-        $send_str['contents']= $contents;
+        $send_str['content']= $msg;
         $send_str['account']=ACCOUNT;
         $send_str['password']=md5(PASSWORD);
         $send_str['mobile'] = $phones;
         /* 发送HTTP请求 */
         $response = $this->t->request($sms_url, $send_str,'POST');
-        $result = $this->json->decode($response['body'], true);
-        
-        if($result['SubmitResult'])
+        $result = $response['body'];
+
+        if($result=='2')
         {
             return true;
         }

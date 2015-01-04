@@ -45,7 +45,7 @@ if($_SESSION['token']===$token){
             $word = generate_word();
             $_SESSION['smsWord'] = $word;
             $sms = new sms();
-            $content = "你好,你的验证码为[".$word."]";
+            $content = "中圆指尖购物网验证码：【".$word."】，如非本人操作请忽略。";
             $sms->send($userInfo['mobile_phone'],$content);
             $result['content'] = $word;
         }else{
