@@ -79,14 +79,15 @@ elseif ($_REQUEST['act'] == 'insert')
 
      /*处理图片*/
     $img_name = basename($image->upload_image($_FILES['brand_logo'],'brandlogo'));
+    $img_banner_name = basename($image->upload_image($_FILES['brand_banner'],'brandbanner'));
 
      /*处理URL*/
     $site_url = sanitize_url( $_POST['site_url'] );
 
     /*插入数据*/
 
-    $sql = "INSERT INTO ".$ecs->table('brand')."(brand_name, site_url, brand_desc, brand_logo, is_show, sort_order) ".
-           "VALUES ('$_POST[brand_name]', '$site_url', '$_POST[brand_desc]', '$img_name', '$is_show', '$_POST[sort_order]')";
+    $sql = "INSERT INTO ".$ecs->table('brand')."(brand_name, site_url, brand_desc, brand_logo, is_show, sort_order,brand_banner) ".
+           "VALUES ('$_POST[brand_name]', '$site_url', '$_POST[brand_desc]', '$img_name', '$is_show', '$_POST[sort_order]','$img_banner_name')";
     $db->query($sql);
 
     admin_log($_POST['brand_name'],'add','brand');
@@ -110,7 +111,7 @@ elseif ($_REQUEST['act'] == 'edit')
 {
     /* 权限判断 */
     admin_priv('brand_manage');
-    $sql = "SELECT brand_id, brand_name, site_url, brand_logo, brand_desc, brand_logo, is_show, sort_order ".
+    $sql = "SELECT brand_id, brand_name, site_url, brand_logo, brand_desc, brand_logo, is_show, sort_order,brand_banner ".
             "FROM " .$ecs->table('brand'). " WHERE brand_id='$_REQUEST[id]'";
     $brand = $db->GetRow($sql);
 
@@ -154,7 +155,13 @@ elseif ($_REQUEST['act'] == 'updata')
         //有图片上传
         $param .= " ,brand_logo = '$img_name' ";
     }
-
+    /* 处理图片banner */
+    $img_name = basename($image->upload_image($_FILES['brand_banner'],'brandbanner'));
+    if (!empty($img_name))
+    {
+        //有图片上传
+        $param .= " ,brand_banner = '$img_name' ";
+    }
     if ($exc->edit($param,  $_POST['id']))
     {
         /* 清除缓存 */
@@ -311,6 +318,28 @@ elseif ($_REQUEST['act'] == 'drop_logo')
     }
     $link= array(array('text' => $_LANG['brand_edit_lnk'], 'href' => 'brand.php?act=edit&id=' . $brand_id), array('text' => $_LANG['brand_list_lnk'], 'href' => 'brand.php?act=list'));
     sys_msg($_LANG['drop_brand_logo_success'], 0, $link);
+}
+/*------------------------------------------------------ */
+//-- 删除品牌banner
+/*------------------------------------------------------ */
+elseif ($_REQUEST['act'] == 'drop_banner')
+{
+    /* 权限判断 */
+    admin_priv('brand_manage');
+    $brand_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+    /* 取得logo名称 */
+    $sql = "SELECT brand_banner FROM " .$ecs->table('brand'). " WHERE brand_id = '$brand_id'";
+    $banner_name = $db->getOne($sql);
+
+    if (!empty($banner_name))
+    {
+        @unlink(ROOT_PATH . DATA_DIR . '/brandbanner/' .$banner_name);
+        $sql = "UPDATE " .$ecs->table('brand'). " SET brand_banner = '' WHERE brand_id = '$brand_id'";
+        $db->query($sql);
+    }
+    $link= array(array('text' => $_LANG['brand_edit_lnk'], 'href' => 'brand.php?act=edit&id=' . $brand_id), array('text' => $_LANG['brand_list_lnk'], 'href' => 'brand.php?act=list'));
+    sys_msg($_LANG['drop_brand_banner_success'], 0, $link);
 }
 
 /*------------------------------------------------------ */

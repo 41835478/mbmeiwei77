@@ -25,6 +25,19 @@
     </td>
   </tr>
   <tr>
+    <td class="label"><a href="javascript:showNotice('warn_brandbanner');" title="{$lang.form_notice}">
+      <img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.brand_banner}</td>
+    <td><input type="file" name="brand_banner" id="banner" size="45">{if $brand.brand_banner neq ""}<input type="button" value="{$lang.drop_brand_banner}" onclick="if (confirm('{$lang.confirm_drop_banner}'))location.href='brand.php?act=drop_banner&id={$brand.brand_id}'">{/if}
+      <br /><span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="warn_brandbanner">
+      {if $brand.brand_banner eq ''}
+      {$lang.up_brandbanner}
+      {else}
+      {$lang.warn_brandbanner}
+      {/if}
+      </span>
+    </td>
+  </tr>
+  <tr>
     <td class="label">{$lang.brand_desc}</td>
     <td><textarea  name="brand_desc" cols="60" rows="4"  >{$brand.brand_desc}</textarea></td>
   </tr>

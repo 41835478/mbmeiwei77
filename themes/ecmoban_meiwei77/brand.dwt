@@ -20,38 +20,8 @@
 
 
 <div class="block clearfix">
-  <!--left start-->
-  <div class="AreaL">
-    <!-- TemplateBeginEditable name="左边区域" -->
-	<!-- #BeginLibraryItem "/library/category_tree.lbi" -->
-
-<div class="box">
- <div class="box_1">
-  <div id="category_tree">
-    <!--{foreach from=$categories item=cat}-->
-     <dl>
-     <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
-     <!--{foreach from=$cat.children item=child}-->
-     <dd><a href="{$child.url}">{$child.name|escape:html}</a></dd>
-     <!--{/foreach}-->
-     </dl>
-    <!--{/foreach}--> 
-  </div>
- </div>
-</div>
-<div class="blank5"></div>
-
- <!-- #EndLibraryItem -->
-
-<!-- TemplateEndEditable -->
-<!-- TemplateBeginEditable name="左边广告区域（宽200px）" -->
-<!-- TemplateEndEditable -->
-    <!--AD end-->
-    <!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
-  </div>
-  <!--left end-->
   <!--right start-->
-  <div class="AreaR">
+  <div class="">
     <div class="box">
      <div class="box_1">
       <h3><span>{$brand.brand_name}</span></h3>
@@ -79,6 +49,9 @@
          </td>
         </tr>
       </table>
+      <!-- {if $brand.brand_banner} -->
+                  <img src="data/brandbanner/{$brand.brand_banner}" width="1172px" />
+      <!-- {/if} -->
       </div>
      </div>
     </div>
