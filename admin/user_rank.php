@@ -307,6 +307,27 @@ elseif ($_REQUEST['act'] == 'toggle_special')
     }
 }
 /*------------------------------------------------------ */
+//-- 切换是否是短信验证登录
+/*------------------------------------------------------ */
+elseif ($_REQUEST['act'] == 'toggle_captcha')
+{
+    check_authz_json('user_rank');
+
+    $rank_id       = intval($_POST['id']);
+    $is_sms_captcha    = intval($_POST['val']);
+
+    if ($exc->edit("sms_captcha = '$is_sms_captcha'", $rank_id))
+    {
+        $rank_name = $exc->get_name($rank_id);
+        admin_log(addslashes($rank_name), 'edit', 'user_rank');
+        make_json_result($is_sms_captcha);
+    }
+    else
+    {
+        make_json_error($db->error());
+    }
+}
+/*------------------------------------------------------ */
 //-- 切换是否显示价格
 /*------------------------------------------------------ */
 elseif ($_REQUEST['act'] == 'toggle_showprice')

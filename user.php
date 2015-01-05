@@ -348,7 +348,7 @@ elseif ($action == 'act_login')
         if($userInfo){
             if($userInfo['user_rank']){
                 $userRank = $db->getRow("select * from ".$ecs->table('user_rank')." where rank_id=".$userInfo['user_rank']);
-                if($userRank &&$userRank['special_rank']){
+                if($userRank &&$userRank['sms_captcha']){
                     $isCheck = false;
                 }
             }
@@ -725,7 +725,7 @@ elseif($action=='get_check_type'){
     $userInfo =$user->get_user_info($username);
     if($userInfo['user_rank']){
         $userRank = $db->getRow("select * from ".$ecs->table('user_rank')." where rank_id=".$userInfo['user_rank']);
-        if($userRank && $userRank['special_rank']){
+        if($userRank && $userRank['sms_captcha']==0){
             $result['error']=0;
             $result['content'] = array('special'=>1);
         }

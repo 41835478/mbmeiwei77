@@ -31,7 +31,7 @@ if($_SESSION['token']===$token){
     if($userInfo){
         if($userInfo['user_rank']){
             $userRank = $db->getRow("select * from ".$ecs->table('user_rank')." where rank_id=".$userInfo['user_rank']);
-            if($userRank &&$userRank['special_rank']){
+            if($userRank &&$userRank['sms_captcha']==0){
                 $result['err_msg'] = '此用户不需要验证码就可登录，请刷新页面重试';
             }
         }
