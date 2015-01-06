@@ -168,7 +168,7 @@ h6 span{float:left; padding-left:15px; font-size:14px;}
 #topchannel .lichannel {position: relative;}
 
 .shooping_car {color:white;float:right;position:relative;top:-6px;width:217px;z-index:1000; background:url(images/cat_bg.png) no-repeat; height:43px}
-.shooping_car a{ line-height:45px; color:#fed853}
+.shooping_car a,.shooping_car { line-height:45px; color:#fed853}
 
 
 

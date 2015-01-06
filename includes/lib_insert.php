@@ -122,7 +122,8 @@ function insert_cart_info()
 
     $str = sprintf($GLOBALS['_LANG']['cart_info'], $number, price_format($amount, false));
 
-    return '<a href="flow.php" title="' . $GLOBALS['_LANG']['view_cart'] . '">' . $str . '</a>';
+    //return '<a href="flow.php" title="' . $GLOBALS['_LANG']['view_cart'] . '">' . $str . '</a>';
+    return $str;
 }
 
 /**

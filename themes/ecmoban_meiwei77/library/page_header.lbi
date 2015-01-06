@@ -131,9 +131,11 @@ var process_request = "{$lang.process_request}";
     <li class="lichannel"><a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}>{$nav.name}</a></li>
     <!-- {/foreach} -->
   </ul>
+  <a href="flow.php" title="查看购物车">
   <div id="menuCart" class="shooping_car">
       {insert name='cart_info'}
   </div>
+  </a>
 </div>
 </div>
 

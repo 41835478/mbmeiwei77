@@ -3201,10 +3201,12 @@ img.err-price {
     border-width: 0 1px 1px
 }
 
-.curr .mt, .curr .smt {
+.curr .mt, .curr .smt,.curr .smt a {
     color: #d41c4f
 }
-
+.curr .smt a{
+    text-decoration:none;
+}
 .curr .mc, .curr .smc {
     display: block
 }
