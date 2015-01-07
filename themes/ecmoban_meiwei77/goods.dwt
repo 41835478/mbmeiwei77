@@ -257,41 +257,39 @@ function reg(str){
       <!-- {/if} -->
             </ul>
          <ul class="bnt_ul">
-     
-      <!-- {* 开始循环所有可选属性 *} -->
-      <!-- {foreach from=$specification item=spec key=spec_key} -->
-      <li class="padd loop">
-      <strong>{$spec.name}：</strong>
-        <!-- {* 判断属性是复选还是单选 *} -->
-                    <!-- {if $spec.attr_type eq 1} -->
-                      <!-- {if $cfg.goodsattr_style eq 1} -->
-                        <!-- {foreach from=$spec.values item=value key=key} -->
-                        <label for="spec_value_{$value.id}">
-                        <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} onclick="changePrice()" />
-                        {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label>
-                        <!-- {/foreach} -->
-                        <input type="hidden" name="spec_list" value="{$key}" />
-                        <!-- {else} -->
-                        <select name="spec_{$spec_key}" onchange="changePrice()" >
-                          <!-- {foreach from=$spec.values item=value key=key} -->
-                          <option label="{$value.label}" value="{$value.id}">{$value.label} {if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if}{if $value.price neq 0}{$value.format_price}{/if}</option>
+                    <!-- {* 开始循环所有可选属性 *} -->
+                          <!-- {foreach from=$specification item=spec key=spec_key} -->
+                          <li class="padd loop">
+                          <strong>{$spec.name}：</strong>
+                            <!-- {* 判断属性是复选还是单选 *} -->
+                                        <!-- {if $spec.attr_type eq 1} -->
+                                          <!-- {if $cfg.goodsattr_style eq 1} -->
+                                            <!-- {foreach from=$spec.values item=value key=key} -->
+                                            <label for="spec_value_{$value.id}">
+                                            <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} onclick="changePrice()" />
+                                            {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label>
+                                            <!-- {/foreach} -->
+                                            <input type="hidden" name="spec_list" value="{$key}" />
+                                            <!-- {else} -->
+                                              <!-- {foreach from=$spec.values item=value key=key} -->
+                                              <input type="button" value="{$value.label}" name="spec_{$spec_key}" id="{$value.id}" onclick="selectSpec({$value.id}, this)"  class="<!--{if $key eq 0}-->active<!--{/if}-->">
+                                              <!-- {/foreach} -->
+                                            <input type="hidden" name="spec_list" value="{$key}" />
+                                          <!-- {/if} -->
+                                        <!-- {else} -->
+                                          <!-- {foreach from=$spec.values item=value key=key} -->
+                                          <label for="spec_value_{$value.id}">
+                                          <input type="checkbox" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" onclick="changePrice()" />
+                                          {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label>
+                                          <!-- {/foreach} -->
+                                          <input type="hidden" name="spec_list" value="{$key}" />
+                                        <!-- {/if} -->
+                          </li>
                           <!-- {/foreach} -->
-                        </select>
-                        <input type="hidden" name="spec_list" value="{$key}" />
-                      <!-- {/if} -->
-                    <!-- {else} -->
-                      <!-- {foreach from=$spec.values item=value key=key} -->
-                      <label for="spec_value_{$value.id}">
-                      <input type="checkbox" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" onclick="changePrice()" />
-                      {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label>
-                      <!-- {/foreach} -->
-                      <input type="hidden" name="spec_list" value="{$key}" />
-                    <!-- {/if} -->
-      </li>
-      <!-- {/foreach} -->
-      <!-- {* 结束循环可选属性 *} -->
+                          <!-- {* 结束循环可选属性 *} -->
+
       
-           <li class="clearfix">
+       <li class="clearfix">
        <dd>
        <strong>{$lang.number}：</strong>
         <input name="number" type="text" id="number" value="1" size="4" onblur="changePrice()" style="border:1px solid #ccc; "/> <strong>{$lang.amount}：</strong><font id="ECS_GOODS_AMOUNT" class="f1"></font>
@@ -598,7 +596,8 @@ var now_time = {$now_time};
 
 <!-- {literal} -->
 onload = function(){
-  changePrice();
+  //changePrice();
+  selectSpec();
   onCoupon();
   fixpng();
   try { onload_leftTime(); }
@@ -615,7 +614,26 @@ function changePrice()
 
   Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
 }
-
+/**
+*修改后更新属性价格
+*/
+function selectSpec(id,thisObj){
+    var formBuy = document.forms['ECS_FORMBUY'];
+    if(id && thisObj){
+        var name = thisObj.name;
+            for (i = 0; i < formBuy.elements.length; i ++ )
+              {
+                if (formBuy.elements[i].name == name && formBuy.elements[i].type == 'button')
+                        {
+                           formBuy.elements[i].className='';
+                        }
+              }
+            thisObj.className ='active';
+    }
+    var attr = getSelectedAttributesBySelect(formBuy);
+    var qty = document.forms['ECS_FORMBUY'].elements['number'].value;
+     Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
+}
 /**
  * 接收返回的信息
  */

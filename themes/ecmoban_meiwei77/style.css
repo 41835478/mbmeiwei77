@@ -682,7 +682,17 @@ h6 span{float:left; padding-left:15px; font-size:14px;}
 }
 
 
-
+/*********************产品属性价格***********************/
+.bnt_ul .active {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.125) inset;
+    outline: 0 none;
+    background-color: #be000e;
+    color: #FFFFFF;
+}
+.bnt_ul input{
+    border: 0px;
+    cursor: pointer;
+}
 
 
 
