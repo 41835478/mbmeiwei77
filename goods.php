@@ -131,7 +131,33 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'gotopage')
 
     die($json->encode($res));
 }
-
+if(!empty($_REQUEST['act']) && $_REQUEST['act'] ==  'check_buy'){
+    $li='';
+    $goods_id = $_REQUEST['goods'];
+    $goodAttr = get_goods_attr($goods_id);
+    if($goodAttr){
+        $content = '<ul class="bnt_ul">';
+        foreach($goodAttr as $attr){
+            $em = '';
+            $i=0;
+            $li .= '<li class="padd loop"><strong>' . $attr["attr_name"] . '：</strong>';
+            foreach ($attr['goods_attr_list'] as $v => $name) {
+                $active = $i == 0 ? 'active' : '';
+                $em .= '<input type="button" class="' . $active . '" onclick="selectSpec(' . $v . ', this)" id="' . $v . '" name="spec_' . $attr["attr_id"] . '" value="' . $name . '">';
+                $i++;
+            }
+            $li .=$em.'</li>';
+        }
+        $content .=$li.'<li style="text-align:center"><input type="button" name="" value="确认" onclick="doBuy('.$goods_id.')" style="margin-right:10px">
+        <input type="button" name="" value="取消" onclick="cncel_div_ecshop()"></li></ul>';
+        $result = array('goods_id'=>$goods_id,'isAttr'=>1,'content'=>$content);
+    }else{
+        $result = array('goods_id'=>$goods_id,'isAttr'=>0);
+    }
+    include_once('includes/cls_json.php');
+    $json = new JSON();
+    die($json->encode($result));
+}
 
 /*------------------------------------------------------ */
 //-- PROCESSOR

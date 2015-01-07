@@ -693,7 +693,14 @@ h6 span{float:left; padding-left:15px; font-size:14px;}
     border: 0px;
     cursor: pointer;
 }
-
+#speDiv .bnt_ul{
+    background:none;
+    padding: 0px;
+}
+#speDiv li{
+    text-align: left;
+    width: 250px;
+}
 
 
 

@@ -75,7 +75,7 @@ function quickBuy(goodsId, parentId)
 // 检查是否有商品规格
     if (formBuy)
     {
-        spec_arr = getSelectedAttributes(formBuy);
+        spec_arr = getSelectedAttributesBySelect(formBuy);
         if (formBuy.elements['number'])
         {
             number = formBuy.elements['number'].value;
@@ -1103,4 +1103,77 @@ function cancel_div()
     sel_obj[i].style.visibility = "";
     i++;
   }
+}
+
+function openDIV_ecshop(id,content)
+{
+  cncel_div_ecshop();
+  var _id = "speDiv";
+  var m = "mask";
+  if (docEle(_id)) document.removeChild(docEle(_id));
+  if (docEle(m)) document.removeChild(docEle(m));
+  //计算上卷元素值
+  var scrollPos;
+  if (typeof window.pageYOffset != 'undefined')
+  {
+    scrollPos = window.pageYOffset;
+  }
+  else if (typeof document.compatMode != 'undefined' && document.compatMode != 'BackCompat')
+  {
+    scrollPos = document.documentElement.scrollTop;
+  }
+  else if (typeof document.body != 'undefined')
+  {
+    scrollPos = document.body.scrollTop;
+  }
+  var i = 0;
+  var sel_obj = document.getElementsByTagName('select');
+  while (sel_obj[i])
+  {
+    sel_obj[i].style.visibility = "hidden";
+    i++;
+  }
+  var odiv=document.getElementById('gwc_'+id);
+  var X= odiv.getBoundingClientRect().left+document.documentElement.scrollLeft;
+  var Y =odiv.getBoundingClientRect().top+document.documentElement.scrollTop;
+  var left = parseInt(X)+120;
+  var top=parseInt(Y)-100;
+  // 新激活图层
+  var newDiv = document.createElement("div");
+  newDiv.id = _id;
+ newDiv.style.position = "absolute";
+  newDiv.style.zIndex = "100";
+  newDiv.style.width = "289px";
+  newDiv.style.height = "250px";
+  newDiv.style.top = top+"px";
+  newDiv.style.left = left+"px";
+  newDiv.style.overflow = "hidden";
+  newDiv.style.background = "#FFF";
+  newDiv.style.border = "0px solid #59B0FF";
+  newDiv.style.padding = "0px";
+  //生成层内内容
+  newDiv.innerHTML = '<div id="gwc_div" name="gwc_div" style="text-align:center;height:250px;line-height:25px;' +
+  'width:289px;background:url(/data/images/div_bg.gif) no-repeat 0 0;overflow:hidden;"><table width="280px" cellpading=0 ' +
+  'cellspacing=0 align=center ><th style="height:30px;line-height:30px;text-align:right;">' +
+  '<a href="javascript:cncel_div_ecshop()" ><img src="/data/images/div_close.gif" style="margin:5px 10px;"></a>' +
+  '</th><tr><td align=center >' +content+
+  '</td></tr>';
+  newDiv.innerHTML += '<tr><td align=center></td></tr></table></div>';
+  document.getElementById('gwc_'+id).appendChild(newDiv);
+}
+
+function cncel_div_ecshop()
+{
+  var box = document.getElementById('speDiv');
+  if(box){
+    box.parentNode.removeChild(box);
+    var i=0;
+    var sel_obj = document.getElementsByTagName('select');
+    while(sel_obj[i])
+    {
+      sel_obj[i].style.visibility='visible';
+      i++;
+    }
+  }
+
 }
