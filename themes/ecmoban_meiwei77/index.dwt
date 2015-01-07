@@ -18,6 +18,17 @@
 {insert_scripts files='common.js,index.js'}
 </head>
 <body class="index_page">
+<div class="top_add" id="top_add">
+<a href="javascript:void(0)" height="38" width="38" class="imgClose" title="关闭" onclick="topBannerMaxClose();return false;"></a>
+        	<!-- TemplateBeginEditable name="头部部大广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+
+<div class="blank"></div>
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+    </div>
 <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
 <div class="block">
 <!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
@@ -167,7 +178,7 @@
                          ?>
                 <!--{foreach from=$cat_goods_nf item=goods name=name}-->
                                 <!--{if $smarty.foreach.name.iteration eq 1}-->
-                                <div class="style1 <!--{if $ci neq 1}--> hide <!--{/if}-->" id="focus{$ci}" >
+                                <div class="style1 <!--{if $ci neq 1}--> hide <!--{/if}-->" id="focus{$s_cat.id}{$ci}" >
                                 <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">
                                     <img width="270px" height="361px" data-img="{$i}" alt="{$goods.name|escape:html}" src="{$goods.thumb}" class="err-product">
                                  </a>
@@ -191,9 +202,9 @@
                                 $this ->assign('goods_cat_'.$cid, assign_cat_goods($cid, 9));
                                 $this->assign('cat_goods_nf',$this->_var['cat_goods_'.$cid]);
                          ?>
-        <div data-widget="tab-item" class="sm sm2 fore{$i} <!--{if $i eq 1}-->curr <!--{/if}--> " id="{$i}">
+        <div data-widget="tab-item" class="sm sm2 fore{$i} <!--{if $i eq 1}-->curr <!--{/if}--> " id="{$s_cat.id}{$i}" data-count="{$i}">
             <div clstag="homepage|keycount|home2013|18c1" class="smt">
-                <h3>{$s_cat.name|escape:html} </h3>
+                <a href="{$s_cat.url}" target="_blank"><h3>{$s_cat.name|escape:html} </h3></a>
             </div>
             <div data-widget="tab-content" class="smc">
                 <ul class="lh style1" id="style{$i}">
@@ -227,11 +238,13 @@
 <script>
     $().ready(function(){
         $(".sm2").hover(function(){
-            $(".sm2").removeClass('curr');
+            $(this).siblings().removeClass('curr');
             $(this).addClass('curr');
            var id = $(this).attr('id');
            $("#focus"+id).removeClass('hide');
            $("#focus"+id).siblings().addClass('hide');
+           var i =  $(this).attr('data-count');
+           $(this).parent().find('.tab-arrow').css('left',(i-1)*230+'px');
         })
     })
 </script>
@@ -265,7 +278,7 @@
                          ?>
                 <!--{foreach from=$cat_goods_nf item=goods name=name}-->
                                 <!--{if $smarty.foreach.name.iteration eq 1}-->
-                                <div class="style1 <!--{if $ci neq 1}--> hide <!--{/if}-->" id="focus{$ci}" >
+                                <div class="style1 <!--{if $ci neq 1}--> hide <!--{/if}-->" id="focus{$s_cat.id}{$ci}" >
                                 <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">
                                     <img width="270px" height="361px" data-img="{$i}" alt="{$goods.name|escape:html}" src="{$goods.thumb}" class="err-product">
                                  </a>
@@ -289,9 +302,9 @@
                                 $this ->assign('goods_cat_'.$cid, assign_cat_goods($cid, 9));
                                 $this->assign('cat_goods_nf',$this->_var['cat_goods_'.$cid]);
                          ?>
-        <div data-widget="tab-item" class="sm sm2 fore{$i} <!--{if $i eq 1}-->curr <!--{/if}--> " id="{$i}">
+        <div data-widget="tab-item" class="sm sm2 fore{$i} <!--{if $i eq 1}-->curr <!--{/if}--> " id="{$s_cat.id}{$i}" data-count="{$i}">
             <div clstag="homepage|keycount|home2013|18c1" class="smt">
-                <h3>{$s_cat.name|escape:html} </h3>
+                <a href="{$s_cat.url}" target="_blank"><h3>{$s_cat.name|escape:html} </h3></a>
             </div>
             <div data-widget="tab-content" class="smc">
                 <ul class="lh style1" id="style{$i}">
@@ -325,11 +338,13 @@
 <script>
     $().ready(function(){
         $(".sm2").hover(function(){
-            $(".sm2").removeClass('curr');
+            $(this).siblings().removeClass('curr');
             $(this).addClass('curr');
            var id = $(this).attr('id');
            $("#focus"+id).removeClass('hide');
            $("#focus"+id).siblings().addClass('hide');
+           var i =  $(this).attr('data-count');
+           $(this).parent().find('.tab-arrow').css('left',(i-1)*230+'px');
         })
     })
 </script>
@@ -344,5 +359,15 @@
 
 </div>
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+<script>
+    setTimeout("closeAdd()",3000);
+    function closeAdd(){
+        var obj = document.getElementById('top_add');
+            if(obj.getElementsByTagName('img') && obj.className!='hide'){
+                obj.className='hide';
+            }
+    }
+
+</script>
 </body>
 </html>

@@ -1177,3 +1177,8 @@ function cncel_div_ecshop()
   }
 
 }
+
+function topBannerMaxClose(){
+  var obj = document.getElementById('top_add');
+  obj.className="hide";
+}

@@ -703,6 +703,23 @@ h6 span{float:left; padding-left:15px; font-size:14px;}
 }
 
 
+/***********top add*********/
+#top_add table{
+    width: 100%;
+}
+#top_add{
+    text-align: center;
+}
+
+#top_add a.imgClose {
+    display: block;
+    height: 32px;
+    position: absolute;
+    right: 130px;
+    top: 10px;
+    width: 32px;
+    background: url(/images/index_icons_121226.png) no-repeat 0 0;
+}
 
 
  
