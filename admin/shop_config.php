@@ -38,6 +38,7 @@ $url = 'http://ecshop.ecmoban.com/sms/index.php?certificate_id='.$certi_id.'&ses
 /*------------------------------------------------------ */
 if ($_REQUEST['act'] == 'list_edit')
 {
+	include_once(dirname(__FILE__) .'/../includes/cls_sms.php');
     /* 检查权限 */
     admin_priv('shop_config');
 
@@ -52,7 +53,6 @@ if ($_REQUEST['act'] == 'list_edit')
         }
     }
     @closedir($dir);
-
     $smarty->assign('lang_list',    $lang_list);
     $smarty->assign('ur_here',      $_LANG['01_shop_config']);
     $smarty->assign('group_list',   get_settings(null, array('5')));

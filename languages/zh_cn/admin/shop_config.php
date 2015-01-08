@@ -139,7 +139,7 @@ $_LANG['cfg_name']['show_attr_in_cart'] = '购物车里是否显示商品属性'
 $_LANG['test_mail_title'] = '测试邮件';
 $_LANG['cfg_name']['email_content']  = '您好！这是一封检测邮件服务器设置的测试邮件。收到此邮件，意味着您的邮件服务器设置正确！您可以进行其它邮件发送的操作了！';
 $_LANG['cfg_name']['sms'] = '短信设置';
-$_LANG['cfg_name']['sms_shop_mobile'] = '商家的手机号码';
+$_LANG['cfg_name']['sms_shop_mobile'] = '短信余额';
 $_LANG['cfg_name']['sms_order_placed'] = '客户下订单时是否给商家发短信';
 $_LANG['cfg_name']['sms_order_payed'] = '客户付款时是否给商家发短信';
 $_LANG['cfg_name']['sms_order_shipped'] = '商家发货时是否给客户发短信';
@@ -197,7 +197,7 @@ $_LANG['cfg_desc']['cart_confirm'] = '允许您设置用户点击“加入购物
 $_LANG['cfg_desc']['use_how_oos'] = '使用缺货处理时前台订单确认页面允许用户选择缺货时处理方法。';
 $_LANG['cfg_desc']['send_service_email'] = '网店信息中的客服邮件地址不为空时，该选项有效。';
 $_LANG['cfg_desc']['send_mail_on'] = '启用该选项登录后台时，会自动发送邮件队列中尚未发送的邮件';
-$_LANG['cfg_desc']['sms_shop_mobile'] = '请先注册手机短信服务再填写手机号码';
+$_LANG['cfg_desc']['sms_shop_mobile'] = '';
 $_LANG['cfg_desc']['send_verify_email'] = '“是否开启会员邮件验证”设为开启时才可使用此功能';
 
 $_LANG['cfg_range']['cart_confirm'][1] = '提示用户，点击“确定”进购物车';

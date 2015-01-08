@@ -6,6 +6,9 @@
           {$var.name}:
         </td>
         <td>
+		{if $var.id eq 801}
+			<?php $sms = new sms();echo $sms->getSmsInfo();?>
+		{else}
           {if $var.type eq "text"}
           <input name="value[{$var.id}]" type="text" value="{$var.value}" size="40" />
 
@@ -101,6 +104,7 @@
             </table>
             {/if}
           {/if}
+		  {/if}
           {if $var.desc}
           <br />
           <span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="notice{$var.code}">{$var.desc|nl2br}</span>
