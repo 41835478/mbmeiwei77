@@ -46,8 +46,8 @@ if($_SESSION['token']===$token){
             $_SESSION['smsWord'] = $word;
             $sms = new sms();
             $content = "中圆指尖购物网验证码：【".$word."】，如非本人操作请忽略。";
-            $sms->send($userInfo['mobile_phone'],$content);
-            $result['content'] = $word;
+			sms->send($userInfo['mobile_phone'],$content);
+            $result['content'] = '';
         }else{
             $result['err_msg'] = '检测到该账户为设置手机号码，请联系客服录入手机号码';
         }

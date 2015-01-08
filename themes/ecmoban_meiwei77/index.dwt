@@ -19,8 +19,7 @@
 </head>
 <body class="index_page">
 <div class="top_add" id="top_add">
-<a href="javascript:void(0)" height="38" width="38" class="imgClose" title="关闭" onclick="topBannerMaxClose();return false;"></a>
-        	<!-- TemplateBeginEditable name="头部部大广告" -->
+<!-- TemplateBeginEditable name="头部部大广告" -->
 <!-- #BeginLibraryItem "/library/ad_position.lbi" -->
 
 {insert name='ads' id=$ads_id num=$ads_num}

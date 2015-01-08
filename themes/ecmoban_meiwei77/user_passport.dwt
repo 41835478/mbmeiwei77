@@ -41,14 +41,14 @@
             <input name="password" type="password" size="15"  class="inputBg"/>            </td>
           </tr>
           <!-- 判断是否启用验证码{if $enabled_captcha} -->
-          <!--<tr>
+          <tr id="captcha">
             <td align="right">{$lang.comment_captcha}</td>
             <td><input type="text" size="8" name="captcha" class="inputBg" />
             <img src="captcha.php?is_login=1&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </td>
-          </tr>-->
-          <tr id="captcha">
+          </tr>
+          <tr id="captchaSms"  style="display:none">
                       <td align="right">{$lang.comment_captcha}</td>
-                      <td><input type="text" size="8" name="captcha" class="inputBg" />
+                      <td><input type="text" size="8" name="captchaSms" class="inputBg" />
                        <input type="button" class="inp_2" value="发送验证码" id="sendPhoneCode" onClick="sendCode()">
                       </td>
                     </tr>
@@ -367,10 +367,13 @@ function getCheckTypeResponse(res){
       else
       {
        var captchaObj = document.getElementById('captcha');
+	   var captchaSmsObj = document.getElementById('captchaSms');
         if(res.content && res.content.special==1){
             captchaObj.style.display = 'none';
+			captchaSmsObj.style.display = ''
         }else{
             captchaObj.style.display = '';
+			captchaSmsObj.style.display = 'none'
         }
       }
 }

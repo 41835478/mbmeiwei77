@@ -341,30 +341,31 @@ elseif ($action == 'act_login')
     $captcha = intval($_CFG['captcha']);
     if (($captcha & CAPTCHA_LOGIN) && (!($captcha & CAPTCHA_LOGIN_FAIL) || (($captcha & CAPTCHA_LOGIN_FAIL) && $_SESSION['login_fail'] > 2)) && gd_version() > 0)
     {
-        $isCheck = true;
+        $isCheck = false;
 
         //检查是否不需要短信验证
         $userInfo = $db->getRow("select * from ".$ecs->table('users')." where user_name='".$username."'");
         if($userInfo){
             if($userInfo['user_rank']){
                 $userRank = $db->getRow("select * from ".$ecs->table('user_rank')." where rank_id=".$userInfo['user_rank']);
-                if($userRank &&$userRank['sms_captcha']==0){
-                    $isCheck = false;
+                 if($userRank &&$userRank['sms_captcha']==1){
+                    $isCheck = true;
                 }
             }
         }
-        if($isCheck){
-            if (empty($_POST['captcha']))
+		if (empty($_POST['captcha'])&&empty($_POST['captchaSms']))
             {
                 show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
             }
-            if(strtolower($_SESSION['smsWord'])!=strtolower($_POST['captcha'])){
+        if($isCheck){
+            
+            if(strtolower($_SESSION['smsWord'])!=strtolower($_POST['captchaSms'])){
                 show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
             }
 
-        }
-        /* 检查验证码 */
-        /*
+        }else{
+			/* 检查验证码 */
+       
         include_once('includes/cls_captcha.php');
 
         $validator = new captcha();
@@ -373,7 +374,9 @@ elseif ($action == 'act_login')
         {
             show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
         }
-        */
+		}
+        
+        
     }
 
     if ($user->login($username, $password,isset($_POST['remember'])))
@@ -725,7 +728,7 @@ elseif($action=='get_check_type'){
     $userInfo =$user->get_user_info($username);
     if($userInfo['user_rank']){
         $userRank = $db->getRow("select * from ".$ecs->table('user_rank')." where rank_id=".$userInfo['user_rank']);
-        if($userRank && $userRank['sms_captcha']==0){
+		if(($userRank &&$userRank['sms_captcha']==1)){
             $result['error']=0;
             $result['content'] = array('special'=>1);
         }

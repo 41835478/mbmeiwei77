@@ -130,7 +130,7 @@ else
     if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'form')
     {
         /* 要显示高级搜索栏 */
-        $adv_value['keywords']  = htmlspecialchars(stripcslashes($_REQUEST['keywords']));
+        $adv_value['quickBuy']  = htmlspecialchars(stripcslashes($_REQUEST['keywords']));
         $adv_value['brand']     = $_REQUEST['brand'];
         $adv_value['min_price'] = $_REQUEST['min_price'];
         $adv_value['max_price'] = $_REQUEST['max_price'];
@@ -463,7 +463,6 @@ else
     $smarty->assign('goods_list', $arr);
     $smarty->assign('category',   $category);
     $smarty->assign('keywords',   htmlspecialchars(stripslashes($_REQUEST['keywords'])));
-    $smarty->assign('search_keywords',   stripslashes(htmlspecialchars_decode($_REQUEST['keywords'])));
     $smarty->assign('brand',      $_REQUEST['brand']);
     $smarty->assign('min_price',  $min_price);
     $smarty->assign('max_price',  $max_price);

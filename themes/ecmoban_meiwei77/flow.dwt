@@ -782,17 +782,17 @@
                     <td bgcolor="#ffffff"><input name="password" class="inputBg" type="password" /></td>
                   </tr>
                  <!-- 判断是否启用验证码{if $enabled_login_captcha} -->
-                  <!--<tr>
-                    <td bgcolor="#ffffff"><div align="right"><strong>{$lang.comment_captcha}:</strong></div></td>
-                    <td bgcolor="#ffffff"><input type="text" size="8" name="captcha" class="inputBg" />
-                    <img src="captcha.php?is_login=1&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </td>
-                  </tr>-->
-                   <tr id="captcha">
-                                        <td align="right" bgcolor="#ffffff">{$lang.comment_captcha}</td>
-                                        <td bgcolor="#ffffff"><input type="text" size="8" name="captcha" class="inputBg" />
-                                         <input type="button" class="inp_2" value="发送验证码" id="sendPhoneCode" onClick="sendCode()">
-                                        </td>
-                                      </tr>
+                  <tr id="captcha">
+            <td align="right" bgcolor="#ffffff">{$lang.comment_captcha}</td>
+            <td bgcolor="#ffffff"><input type="text" size="8" name="captcha" class="inputBg" />
+            <img src="captcha.php?is_login=1&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </td>
+          </tr>
+          <tr id="captchaSms"  style="display:none">
+                      <td align="right" bgcolor="#ffffff">{$lang.comment_captcha}</td>
+                      <td bgcolor="#ffffff"><input type="text" size="8" name="captchaSms" class="inputBg" />
+                       <input type="button" class="inp_2" value="发送验证码" id="sendPhoneCode" onClick="sendCode()">
+                      </td>
+                    </tr>
                   <!--{/if}-->
                   <tr>
             <td bgcolor="#ffffff"></td><td  bgcolor="#ffffff"><input type="checkbox" value="1" name="remember" id="remember" /><label for="remember">{$lang.remember}</label></td>
@@ -898,10 +898,13 @@ function getCheckTypeResponse(res){
       else
       {
        var captchaObj = document.getElementById('captcha');
+	   var captchaSmsObj = document.getElementById('captchaSms');
         if(res.content && res.content.special==1){
             captchaObj.style.display = 'none';
+			captchaSmsObj.style.display = ''
         }else{
             captchaObj.style.display = '';
+			captchaSmsObj.style.display = 'none'
         }
       }
 }

@@ -292,7 +292,7 @@ function reg(str){
        <li class="clearfix">
        <dd>
        <strong>{$lang.number}：</strong>
-        <input name="number" type="text" id="number" value="1" size="4" onblur="changePrice()" style="border:1px solid #ccc; "/> <strong>{$lang.amount}：</strong><font id="ECS_GOODS_AMOUNT" class="f1"></font>
+        <input name="number" type="text" id="number" value="1" size="4" onblur="selectSpec()" style="border:1px solid #ccc; "/> <strong>{$lang.amount}：</strong><font id="ECS_GOODS_AMOUNT" class="f1"></font>
        </dd>
        </li>
       

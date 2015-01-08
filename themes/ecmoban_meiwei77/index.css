@@ -2,270 +2,10 @@
 
  Date: 2014-11-20 1:15:25 [PM] 
  */
-html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, address, big, cite, code, del, em, font, img, ins, small, strong, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
-    margin: 0;
-    padding: 0
-}
 
-ol, ul {
-    list-style: none
-}
 
-:focus {
-    outline: 0
-}
 
-a img {
-    border: 0
-}
 
-img {
-    vertical-align: middle
-}
-
-table {
-    empty-cells: show
-}
-
-ins {
-    text-decoration: none
-}
-
-del {
-    text-decoration: line-through
-}
-
-em {
-    font-style: normal
-}
-
-button::-moz-focus-inner, input[type=reset]::-moz-focus-inner, input[type=button]::-moz-focus-inner, input[type=submit]::-moz-focus-inner, input[type=file] > input[type=button]::-moz-focus-inner {
-    border: 0;
-    padding: 0
-}
-
-.g-0 {
-    width: 100%
-}
-
-.g-8 {
-    width: 150px
-}
-
-.g-a {
-    width: 190px
-}
-
-.g-a1 {
-    width: 210px
-}
-
-.g-a5 {
-    width: 290px
-}
-
-.g-b1 {
-    width: 410px
-}
-
-.g-b4 {
-    width: 470px
-}
-
-.g-b8 {
-    width: 550px
-}
-
-.g-b9 {
-    width: 570px
-}
-
-.g-c9 {
-    width: 770px
-}
-
-.g-d {
-    width: 790px
-}
-
-.g-e {
-    width: 990px
-}
-
-.g-0, .g-8, .g-a, .g-a1, .g-a5, .g-b1, .g-b4, .g-b8, .g-b9, .g-c9, .g-d, .g-e {
-    float: left
-}
-
-.g-8, .g-a, .g-a1, .g-a5, .g-b1, .g-b4, .g-b8, .g-b9, .g-c9, .g-d, .g-e {
-    position: relative;
-    z-index: 1
-}
-
-.g-80, .c-80 {
-    margin-left: 160px
-}
-
-.g-a0, .c-a0 {
-    margin-left: 200px
-}
-
-.g-a10, .c-a10 {
-    margin-left: 220px
-}
-
-.g-a50, .c-a50 {
-    margin-left: 300px
-}
-
-.g-b10, .c-b10 {
-    margin-left: 420px
-}
-
-.g-b40, .c-b40 {
-    margin-left: 480px
-}
-
-.g-b80, .c-b80 {
-    margin-left: 560px
-}
-
-.g-b90, .c-b90 {
-    margin-left: 580px
-}
-
-.g-c90, .c-c90 {
-    margin-left: 780px
-}
-
-.g-d0, .c-d0 {
-    margin-left: 800px
-}
-
-.g-e0, .c-e0 {
-    margin-left: 1000px
-}
-
-* html .g-80, * html .g-a0, * html .g-a10, * html .g-a50, * html .g-b10, * html .g-b40, * html .g-b80, * html .g-b90, * html .g-c90, * html .g-d0, * html .g-e0 {
-    float: right;
-    margin-left: 10px
-}
-
-.g-08, .c-08 {
-    margin-right: 160px
-}
-
-.g-0a, .c-0a {
-    margin-right: 200px
-}
-
-.g-0a1, .c-0a1 {
-    margin-right: 220px
-}
-
-.g-0a5, .c-0a5 {
-    margin-right: 300px
-}
-
-.g-0b1, .c-0b1 {
-    margin-right: 420px
-}
-
-.g-0b4, .c-0b4 {
-    margin-right: 480px
-}
-
-.g-0b8, .c-0b8 {
-    margin-right: 560px
-}
-
-.g-0b9, .c-0b9 {
-    margin-right: 580px
-}
-
-.g-0c9, .c-0c9 {
-    margin-right: 780px
-}
-
-.g-0d, .c-0d {
-    margin-right: 800px
-}
-
-.g-0e, .c-0e {
-    margin-right: 1000px
-}
-
-* html .g-08, * html .g-0a, * html .g-0a1, * html .g-0a5, * html .g-0b1, * html .g-0b4, * html .g-0b8, * html .g-0b9, * html .g-0c9, * html .g-0d, * html .g-0e {
-    float: left;
-    margin-right: 10px
-}
-
-.c-0 {
-    margin-left: -100%
-}
-
-.c-080 {
-    margin-left: -150px
-}
-
-.c-0a0 {
-    margin-left: -190px
-}
-
-.c-0a10 {
-    margin-left: -210px
-}
-
-.c-0a50 {
-    margin-left: -290px
-}
-
-.c-0b10 {
-    margin-left: -410px
-}
-
-.c-0b40 {
-    margin-left: -470px
-}
-
-.c-0b80 {
-    margin-left: -550px
-}
-
-.c-0b90 {
-    margin-left: -570px
-}
-
-.c-0c90 {
-    margin-left: -770px
-}
-
-.c-0d0 {
-    margin-left: -790px
-}
-
-.c-0e0 {
-    margin-left: -990px
-}
-
-* html .c-0 {
-    filter: ""
-}
-
-.fl {
-    float: left
-}
-
-.fr {
-    float: right
-}
-
-.fn {
-    float: none
-}
-
-.al {
-    text-align: left
-}
 
 .ac {
     text-align: center
@@ -338,11 +78,6 @@ button::-moz-focus-inner, input[type=reset]::-moz-focus-inner, input[type=button
     font-size: 12px
 }
 
-.block {
-    display: block;
-    overflow: hidden
-}
-
 .hide {
     display: none
 }
@@ -375,38 +110,6 @@ button::-moz-focus-inner, input[type=reset]::-moz-focus-inner, input[type=button
     padding: 0;
     text-align: center;
     cursor: pointer
-}
-
-body {
-    font: 12px/150% Arial, Verdana, "\5b8b\4f53";
-    color: #666;
-    background: #fff;
-    _background-image: url(about:blank);
-    _background-attachment: fixed;
-    margin: 0 auto;
-    padding: 0 ;
-}
-
-h1 {
-    font: 20px "microsoft yahei", "\5b8b\4f53"
-}
-
-h2, h3 {
-    font-size: 14px
-}
-
-h4, h5, h6 {
-    font-size: 12px
-}
-
-a {
-    color: #666;
-    text-decoration: none
-}
-
-a:hover {
-    color: #d41c4f;
-    text-decoration: underline
 }
 
 .w {
@@ -518,19 +221,11 @@ a:hover {
 .ptx1 {
 }
 
-img.err-product, img.err-poster {
-    background: url(http://misc.360buyimg.com/lib/skin/e/i/error-jd.gif) no-repeat 50% 50%
-}
 
-img.err-price {
-    width: 81px;
-    height: 22px;
-    background: url(http://misc.360buyimg.com/lib/skin/e/i/error-3.gif) no-repeat 50% 50%
-}
 
-.loading-style1 b, .loading-style2 {
-    background: url(http://misc.360buyimg.com/lib/skin/e/i/loading-jd.gif) no-repeat 50% 50%
-}
+
+
+
 
 .loading-style1 {
     width: 126px;
@@ -546,10 +241,7 @@ img.err-price {
     margin: 0 auto 5px
 }
 
-.slide {
-    position: relative;
-    background: url(http://misc.360buyimg.com/lib/skin/e/i/loading-jd.gif) no-repeat center center
-}
+
 
 .slide .slide-itemswrap {
     position: relative;
@@ -596,10 +288,7 @@ img.err-price {
     z-index: 1000
 }
 
-#sidepanel a, #sidepanel b {
-    background-image: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png);
-    background-repeat: no-repeat
-}
+
 
 #sidepanel a {
     display: block;
@@ -698,16 +387,6 @@ img.err-price {
     font-weight: 700
 }
 
-.pagin b {
-    display: block;
-    position: absolute;
-    top: 9px;
-    width: 5px;
-    height: 9px;
-    background-image: url(http://misc.360buyimg.com/201007/skin/df/i/bg_hotsale.gif);
-    background-repeat: no-repeat;
-    overflow: hidden
-}
 
 .pagin .prev, .pagin .next, .pagin .prev-disabled, .pagin .next-disabled {
     position: relative;
@@ -828,33 +507,7 @@ img.err-price {
     border: 0
 }
 
-.thickclose:link, .thickclose:visited {
-    display: block;
-    position: absolute;
-    z-index: 100000;
-    top: 7px;
-    right: 12px;
-    overflow: hidden;
-    width: 15px;
-    height: 15px;
-    background: url(http://misc.360buyimg.com/201007/skin/df/i/bg_thickbox.gif) no-repeat 0 -18px;
-    font-size: 0;
-    line-height: 100px
-}
 
-.thickwrap .thickclose:link, .thickwrap .thickclose:visited {
-    display: block;
-    position: absolute;
-    z-index: 100000;
-    top: 5px;
-    right: 10px;
-    overflow: hidden;
-    width: 21px;
-    height: 21px;
-    background: url(http://misc.360buyimg.com/lib/skin/2013/i/thickbox_close.png) no-repeat 0 0;
-    font-size: 0;
-    line-height: 100px
-}
 
 .thickcon {
     overflow: auto;
@@ -875,9 +528,6 @@ img.err-price {
     background: #fff
 }
 
-.thickloading {
-    background: url(http://misc.360buyimg.com/lib/skin/e/i/loading-jd.gif) #fff no-repeat center center
-}
 
 .thickcountdown {
     height: 20px;
@@ -925,14 +575,6 @@ img.err-price {
     float: left
 }
 
-.compare .extra {
-    float: right;
-    margin-top: 2px;
-    width: 13px;
-    height: 13px;
-    background: url(http://misc.360buyimg.com/201007/skin/df/i/bg_hotsale.gif) no-repeat -51px -632px;
-    cursor: pointer
-}
 
 .compare .mc {
     padding: 2px
@@ -978,15 +620,7 @@ img.err-price {
     font-family: "\5b8b\4f53"
 }
 
-.iloading {
-    width: 140px;
-    height: 30px;
-    padding-left: 22px;
-    background: url(http://misc.360buyimg.com/201007/skin/df/i/loading.gif) no-repeat 0 center;
-    margin: 0 auto;
-    line-height: 30px;
-    color: #999
-}
+
 
 .norecode {
     color: #999
@@ -997,11 +631,7 @@ img.err-price {
     zoom: 1
 }
 
-.model-prompt .con b {
-    position: absolute;
-    background-image: url(http://misc.360buyimg.com/201007/skin/df/i/bg_prompt.gif);
-    background-repeat: no-repeat
-}
+
 
 #model-collect .con {
     padding: 20px 0 0 60px;
@@ -1090,10 +720,7 @@ img.err-price {
     font-size: 14px
 }
 
-#shortcut-2013 .fl b, #shortcut-2013 .fr b {
-    background-image: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png);
-    background-repeat: no-repeat
-}
+
 
 #shortcut-2013, #shortcut-2013 .w {
     height: 30px;
@@ -1134,14 +761,7 @@ img.err-price {
     z-index: 13
 }
 
-#shortcut-2013 .fl b {
-    top: 8px;
-    left: 0;
-    width: 13px;
-    height: 13px;
-    background: url(http://misc.360buyimg.com/lib/skin/2013/i/20130725.png) no-repeat 0 0;
-    cursor: pointer
-}
+
 
 #shortcut-2013 .fl li:hover b {
     transform: rotate(720deg);
@@ -1288,10 +908,6 @@ img.err-price {
     cursor: pointer
 }
 
-#logo-2013 a:hover b, #logo-2013 a:active b {
-    display: none;
-    background: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png) #fff no-repeat 0 -312px
-}
 
 .root61 #logo {
     width: 350px
@@ -1584,11 +1200,7 @@ img.err-price {
     background: #F3F3F3
 }
 
-#shelper-2013 .list-text .resultful {
-    background-image: url(http://misc.360buyimg.com/lib/skin/2012/i/8.png);
-    background-repeat: no-repeat;
-    background-position: 302px 8px
-}
+
 
 #shelper-2013 .list-word {
     width: 320px;
@@ -1672,10 +1284,7 @@ img.err-price {
     width: 406px
 }
 
-#my360buy-2013 dt, #my360buy-2013 dl.hover dt {
-    background-image: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png);
-    background-repeat: no-repeat
-}
+
 
 #my360buy-2013 {
     float: left;
@@ -1825,14 +1434,7 @@ img.err-price {
     margin-right: 3px
 }
 
-#my360buy-2013 .orderlist .more {
-    width: 50px;
-    height: 50px;
-    background: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png) no-repeat 0 -250px;
-    overflow: hidden;
-    line-height: 150px;
-    margin-right: 0
-}
+
 
 #my360buy-2013 .orderlist .p-detail {
     padding-top: 2px
@@ -1893,10 +1495,7 @@ img.err-price {
     margin: 10px auto
 }
 
-#settleup-2013 dt, #settleup-2013 dl.hover dt, #settleup-2013 .nogoods b {
-    background-image: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png);
-    background-repeat: no-repeat
-}
+
 
 #settleup-2013 {
     float: right;
@@ -1920,24 +1519,7 @@ img.err-price {
     text-align: center
 }
 
-#settleup-2013 dt .shopping {
-    position: absolute;
-    top: -13px;
-    left: 20px;
-    background-image: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png);
-    background-position: -133px -279px;
-    padding-left: 6px;
-    color: #fff
-}
 
-#settleup-2013 dt .shopping span {
-    float: left;
-    display: block;
-    height: 20px;
-    padding-right: 6px;
-    background-image: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png);
-    background-position: 100% -250px
-}
 
 #settleup-2013 dt a {
     line-height: 27px;
@@ -2257,10 +1839,7 @@ img.err-price {
     top: 0
 }
 
-#categorys-2013 .mt b, #categorys-2013 h3, #categorys-2013 s, #categorys-2013.hover .mt b {
-    background-image: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png);
-    background-repeat: no-repeat
-}
+
 
 #categorys-2013 {
     position: absolute;
@@ -2556,15 +2135,7 @@ img.err-price {
     padding: 10px 8px
 }
 
-#categorys-2013 .categorys-links a {
-    display: block;
-    width: 194px;
-    height: 30px;
-    background-image: url(http://misc.360buyimg.com/lib/skin/2013/i/28.png);
-    background-repeat: no-repeat;
-    line-height: 80px;
-    overflow: hidden
-}
+
 
 #categorys-links-diy a {
     background-position: 0 0
@@ -2610,14 +2181,7 @@ img.err-price {
     border-bottom: 1px solid #eee
 }
 
-#categorys-2013 .title-list li {
-    padding-left: 30px;
-    height: 28px;
-    line-height: 28px;
-    margin-right: 20px;
-    background-image: url(http://misc.360buyimg.com/lib/skin/2013/i/virtuals-cat-ico20140826.png);
-    background-repeat: no-repeat
-}
+
 
 #categorys-2013 .title-list li.fore1 {
     background-position: 0 0
@@ -2647,10 +2211,6 @@ img.err-price {
     height: 370px
 }
 
-#service-2013 dl b {
-    background-image: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png);
-    background-repeat: no-repeat
-}
 
 #service-2013 {
     padding: 10px 20px;
@@ -2781,12 +2341,7 @@ img.err-price {
     *cursor: pointer
 }
 
-.footmark .may-like .change .ico {
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
-    background: url(http://misc.360buyimg.com/product/skin/2012/i/update.png) no-repeat
-}
+
 
 .footmark .may-like .mc {
     height: 246px;
@@ -2869,19 +2424,7 @@ img.err-price {
     padding-left: 37px
 }
 
-#app-jd i {
-    position: absolute;
-    z-index: 2;
-    left: 14px;
-    top: 5px;
-    width: 13px;
-    height: 22px;
-    background-image: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png);
-    background-repeat: no-repeat;
-    background-position: -128px -360px;
-    -webkit-transition: all .2s ease;
-    transition: all .2s ease
-}
+
 
 #app-jd.hover i {
     background-position: -128px -399px
@@ -2898,15 +2441,6 @@ img.err-price {
     margin-bottom: 8px
 }
 
-#app-jd .dd .qr-code i {
-    position: absolute;
-    display: block;
-    width: 49px;
-    height: 23px;
-    background: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png) no-repeat 0 -438px;
-    left: 88px;
-    top: 5px
-}
 
 #app-jd .dd .qr-code .details {
     position: absolute;
@@ -2933,14 +2467,7 @@ img.err-price {
     font-size: 0
 }
 
-#app-jd .btn-app-apple, #app-jd .btn-app-android {
-    width: 97px;
-    height: 29px;
-    display: inline-block;
-    line-height: 29px;
-    background-image: url(http://misc.360buyimg.com/lib/skin/2013/i/20130330A_2.png);
-    background-repeat: no-repeat
-}
+
 
 #app-jd .btn-app-apple {
     background-position: 0 -360px;
@@ -3016,16 +2543,7 @@ img.err-price {
     background-position: 0 -15px
 }
 
-#jd-vip i {
-    position: absolute;
-    left: 10px;
-    top: 9px;
-    display: block;
-    width: 24px;
-    height: 11px;
-    overflow: hidden;
-    background: url(http://misc.360buyimg.com/lib/skin/2013/i/vip.png)
-}
+
 
 #shortcut-2013 #jd-dakehu {
     padding-left: 38px
@@ -3042,7 +2560,7 @@ img.err-price {
 }
 
 /* 
- Copyright @ JD.COM 
+ 
  Date: 2014-11-20 1:25:14 [PM] 
  */
 .w1 {
@@ -3091,11 +2609,7 @@ img.err-price {
     width: 192px
 }
 
-#branch-office {
-    background-image: url(http://misc.360buyimg.com/product/skin/2013/i/20130330B_1.png);
-    background-repeat: no-repeat;
-    margin-bottom: 0
-}
+
 
 #branch-office {
     width: 200px;
@@ -3265,10 +2779,7 @@ img.err-price {
     width: 650px
 }
 
-#mscroll .ctrl b {
-    background-image: url(http://misc.360buyimg.com/product/skin/2013/i/20130330B_1.png);
-    background-repeat: no-repeat
-}
+
 
 #mscroll {
     width: 488px;
@@ -3336,13 +2847,6 @@ img.err-price {
     background-color: #F5F5F5
 }
 
-#mscroll #mscroll-ctrl-prev:hover b {
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/15.png) no-repeat 0 0
-}
-
-#mscroll #mscroll-ctrl-next:hover b {
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/15.png) no-repeat 0 -37px
-}
 
 #mscroll .disabled {
     cursor: default
@@ -3609,15 +3113,7 @@ img.err-price {
     border-right: 0
 }
 
-#virtuals-2014 .mt li a s {
-    display: block;
-    width: 42px;
-    height: 34px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    background-image: url(http://misc.360buyimg.com/product/skin/2013/i/virtuals-20140606.png);
-    background-repeat: no-repeat
-}
+
 
 #virtuals-2014 .mt li.fore2 a s {
     background-position: -64px 0
@@ -4001,10 +3497,6 @@ img.err-price {
     display: inline
 }
 
-#group .p-detail, #group .ctrl {
-    background-image: url(http://misc.360buyimg.com/product/skin/2013/i/20130330B_1.png);
-    background-repeat: no-repeat
-}
 
 #group {
     float: right;
@@ -4967,10 +4459,7 @@ img.err-price {
     width: 158px
 }
 
-.brands .smt .extra b {
-    background-image: url(http://misc.360buyimg.com/product/skin/2013/i/20130330B_1.png);
-    background-repeat: no-repeat
-}
+
 
 .brands {
     float: right;
@@ -5031,16 +4520,6 @@ img.err-price {
     display: none
 }
 
-#clothing .brands .smt .extra-ico a {
-    display: none;
-    position: relative;
-    top: -5px;
-    width: 115px;
-    height: 22px;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/18.png) 0 0 no-repeat;
-    line-height: 1000px;
-    overflow: hidden
-}
 
 .root61 .brands {
     width: 210px
@@ -5105,10 +4584,7 @@ img.err-price {
     display: block
 }
 
-.ranking .smc span {
-    background-image: url(http://misc.360buyimg.com/product/skin/2013/i/20130330B_1.png);
-    background-repeat: no-repeat
-}
+
 
 .ranking {
     display: none;
@@ -5386,16 +4862,7 @@ img.err-price {
     height: 160px
 }
 
-#life .brands .smt .extra-ico a {
-    display: none;
-    position: relative;
-    top: -5px;
-    width: 115px;
-    height: 22px;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/18.png) 0 -27px no-repeat;
-    line-height: 1000px;
-    overflow: hidden
-}
+
 
 #life .brands .smt {
     padding: 5px 0;
@@ -5409,13 +4876,6 @@ img.err-price {
     display: block
 }
 
-.ci {
-    width: 20px;
-    height: 20px;
-    background-image: url(http://misc.360buyimg.com/product/skin/2013/i/20130330B_1.png);
-    background-repeat: no-repeat;
-    overflow: hidden
-}
 
 .cix1 {
     background-position: -198px -50px
@@ -5464,13 +4924,7 @@ img.err-price {
     right: -10px
 }
 
-.club .p-detail {
-    width: 225px;
-    height: 3em;
-    padding-right: 50px;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/20130330B_1.png) no-repeat 240px -80px;
-    color: #999
-}
+
 
 .club .p-detail a:link, .club .p-detail a:visited {
     color: #999
@@ -5586,15 +5040,7 @@ img.err-price {
     width: 210px
 }
 
-#subscription .text {
-    width: 115px;
-    height: 21px;
-    padding: 1px 0 1px 25px;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/20130330B_1.png) no-repeat -251px -46px;
-    border: 1px inset #bbb;
-    line-height: 21px;
-    color: #999
-}
+
 
 #subscription .button {
     float: right;
@@ -5645,10 +5091,7 @@ img.err-price {
     width: 240px
 }
 
-#treasure .research b, #guidelayer .close, #guidelayer .corner {
-    background-image: url(http://misc.360buyimg.com/product/skin/2012/i/20120209D.png);
-    background-repeat: no-repeat
-}
+
 
 #treasure .guide {
     float: right;
@@ -5913,17 +5356,7 @@ img.err-price {
     margin-top: 5px
 }
 
-.backpanel .bp-item a {
-    display: block;
-    background-image: url(http://misc.360buyimg.com/product/skin/2013/i/backpanel20140708.png);
-    background-color: #aaa;
-    background-repeat: no-repeat;
-    padding: 5px 0 0 7px;
-    color: #fff;
-    height: 33px;
-    line-height: 1000px;
-    overflow: hidden
-}
+
 
 .backpanel .bp-item a:hover {
     line-height: 14px;
@@ -6122,20 +5555,7 @@ img.err-price {
     padding-bottom: 15px
 }
 
-.setting-title .setting-close {
-    position: absolute;
-    right: 0;
-    top: 0;
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    line-height: 1000px;
-    overflow: hidden;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/floor-sort20131202.png) 0 -139px no-repeat;
-    cursor: pointer;
-    _right: 20px;
-    *zoom: 1
-}
+
 
 .setting-title h4 {
     font: 700 16px/16px 'microsoft yahei';
@@ -6282,34 +5702,13 @@ a.floor-sort:hover span {
     padding-left: 5px
 }
 
-.floor-sort strong b {
-    position: absolute;
-    top: 4px;
-    left: 5px;
-    width: 5px;
-    height: 23px;
-    overflow: hidden;
-    line-height: 1000px;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/floor-sort20131202.png) -5px -84px no-repeat;
-    cursor: move
-}
+
 
 .setting-con .layer-1 .floor-item a:hover strong b {
     background-position: -46px -84px
 }
 
-.floor-sort span b {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    overflow: hidden;
-    line-height: 1000px;
-    background-image: url(http://misc.360buyimg.com/product/skin/2013/i/floor-sort20131202.png);
-    background-repeat: no-repeat;
-    vertical-align: top;
-    cursor: pointer;
-    *zoom: 1
-}
+
 
 .floor-del {
     background-position: 0 -52px
@@ -6393,17 +5792,7 @@ a.floor-sort:hover span {
     right: 0
 }
 
-.setting-title h4 s {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    overflow: hidden;
-    line-height: 1000px;
-    position: relative;
-    top: 3px;
-    margin-right: 5px;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/floor-sort20131202.png) -5px -118px no-repeat
-}
+
 
 .setting-con .layer-4 {
     border-left: 2px solid #9a9a9a;
@@ -6432,16 +5821,7 @@ a.floor-sort:hover span {
     text-decoration: underline
 }
 
-#jewellery .brands .smt .extra-ico a {
-    display: none;
-    position: relative;
-    top: -5px;
-    width: 115px;
-    height: 22px;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/18.png) 0 -54px no-repeat;
-    line-height: 1000px;
-    overflow: hidden
-}
+
 
 .root61 #jewellery .brands .smt .extra-ico a {
     display: block
@@ -6483,16 +5863,7 @@ a.floor-sort:hover span {
     height: 28px
 }
 
-#home-area dt b {
-    position: relative;
-    top: 3px;
-    margin: 0 4px;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/17.png) -5px -3px no-repeat;
-    height: 18px;
-    width: 12px;
-    display: inline-block;
-    *zoom: 1
-}
+
 
 #home-area dd {
     position: relative;
@@ -6508,17 +5879,7 @@ a.floor-sort:hover span {
     padding-top: 4px
 }
 
-#home-area dd .close {
-    position: absolute;
-    right: -5px;
-    top: -5px;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/17.png) -35px 0;
-    width: 19px;
-    height: 19px;
-    overflow: hidden;
-    line-height: 100px;
-    cursor: pointer
-}
+
 
 #home-area dd li a {
     padding: 1px 3px;
@@ -6576,15 +5937,7 @@ a.floor-sort:hover span {
     padding: 30px 0 0 20px
 }
 
-#showcase .sc-list .item .s-link {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: url(http://misc.360buyimg.com/lib/img/e/blank.gif);
-    z-index: 2
-}
+
 
 #showcase .sc-list .item h3 {
     color: #333;
@@ -6686,13 +6039,7 @@ a.floor-sort:hover span {
     display: none
 }
 
-#showcase .sc-list .item.tuangou .s-tuangou {
-    width: 120px;
-    margin-top: 28px;
-    display: block;
-    height: 60px;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/index.showcase.tg.png) no-repeat 0 28px
-}
+
 
 #showcase .sc-list .item.tuangou .s-tuangou em {
     margin-right: 5px;
@@ -6882,15 +6229,7 @@ a.floor-sort:hover span {
     *z-index: 7
 }
 
-.jd-wx-qrcode .i-qrcode {
-    float: left;
-    display: inline;
-    width: 12px;
-    height: 12px;
-    margin-left: -18px;
-    margin-top: 9px;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/index-jd-wx-qrcode.png) no-repeat
-}
+
 
 .hover div.qrcode-show {
     display: block
@@ -6900,20 +6239,6 @@ a.floor-sort:hover span {
     text-decoration: none
 }
 
-.jd-wx-qrcode .qrcode-show {
-    display: none;
-    width: 116px;
-    height: 129px;
-    position: absolute;
-    left: -15px;
-    top: 35px;
-    z-index: 10;
-    border: 1px solid #ddd;
-    background: url(http://misc.360buyimg.com/product/skin/2013/i/index-jd-wx-qrcode.png) no-repeat 0 -30px #fff;
-    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .12);
-    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .12);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .12)
-}
 
 .jd-wx-qrcode .qrcode-show .arrow {
     position: absolute;
