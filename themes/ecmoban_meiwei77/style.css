@@ -692,6 +692,9 @@ h6 span{float:left; padding-left:15px; font-size:14px;}
 .bnt_ul input{
     border: 0px;
     cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 20px;
 }
 #speDiv .bnt_ul{
     background:none;
@@ -716,6 +719,8 @@ h6 span{float:left; padding-left:15px; font-size:14px;}
     height: 32px;
     position: absolute;
     right: 130px;
+    *right: 170px;
+    _right:170px;
     top: 10px;
     width: 32px;
     background: url(/images/index_icons_121226.png) no-repeat 0 0;

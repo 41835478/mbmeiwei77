@@ -382,7 +382,9 @@ body {
     color: #666;
     background: #fff;
     _background-image: url(about:blank);
-    _background-attachment: fixed
+    _background-attachment: fixed;
+    margin: 0 auto;
+    padding: 0 ;
 }
 
 h1 {

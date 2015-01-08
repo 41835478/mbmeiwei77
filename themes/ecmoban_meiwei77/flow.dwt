@@ -775,18 +775,24 @@
                 <table width="90%" border="0" cellpadding="8" cellspacing="0" bgcolor="#B0D8FF" class="table">
                   <tr>
                     <td bgcolor="#ffffff"><div align="right"><strong>{$lang.username}</strong></div></td>
-                    <td bgcolor="#ffffff"><input name="username" type="text" class="inputBg" id="username" /></td>
+                    <td bgcolor="#ffffff"><input name="username" type="text" class="inputBg" id="username" onBlur="checkType()"/></td>
                   </tr>
                   <tr>
                     <td bgcolor="#ffffff"><div align="right"><strong>{$lang.password}</strong></div></td>
                     <td bgcolor="#ffffff"><input name="password" class="inputBg" type="password" /></td>
                   </tr>
                  <!-- 判断是否启用验证码{if $enabled_login_captcha} -->
-                  <tr>
+                  <!--<tr>
                     <td bgcolor="#ffffff"><div align="right"><strong>{$lang.comment_captcha}:</strong></div></td>
                     <td bgcolor="#ffffff"><input type="text" size="8" name="captcha" class="inputBg" />
                     <img src="captcha.php?is_login=1&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </td>
-                  </tr>
+                  </tr>-->
+                   <tr id="captcha">
+                                        <td align="right" bgcolor="#ffffff">{$lang.comment_captcha}</td>
+                                        <td bgcolor="#ffffff"><input type="text" size="8" name="captcha" class="inputBg" />
+                                         <input type="button" class="inp_2" value="发送验证码" id="sendPhoneCode" onClick="sendCode()">
+                                        </td>
+                                      </tr>
                   <!--{/if}-->
                   <tr>
             <td bgcolor="#ffffff"></td><td  bgcolor="#ffffff"><input type="checkbox" value="1" name="remember" id="remember" /><label for="remember">{$lang.remember}</label></td>
@@ -879,5 +885,54 @@ var compare_no_goods = "{$lang.compare_no_goods}";
 var btn_buy = "{$lang.btn_buy}";
 var is_cancel = "{$lang.is_cancel}";
 var select_spe = "{$lang.select_spe}";
+var token = '{$token}';
+function checkType(){
+var username = document.getElementById("username").value;
+     Ajax.call('user.php', 'act=get_check_type&username=' + username, getCheckTypeResponse, 'GET', 'JSON');
+}
+function getCheckTypeResponse(res){
+    if (res.err_msg.length > 0)
+      {
+        alert(res.err_msg);
+      }
+      else
+      {
+       var captchaObj = document.getElementById('captcha');
+        if(res.content && res.content.special==1){
+            captchaObj.style.display = 'none';
+        }else{
+            captchaObj.style.display = '';
+        }
+      }
+}
+function sendCode(){
+    var username = document.getElementById("username").value;
+    Ajax.call('sendSms.php', 'username=' + username+'&token='+token, getSendCodeResponse, 'GET', 'JSON');
+}
+function getSendCodeResponse(res){
+    if (res.err_msg.length > 0)
+          {
+            alert(res.err_msg);
+          }
+          else
+          {
+            document.getElementById("sendPhoneCode").disabled = true;
+            runTime = 120;
+            timeRunning();
+          }
+}
+function timeRunning(){
+var objSendCode = document.getElementById("sendPhoneCode");
+			runTime = parseInt(runTime) - 1;
+			setTimeout(function(){
+				if(runTime >= 1){
+					objSendCode.value = '短信已发送，' +runTime + '秒后可重发';
+					timeRunning();
+				}else{
+					objSendCode.value = '发送验证码';
+					objSendCode.disabled = false;
+				}
+			},1000);
+		}
 </script>
 </html>
