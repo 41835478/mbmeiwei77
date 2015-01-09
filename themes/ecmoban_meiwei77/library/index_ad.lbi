@@ -168,7 +168,7 @@ window.onload=function(){
 
 	var objs = gId("idNum").getElementsByTagName("li");
 	
-	var tv = new TransformView("idTransformView", "idSlider", 395, 5, {
+	var tv = new TransformView("idTransformView", "idSlider", 395, objs.length, {
 		onStart : function(){ Each(objs, function(o, i){ o.className = tv.Index == i ? "on" : ""; }) }//按钮样式
 	});
 	
