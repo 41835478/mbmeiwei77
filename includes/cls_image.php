@@ -109,7 +109,7 @@ class cls_image
         }
 
         /* 允许上传的文件类型 */
-        $allow_file_types = '|GIF|JPG|JEPG|PNG|BMP|SWF|';
+        $allow_file_types = '|GIF|JPG|JEPG|PNG|BMP|SWF|JPEG|';
         if (!check_file_type($upload['tmp_name'], $img_name, $allow_file_types))
         {
             $this->error_msg = $GLOBALS['_LANG']['invalid_upload_image_type'];

@@ -288,6 +288,8 @@ h6 span{float:left; padding-left:15px; font-size:14px;}
 .itemBest_box .f1 a{ color:#1e51a4;}
 .itemTit img{position:relative; top:7px;}
 .itemTit h2{height:27px; line-height:28px; border:none; background:none;font-size:12px; text-align:center; color:#f90; font-weight:bold; padding:0px 10px;display:inline; white-space:nowrap;}
+#indexTab h2{font-size:22px;font-family:"Microsoft Yahei"}
+#indexTab{padding-bottom: 10px}
 .itemTit h2 a{color:#f90;text-decoration:none;}
 .itemTit .h2bg{height:27px; line-height:28px; border:none; background:none;font-size:12px; text-align:center; color:#666; font-weight:100; padding:0px 10px;display:inline; white-space:nowrap;}
 .itemTit .h2bg a{color:#666; text-decoration:none;}
