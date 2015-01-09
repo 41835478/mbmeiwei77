@@ -67,6 +67,11 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class yeepay_ccb
 {
+    function __construct()
+    {
+        $this->yeepay_ccb();
+    }
+
     /**
      * 构造函数
      *
@@ -80,10 +85,7 @@ class yeepay_ccb
         $this->frpid = 'CCB-NET';
     }
 
-    function __construct()
-    {
-        $this->yeepay_ccb();
-    }
+
 
     /**
      * 生成支付代码

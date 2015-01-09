@@ -77,6 +77,11 @@ if (isset($set_modules) && $set_modules == TRUE)
 
 class nps
 {
+    function __construct()
+    {
+        $this->nps();
+    }
+
     /**
      * 构造函数
      *
@@ -89,10 +94,7 @@ class nps
     {
     }
 
-    function __construct()
-    {
-        $this->nps();
-    }
+
 
     /**
      * 生成支付代码

@@ -67,6 +67,11 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class yeepayszx
 {
+    function __construct()
+    {
+        $this->yeepayszx();
+    }
+
     /**
      * 构造函数
      *
@@ -79,10 +84,7 @@ class yeepayszx
     {
     }
 
-    function __construct()
-    {
-        $this->yeepayszx();
-    }
+
 
     /**
      * 生成支付代码

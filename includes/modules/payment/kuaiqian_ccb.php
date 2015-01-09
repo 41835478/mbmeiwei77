@@ -67,6 +67,10 @@ if (isset($set_modules) && $set_modules == true)
 
 class kuaiqian_ccb
 {
+    function __construct()
+    {
+        $this->kuaiqian_ccb();
+    }
     /**
      * 构造函数
      *
@@ -80,10 +84,7 @@ class kuaiqian_ccb
     {
     }
 
-    function __construct()
-    {
-        $this->kuaiqian_ccb();
-    }
+
 
    /**
      * 生成支付代码

@@ -67,6 +67,11 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class yeepay
 {
+    function __construct()
+    {
+        $this->yeepay();
+    }
+
     /**
      * 构造函数
      *
@@ -79,10 +84,7 @@ class yeepay
     {
     }
 
-    function __construct()
-    {
-        $this->yeepay();
-    }
+
 
     /**
      * 生成支付代码

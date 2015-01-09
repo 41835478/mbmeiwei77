@@ -79,7 +79,10 @@ if (isset($set_modules) && $set_modules == TRUE)
 class paypal_ec
 {
 
-
+    function __construct()
+    {
+        $this->paypal_ec();
+    }
     /**
      * 构造函数
      *
@@ -93,10 +96,7 @@ class paypal_ec
 
     }
 
-    function __construct()
-    {
-        $this->paypal_ec();
-    }
+
 
 
 

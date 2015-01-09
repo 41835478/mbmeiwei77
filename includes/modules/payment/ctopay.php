@@ -69,6 +69,10 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class ctopay
 {
+    function __construct()
+    {
+        $this->ctopay();
+    }
 
     /**
      * 构造函数
@@ -82,10 +86,7 @@ class ctopay
     {
     }
 
-    function __construct()
-    {
-        $this->ctopay();
-    }
+
 
     /**
      * 生成支付代码

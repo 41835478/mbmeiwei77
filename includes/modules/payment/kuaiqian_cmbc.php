@@ -67,6 +67,11 @@ if (isset($set_modules) && $set_modules == true)
 
 class kuaiqian_cmbc
 {
+    function __construct()
+    {
+        $this->kuaiqian_cmbc();
+    }
+
     /**
      * 构造函数
      *
@@ -80,10 +85,7 @@ class kuaiqian_cmbc
     {
     }
 
-    function __construct()
-    {
-        $this->kuaiqian_cmbc();
-    }
+
 
    /**
      * 生成支付代码

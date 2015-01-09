@@ -67,6 +67,10 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class yeepay_icbc
 {
+    function __construct()
+    {
+        $this->yeepay_icbc();
+    }
     /**
      * 构造函数
      *
@@ -80,10 +84,7 @@ class yeepay_icbc
         $this->frpid = 'ICBC-NET';
     }
 
-    function __construct()
-    {
-        $this->yeepay_icbc();
-    }
+
 
     /**
      * 生成支付代码

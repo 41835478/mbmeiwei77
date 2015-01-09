@@ -64,6 +64,11 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class bank
 {
+    function __construct()
+    {
+        $this->bank();
+    }
+
     /**
      * 构造函数
      *
@@ -76,10 +81,7 @@ class bank
     {
     }
 
-    function __construct()
-    {
-        $this->bank();
-    }
+
 
     /**
      * 提交函数

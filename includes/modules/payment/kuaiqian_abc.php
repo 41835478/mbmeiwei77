@@ -67,6 +67,10 @@ if (isset($set_modules) && $set_modules == true)
 
 class kuaiqian_abc
 {
+    function __construct()
+    {
+        $this->kuaiqian_abc();
+    }
     /**
      * 构造函数
      *
@@ -80,10 +84,7 @@ class kuaiqian_abc
     {
     }
 
-    function __construct()
-    {
-        $this->kuaiqian_abc();
-    }
+
 
    /**
      * 生成支付代码

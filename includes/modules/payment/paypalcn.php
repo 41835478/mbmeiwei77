@@ -66,6 +66,11 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class paypalcn
 {
+
+    function __construct()
+    {
+        $this->paypalcn();
+    }
     /**
      * 构造函数
      *
@@ -78,10 +83,6 @@ class paypalcn
     {
     }
 
-    function __construct()
-    {
-        $this->paypalcn();
-    }
 
     /**
      * 生成支付代码

@@ -67,6 +67,11 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class paypal
 {
+    function __construct()
+    {
+        $this->paypal();
+    }
+
     /**
      * 构造函数
      *
@@ -79,10 +84,7 @@ class paypal
     {
     }
 
-    function __construct()
-    {
-        $this->paypal();
-    }
+
 
     /**
      * 生成支付代码

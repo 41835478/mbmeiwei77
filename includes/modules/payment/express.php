@@ -64,6 +64,11 @@ if (isset($set_modules) && $set_modules == TRUE)
 
 class express
 {
+    function __construct()
+    {
+        $this->express();
+    }
+
    /**
     * 构造函数
     *
@@ -77,10 +82,7 @@ class express
 
     }
 
-    function __construct()
-    {
-        $this->express();
-    }
+
 
     /**
     * 生成支付代码

@@ -67,6 +67,11 @@ if (isset($set_modules) && $set_modules == true)
 
 class kuaiqian_bcom
 {
+    function __construct()
+    {
+        $this->kuaiqian_bcom();
+    }
+
     /**
      * 构造函数
      *
@@ -80,10 +85,7 @@ class kuaiqian_bcom
     {
     }
 
-    function __construct()
-    {
-        $this->kuaiqian_bcom();
-    }
+
 
    /**
      * 生成支付代码

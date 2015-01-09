@@ -70,6 +70,11 @@ if (isset($set_modules) && $set_modules == TRUE)
 
 class cncard
 {
+    function __construct()
+    {
+        $this->cncard();
+    }
+    
     /**
      * 构造函数
      *
@@ -82,10 +87,7 @@ class cncard
     {
     }
 
-    function __construct()
-    {
-        $this->cncard();
-    }
+
 
     /**
      * 生成支付代码

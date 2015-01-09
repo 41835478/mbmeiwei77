@@ -64,6 +64,10 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class post
 {
+    function __construct()
+    {
+        $this->post();
+    }
     /**
      * 构造函数
      *
@@ -76,10 +80,7 @@ class post
     {
     }
 
-    function __construct()
-    {
-        $this->post();
-    }
+
 
     /**
      * 提交函数

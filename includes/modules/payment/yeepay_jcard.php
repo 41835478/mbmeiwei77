@@ -67,6 +67,10 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class yeepay_jcard
 {
+    function __construct()
+    {
+        $this->yeepay_jcard();
+    }
     /**
      * 构造函数
      *
@@ -80,10 +84,7 @@ class yeepay_jcard
         $this->frpid = 'JUNNET-NET';
     }
 
-    function __construct()
-    {
-        $this->yeepay_jcard();
-    }
+
 
     /**
      * 生成支付代码

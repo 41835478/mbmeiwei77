@@ -67,6 +67,11 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class yeepay_abchina
 {
+    function __construct()
+    {
+        $this->yeepay_abchina();
+    }
+
     /**
      * 构造函数
      *
@@ -80,10 +85,7 @@ class yeepay_abchina
         $this->frpid = 'ABC-NET';
     }
 
-    function __construct()
-    {
-        $this->yeepay_abchina();
-    }
+
 
     /**
      * 生成支付代码

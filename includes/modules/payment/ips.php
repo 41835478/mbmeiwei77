@@ -66,6 +66,11 @@ if (isset($set_modules) && $set_modules == TRUE)
 
 class ips
 {
+    function __construct()
+    {
+        $this->ips();
+    }
+
    /**
     * 构造函数
     *
@@ -79,10 +84,7 @@ class ips
 
     }
 
-    function __construct()
-    {
-        $this->ips();
-    }
+
 
     /**
     * 生成支付代码

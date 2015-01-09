@@ -67,6 +67,11 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class xpay
 {
+    function __construct()
+    {
+        $this->xpay();
+    }
+
     /**
      * 构造函数
      *
@@ -79,10 +84,7 @@ class xpay
     {
     }
 
-    function __construct()
-    {
-        $this->xpay();
-    }
+
 
     /**
      * 生成支付代码
