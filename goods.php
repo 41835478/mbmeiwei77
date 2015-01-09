@@ -148,7 +148,12 @@ if(!empty($_REQUEST['act']) && $_REQUEST['act'] ==  'check_buy'){
             }
             $li .=$em.'</li>';
         }
-        $content .=$li.'<li style="text-align:center"><input type="button" name="" value="确认" onclick="doBuy('.$goods_id.')" style="margin-right:10px">
+        $content .=$li.'<li class="clearfix">
+       <dd>
+       <strong>购买数量：</strong>
+        <input type="text" style="border:1px solid #ccc;" size="4" value="1" id="number" name="number">
+       </dd>
+       </li><li style="text-align:center"><input type="button" name="" value="确认" onclick="doBuy('.$goods_id.')" style="margin-right:10px">
         <input type="button" name="" value="取消" onclick="cncel_div_ecshop()"></li></ul>';
         $result = array('goods_id'=>$goods_id,'isAttr'=>1,'content'=>$content);
     }else{

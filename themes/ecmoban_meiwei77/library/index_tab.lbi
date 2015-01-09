@@ -2,9 +2,9 @@
 <div class="xm-box">
 
     <div class="itemTit New" id="indexTab">
-        <h2><a href="javascript:void(0)" onclick="change_tab_style('indexTab', 'h2', this);addClass('new')">新品区</a></h2>
-        <h2 class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('indexTab', 'h2', this);addClass('sale')">促销区</a></h2>
-        <h2 class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('indexTab', 'h2', this);addClass('hots')">热卖区</a></h2>
+        <h2><a href="javascript:void(0)" onmouseover="change_tab_style('indexTab', 'h2', this);addClass('new')">新品区</a></h2>
+        <h2 class="h2bg"><a href="javascript:void(0)" onmouseover="change_tab_style('indexTab', 'h2', this);addClass('sale')">促销区</a></h2>
+        <h2 class="h2bg"><a href="javascript:void(0)" onmouseover="change_tab_style('indexTab', 'h2', this);addClass('hots')">热卖区</a></h2>
         <div class="more">
         <a href="../search.php?intro=new" id='newMore'><img src="images/more.gif" /></a>
         <a href="../search.php?intro=promotion" id='saleMore' class='hide'><img src="images/more.gif" /></a>

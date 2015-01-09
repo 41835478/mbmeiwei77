@@ -310,7 +310,7 @@ h6 span{float:left; padding-left:15px; font-size:14px;}
 /*商品分类*/
 .xm-box{ border-top:4px solid #d41c4f}
 .xm-box .title{ height:42px; line-height:42px; padding:0 10px; font-size:14px; font-weight:normal;color:#666; text-align:right; background:#f1f1f1; border-top:3px solid #fff;}
-.xm-box .title span{ float:left; font-size:14px; font-weight:bold; color:#d41c4f}
+.xm-box .title span{ float:left; font-size:22px; font-weight:bold; color:#d41c4f;font-family: "Microsoft Yahei"}
 .xm-box .title .more{ float:right; padding-right:20px; height:42px; line-height:42px; background:url(images/biao17.gif) right center no-repeat}
 .top_nav .header_r{ color:#cbcbcb; float:right; color:#818181}
 .top_nav a{ color:#616161; padding:0 3px;}
