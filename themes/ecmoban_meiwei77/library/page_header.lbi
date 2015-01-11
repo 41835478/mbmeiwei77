@@ -61,7 +61,7 @@ var process_request = "{$lang.process_request}";
 <div style=" clear:both"></div>
 <div style="height:83px;width:100%;" class="clearfix">
   <div class="block header">
-    <div class="logo"> <a href="../index.php"><img src="../images/logo.gif" width="180" height="70"></a> <a class="amazonline" href="javascript:void(0)"></a> <a href="#"> <img class="amazonimg" width="90px" height="70px" src="images/amazonlog.gif"> </a> </div>
+    <div class="logo"> <a href="../index.php"><img src="../images/logo.gif" width="180" height="70"></a> <!--<a class="amazonline" href="javascript:void(0)"></a>--> <a href="#"> <img class="amazonimg" width="90px" height="70px" src="images/amazonlog.png"> </a> </div>
     <div class="header-search"> 
       <script type="text/javascript">
                 {literal}

@@ -33,10 +33,10 @@ if (isset($set_modules) && $set_modules == TRUE)
     $modules[$i]['version'] = '4.1/5.0';
 
     /* 插件的作者 */
-    $modules[$i]['author']  = 'ECSHOP R&D TEAM';
+    $modules[$i]['author']  = 'xl';
 
     /* 插件作者的官方网站 */
-    $modules[$i]['website'] = 'http://www.ecshop.com';
+    $modules[$i]['website'] = 'http://www.weimicron.com';
 
     /* 插件的初始的默认值 */
     $modules[$i]['default']['db_host'] = 'localhost';
