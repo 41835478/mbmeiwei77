@@ -18,9 +18,9 @@
         <div class="mc">
          <?php  $ci = 1;$GLOBALS['smarty']->assign('ci', $ci);?>
         <!--{foreach from=$goods_cat.cat_id item=rec_cat name=f}-->
-                <!--{foreach from=$rec_cat.cat_id item=s_cat name=f}-->
+
                 <?php
-                                $cid = $this->_var['s_cat']['id'];
+                                $cid = $this->_var['rec_cat']['id'];
                                 $this ->assign('goods_cat_'.$cid, assign_cat_goods($cid, 9));
                                 $this->assign('cat_goods_nf',$this->_var['cat_goods_'.$cid]);
                          ?>
@@ -34,7 +34,7 @@
                                 <!--{/if}-->
                 <!--{/foreach}-->
                 <?php $ci = $ci+1;$GLOBALS['smarty']->assign('ci', $ci);?>
-                <!--{/foreach}-->
+
 
         <!--{/foreach}-->
 
@@ -44,15 +44,15 @@
         <div class="tab-arrow" style="left: 0px;"><b></b></div>
         <?php  $i = 1;$GLOBALS['smarty']->assign('i', $i);?>
         <!--{foreach from=$goods_cat.cat_id item=rec_cat name=f}-->
-        <!--{foreach from=$rec_cat.cat_id item=s_cat name=f}-->
+            <!--{if $i<=4}-->
 <?php
-                                $cid = $this->_var['s_cat']['id'];
+                                $cid = $this->_var['rec_cat']['id'];
                                 $this ->assign('goods_cat_'.$cid, assign_cat_goods($cid, 9));
                                 $this->assign('cat_goods_nf',$this->_var['cat_goods_'.$cid]);
                          ?>
-        <div data-widget="tab-item" class="sm sm2 fore{$i} <!--{if $i eq 1}-->curr <!--{/if}--> " id="{$s_cat.id}{$i}" data-count="{$i}">
+        <div data-widget="tab-item" class="sm sm2 fore{$i} <!--{if $i eq 1}-->curr <!--{/if}--> " id="{$rec_cat.id}{$i}" data-count="{$i}">
             <div clstag="homepage|keycount|home2013|18c1" class="smt">
-                <a href="{$s_cat.url}" target="_blank"><h3>{$s_cat.name|escape:html} </h3></a>
+                <a href="{$rec_cat.url}" target="_blank"><h3>{$rec_cat.name|escape:html} </h3></a>
             </div>
             <div data-widget="tab-content" class="smc">
                 <ul class="lh style1" id="style{$i}">
@@ -77,7 +77,7 @@
             </div>
         </div>
         <?php $i = $i+1;$GLOBALS['smarty']->assign('i', $i);?>
-        <!--{/foreach}-->
+        <!--{/if}-->
         <!--{/foreach}-->
     </div>
     <span class="clr"></span>
