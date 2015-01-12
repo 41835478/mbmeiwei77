@@ -26,7 +26,7 @@
                          ?>
                 <!--{foreach from=$cat_goods_nf item=goods name=name}-->
                                 <!--{if $smarty.foreach.name.iteration eq 1}-->
-                                <div class="style1 <!--{if $ci neq 1}--> hide <!--{/if}-->" id="focus{$s_cat.id}{$ci}" >
+                                <div class="style1 <!--{if $ci neq 1}--> hide <!--{/if}-->" id="focus{$rec_cat.id}{$ci}" >
                                 <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">
                                     <img width="270px" height="361px" data-img="{$i}" alt="{$goods.name|escape:html}" src="{$goods.thumb}" class="err-product">
                                  </a>
