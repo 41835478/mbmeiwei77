@@ -79,7 +79,7 @@
         <?php $i = $i+1;$GLOBALS['smarty']->assign('i', $i);?>
         <!--{/if}-->
         <!--{/foreach}-->
-         <!--{if $i<4}-->
+         <!--{if $i<=4}-->
               <?php for($j=$i;$j<=4;$j++){?>
                                 <div id="7862" class=" sm sm2 fore<?php echo $j;?>" data-count="<?php echo $j;?>" data-widget="tab-item">
                                 <div class="smt" clstag="homepage|keycount|home2013|18c1"></div>

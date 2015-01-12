@@ -311,7 +311,7 @@
                                 $this ->assign('goods_cat_'.$cid, assign_cat_goods($cid, 9));
                                 $this->assign('cat_goods_nf',$this->_var['cat_goods_'.$cid]);
                          ?>
-        <div data-widget="tab-item" class="sm sm2 fore{$i} <!--{if $i eq 1}-->curr <!--{/if}--> " id="{$rec_cat.id}{$i}" data-count="{$i}">
+        <div data-widget="tab-item" class="js_sm sm sm2 fore{$i} <!--{if $i eq 1}-->curr <!--{/if}--> " id="{$rec_cat.id}{$i}" data-count="{$i}">
             <div clstag="homepage|keycount|home2013|18c1" class="smt">
                 <a href="{$rec_cat.url}" target="_blank"><h3>{$rec_cat.name|escape:html} </h3></a>
             </div>
@@ -340,13 +340,21 @@
         <?php $i = $i+1;$GLOBALS['smarty']->assign('i', $i);?>
         <!--{/if}-->
         <!--{/foreach}-->
+         <!--{if $i<=4}-->
+              <?php for($j=$i;$j<=4;$j++){?>
+                                <div id="7862" class=" sm sm2 fore<?php echo $j;?>" data-count="<?php echo $j;?>" data-widget="tab-item">
+                                <div class="smt" clstag="homepage|keycount|home2013|18c1"></div>
+                                <div class="smc" data-widget="tab-content"></div>
+                                </div>
+              <?php }?>
+                        <!--{/if}-->
     </div>
     <span class="clr"></span>
 </div>
 {insert_scripts files='jquery.js'}
 <script>
     $().ready(function(){
-        $(".sm2").hover(function(){
+        $(".js_sm").hover(function(){
             $(this).siblings().removeClass('curr');
             $(this).addClass('curr');
            var id = $(this).attr('id');
