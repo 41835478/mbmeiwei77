@@ -3682,16 +3682,15 @@
 
 .catalogue .mc {
     position: relative;
-    height: 361px;
+    height: 510px;
     border-left: 0;
     border-bottom: 1px solid #DDD
 }
 
 .catalogue span {
-    position: absolute;
-    z-index: 1;
-    line-height: 0;
-    font-size: 0
+    line-height:25px;
+    position: relative;
+   
 }
 
 .catalogue ul {
@@ -3829,7 +3828,7 @@
 
 .plist .smc {
     position: relative;
-    height: 361px;
+    height: 510px;
     border-bottom: 1px solid #DDD
 }
 
@@ -3845,7 +3844,7 @@
 }
 
 .plist .p-name {
-    height: 3em;
+    /*height: 3em;*/
     margin-bottom: 2px
 }
 
@@ -3865,7 +3864,7 @@
 
 .plist .style1 li {
     width: 207px;
-    height: 175px
+    height: 250px
 }
 
 .plist .style1 .fore4,.plist .style1 .fore8 {
