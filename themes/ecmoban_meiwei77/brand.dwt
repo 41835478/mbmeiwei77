@@ -38,7 +38,7 @@
           <td bgcolor="#ffffff">
           {$brand.brand_desc|nl2br}<br />
             <!-- {if $brand.site_url} -->
-            {$lang.official_site} <a href="{$brand.site_url}" target="_blank" class="f6">{$brand.site_url}</a><br />
+            <!--{$lang.official_site} <a href="{$brand.site_url}" target="_blank" class="f6">{$brand.site_url}</a><br /> -->
             <!-- {/if} -->
             {$lang.brand_category}<br />
             <div class="brandCategoryA">

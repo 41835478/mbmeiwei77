@@ -388,7 +388,7 @@ h6 span{float:left; padding-left:15px; font-size:14px;}
 /*品牌列表*/
 #brandList{ margin-top:12px; height:1%;}
 #brandList .brandBox{width:225px; _width:221px; float:left; margin:0 6px 20px 5px; text-align:center; overflow:hidden; height:160px;}
-#brandList .brandBox .brandLogo{width:188px; height:52px; overflow:hidden;}
+#brandList .brandBox .brandLogo{width:188px; overflow:hidden;}
 #brandList .brandBox h4{height:23px; line-height:23px; background:#e9e9e9; margin:15px 0 8px 0; padding:0 10px; text-align:right;font-weight:100; font-size:12px;}
 #brandList .brandBox h4 span,#brandList .brandBox h4 span a{float:left; font-weight:bold; color:#3f3f3f; text-decoration:none;}
 #brandList p{text-align:left; margin-bottom:5px; color:#909090; padding:8px;}
