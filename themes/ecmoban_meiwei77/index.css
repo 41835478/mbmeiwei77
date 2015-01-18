@@ -6229,9 +6229,15 @@ a.floor-sort:hover span {
     position: relative;
     *z-index: 7
 }
+.mc .p-name{
+    font-size: 18px;
+    line-height: 40px;
+}
 
-
-
+.mc .p-price{
+    font-size: 15px;
+    color: #d41c4f;
+}
 .hover div.qrcode-show {
     display: block
 }

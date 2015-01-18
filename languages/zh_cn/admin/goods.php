@@ -115,6 +115,7 @@ $_LANG['lab_user_price'] = '会员价格：';
 $_LANG['lab_promote_price'] = '促销价：';
 $_LANG['lab_promote_date'] = '促销日期：';
 $_LANG['lab_picture'] = '上传商品图片：';
+$_LANG['lab_focus_picture'] = '上传首页栏目大图：';
 $_LANG['lab_thumb'] = '上传商品缩略图：';
 $_LANG['auto_thumb'] = '自动生成商品缩略图';
 $_LANG['lab_keywords'] = '商品关键词：';
@@ -154,11 +155,13 @@ $_LANG['alone_sale'] = '打勾表示能作为普通商品销售，否则只能�
 $_LANG['free_shipping'] = '打勾表示此商品不会产生运费花销，否则按照正常运费计算。';
 
 $_LANG['invalid_goods_img'] = '商品图片格式不正确！';
+$_LANG['invalid_focus_img'] = '商品大图格式不正确！';
 $_LANG['invalid_goods_thumb'] = '商品缩略图格式不正确！';
 $_LANG['invalid_img_url'] = '商品相册中第%s个图片格式不正确!';
 
 $_LANG['goods_img_too_big'] = '商品图片文件太大了（最大值：%s），无法上传。';
 $_LANG['goods_thumb_too_big'] = '商品缩略图文件太大了（最大值：%s），无法上传。';
+$_LANG['goods_focus_too_big'] = '商品大图文件太大了（最大值：%s），无法上传。';
 $_LANG['img_url_too_big'] = '商品相册中第%s个图片文件太大了（最大值：%s），无法上传。';
 
 $_LANG['integral_market_price'] = '取整数';

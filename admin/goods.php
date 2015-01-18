@@ -533,6 +533,26 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
             }
         }
 
+        // 商品大图
+        if (isset($_FILES['focus_img']))
+        {
+            if ($_FILES['focus_img']['error'] == 0)
+            {
+                if (!$image->check_img_type($_FILES['focus_img']['type']))
+                {
+                    sys_msg($_LANG['invalid_focus_img'], 1, array(), false);
+                }
+            }
+            elseif ($_FILES['focus_img']['error'] == 1)
+            {
+                sys_msg(sprintf($_LANG['goods_focus_too_big'], $php_maxsize), 1, array(), false);
+            }
+            elseif ($_FILES['focus_img']['error'] == 2)
+            {
+                sys_msg(sprintf($_LANG['goods_focus_too_big'], $htm_maxsize), 1, array(), false);
+            }
+        }
+
         // 相册图片
         foreach ($_FILES['img_url']['error'] AS $key => $value)
         {
@@ -578,6 +598,18 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
             }
         }
 
+        // 商品大图
+        if (isset($_FILES['focus_img']))
+        {
+            if ($_FILES['focus_img']['tmp_name'] != 'none')
+            {
+                if (!$image->check_img_type($_FILES['focus_img']['type']))
+                {
+                    sys_msg($_LANG['invalid_focus_img'], 1, array(), false);
+                }
+            }
+        }
+
         // 相册图片
         foreach ($_FILES['img_url']['tmp_name'] AS $key => $value)
         {
@@ -596,6 +628,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
 
     /* 处理商品图片 */
     $goods_img        = '';  // 初始化商品图片
+    $focus_img        = '';  // 初始化商品大图
     $goods_thumb      = '';  // 初始化商品缩略图
     $original_img     = '';  // 初始化原始图片
     $old_original_img = '';  // 初始化原始图片旧图
@@ -618,6 +651,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
             {
                 @unlink('../' . $row['goods_img']);
             }
+
             if ($row['original_img'] != '' && is_file('../' . $row['original_img']))
             {
                 /* 先不处理，以防止程序中途出错停止 */
@@ -628,6 +662,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
             {
                 get_image_path($_REQUEST[goods_id], $row['goods_img'], false, 'goods', true);
                 get_image_path($_REQUEST[goods_id], $row['goods_thumb'], true, 'goods', true);
+                get_image_path($_REQUEST[goods_id], $row['focus_img'], true, 'goods', true);
             }
         }
 
@@ -735,7 +770,21 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
         //     $gallery_thumb = '';
         // }
     }
-
+    //是否长传大图
+    if(isset($_FILES['focus_img']) && $_FILES['focus_img']['tmp_name'] != '' &&
+        isset($_FILES['focus_img']['tmp_name']) &&$_FILES['focus_img']['tmp_name'] != 'none'){
+        // 上传了，直接使用，原始大小
+        $focus_img = $image->upload_image($_FILES['focus_img']);
+        if ($focus_img === false)
+        {
+            sys_msg($image->error_msg(), 1, array(), false);
+        }
+        $focus_img = $image->make_thumb('../'. $focus_img , 270,  425);
+        if ($focus_img === false)
+        {
+            sys_msg($image->error_msg(), 1, array(), false);
+        }
+    }
 
     // 是否上传商品缩略图
     if (isset($_FILES['goods_thumb']) && $_FILES['goods_thumb']['tmp_name'] != '' &&
@@ -818,6 +867,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
 
     $goods_thumb = (empty($goods_thumb) && !empty($_POST['goods_thumb_url']) && goods_parse_url($_POST['goods_thumb_url'])) ? htmlspecialchars(trim($_POST['goods_thumb_url'])) : $goods_thumb;
     $goods_thumb = (empty($goods_thumb) && isset($_POST['auto_thumb']))? $goods_img : $goods_thumb;
+    $focus_img = (empty($focus_img) && !empty($_POST['focus_img_url']) && goods_parse_url($_POST['focus_img_url'])) ? htmlspecialchars(trim($_POST['focus_img_url'])) : $focus_img;
 
     /* 入库 */
     if ($is_insert)
@@ -826,12 +876,12 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
         {
             $sql = "INSERT INTO " . $ecs->table('goods') . " (goods_name, goods_name_style, goods_sn, " .
                     "cat_id, brand_id, shop_price, market_price, is_promote, promote_price, " .
-                    "promote_start_date, promote_end_date, goods_img, goods_thumb, original_img, keywords, goods_brief, " .
+                    "promote_start_date, promote_end_date, goods_img, goods_thumb, original_img, focus_img,keywords, goods_brief, " .
                     "seller_note, goods_weight, goods_number, warn_number, integral, give_integral, is_best, is_new, is_hot, " .
                     "is_on_sale, is_alone_sale, is_shipping, goods_desc, add_time, last_update, goods_type, rank_integral, suppliers_id)" .
                 "VALUES ('$_POST[goods_name]', '$goods_name_style', '$goods_sn', '$catgory_id', " .
                     "'$brand_id', '$shop_price', '$market_price', '$is_promote','$promote_price', ".
-                    "'$promote_start_date', '$promote_end_date', '$goods_img', '$goods_thumb', '$original_img', ".
+                    "'$promote_start_date', '$promote_end_date', '$goods_img', '$goods_thumb', '$original_img','$focus_img', ".
                     "'$_POST[keywords]', '$_POST[goods_brief]', '$_POST[seller_note]', '$goods_weight', '$goods_number',".
                     " '$warn_number', '$_POST[integral]', '$give_integral', '$is_best', '$is_new', '$is_hot', '$is_on_sale', '$is_alone_sale', $is_shipping, ".
                     " '$_POST[goods_desc]', '" . gmtime() . "', '". gmtime() ."', '$goods_type', '$rank_integral', '$suppliers_id')";
@@ -858,10 +908,11 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
                     " FROM " . $ecs->table('goods') .
                     " WHERE goods_id = '$_REQUEST[goods_id]'";
         $row = $db->getRow($sql);
-        if ($proc_thumb && $goods_img && $row['goods_img'] && !goods_parse_url($row['goods_img']))
+        if ($proc_thumb && $goods_img && $row['goods_img'] && !goods_parse_url($row['goods_img'])&&$focus_img)
         {
             @unlink(ROOT_PATH . $row['goods_img']);
             @unlink(ROOT_PATH . $row['original_img']);
+            @unlink(ROOT_PATH . $row['focus_img']);
         }
 
         if ($proc_thumb && $goods_thumb && $row['goods_thumb'] && !goods_parse_url($row['goods_thumb']))
@@ -891,6 +942,9 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
         if ($goods_thumb)
         {
             $sql .= "goods_thumb = '$goods_thumb', ";
+        }
+        if($focus_img){
+            $sql .= "focus_img = '$focus_img', ";
         }
         if ($code != '')
         {

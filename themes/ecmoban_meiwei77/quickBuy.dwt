@@ -190,8 +190,8 @@ function doBuy(goodsId)
 { var goods = new Object();
     var spec_arr = new Array();
     var fittings_arr = new Array();
-    var number = document.getElementById('number').value;
-    number = number?number:1;
+    var numberObj = document.getElementById('number');
+    var number = numberObj?document.getElementById('number').value:1;
     var j = 0;
     var speDiveObj=document.getElementById('speDiv');
     var formBuy = speDiveObj?speDiveObj.getElementsByTagName("input"):'';

@@ -179,9 +179,9 @@
                          ?>
                 <!--{foreach from=$cat_goods_nf item=goods name=name}-->
                                 <!--{if $smarty.foreach.name.iteration eq 1}-->
-                                <div class="plist style1 <!--{if $ci neq 1}--> hide <!--{/if}-->" id="focus{$rec_cat.id}{$ci}" >
+                                <div class="style1 <!--{if $ci neq 1}--> hide <!--{/if}-->" id="focus{$rec_cat.id}{$ci}" >
                                 <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">
-                                    <img width="270px" height="270px" data-img="{$i}" alt="{$goods.name|escape:html}" src="{$goods.thumb}" class="err-product">
+                                    <img width="270px" height="425px" data-img="{$i}" alt="{$goods.name|escape:html}" src="{$goods.focus_img}" class="err-product">
                                  </a>
                                  <div class="p-name">
                                        <a title="{$goods.name|escape:html}" target="_blank" href="{$goods.url}">{$goods.name|escape:html}</a>
