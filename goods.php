@@ -62,6 +62,11 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'price')
         }
 
         $shop_price  = get_final_price($goods_id, $number, true, $attr_id);
+        $rankPrice = get_user_rank_prices($goods_id, $shop_price);
+        foreach($rankPrice as $k=>$v){
+            $res['ECS_RANKPRICE_'.$k] = $v['price'];
+        }
+        $res['amount'] =price_format($shop_price);
         $res['result'] = price_format($shop_price * $number);
     }
 

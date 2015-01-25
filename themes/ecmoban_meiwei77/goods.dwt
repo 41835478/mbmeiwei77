@@ -647,8 +647,21 @@ function changePriceResponse(res)
   {
     document.forms['ECS_FORMBUY'].elements['number'].value = res.qty;
 
-    if (document.getElementById('ECS_GOODS_AMOUNT'))
-      document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
+    if (document.getElementById('ECS_GOODS_AMOUNT')){
+        document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
+        document.getElementById('ECS_SHOPPRICE').innerHTML=res.amount;
+        if(document.getElementById('ECS_RANKPRICE_1')){
+                  document.getElementById('ECS_RANKPRICE_1').innerHTML=res.ECS_RANKPRICE_1;
+           }
+
+      if(document.getElementById('ECS_RANKPRICE_2')){
+          document.getElementById('ECS_RANKPRICE_2').innerHTML=res.ECS_RANKPRICE_2;
+          }
+      if(document.getElementById('ECS_RANKPRICE_3')){
+          document.getElementById('ECS_RANKPRICE_3').innerHTML=res.ECS_RANKPRICE_3;
+          }
+    }
+
   }
 }
 <!-- {/literal} -->
