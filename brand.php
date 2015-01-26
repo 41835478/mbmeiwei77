@@ -339,7 +339,7 @@ function brand_related_cat($brand)
     $sql = "SELECT c.cat_id, c.cat_name, COUNT(g.goods_id) AS goods_count FROM ".
             $GLOBALS['ecs']->table('category'). " AS c, ".
             $GLOBALS['ecs']->table('goods') . " AS g " .
-            "WHERE g.brand_id = '$brand' AND c.cat_id = g.cat_id ".
+            "WHERE g.brand_id = '$brand' AND c.cat_id = g.cat_id AND g.is_delete='0'".
             "GROUP BY g.cat_id";
     $res = $GLOBALS['db']->query($sql);
 
