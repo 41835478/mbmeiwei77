@@ -166,7 +166,7 @@
             <b class="b b3">{$flow}F</b>
             <b class="fixpng b4"></b>
             </div>
-            <h2>{$goods_cat.name|escape:html}</h2>
+            <a href="{$goods_cat.url}" target="_blank"><h2>{$goods_cat.name|escape:html}</h2></a>
         </div>
         <div class="mc">
          <?php  $ci = 1;$GLOBALS['smarty']->assign('ci', $ci);?>
